@@ -1,0 +1,24 @@
+---
+export interface Props extends astroHTML.JSX.AnchorHTMLAttributes {}
+
+const { href, class: className, ...props } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, '');
+
+const isHome = href === '/' && path === '';
+const isOtherPages =
+  typeof href === 'string' && href.length > 1
+    ? path.substring(1).startsWith(href.substring(1))
+    : false;
+const isActive = isHome || isOtherPages;
+---
+
+<a href={href} class='group transition duration-300'>
+  <slot />
+  <span
+    class:list={[
+      'block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-800',
+      { ' max-w-full': isActive },
+    ]}
+  >
+  </span>
+</a>

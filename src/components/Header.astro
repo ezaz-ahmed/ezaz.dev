@@ -1,14 +1,30 @@
-<header class='flex justify-between border-b py-3 gap-4'>
-  <nav>
-    <a href=''>Home</a>
-    <a href=''>Blog</a>
-    <a href=''>Projects</a>
-  </nav>
+---
+import HeaderLink from './HeaderLink.astro';
+const { href, class: className, ...props } = Astro.props;
 
-  <div>
-    <a href=''>Search</a>
-    <a href=''>Github</a>
-    <a href=''>RSS</a>
-    <a href=''>Theme</a>
-  </div>
+const path = Astro.url.pathname.replace(/\/$/, '');
+
+const isHome = href === '/' && path === '';
+const isOtherPages =
+  typeof href === 'string' && href.length > 1
+    ? path.substring(1).startsWith(href.substring(1))
+    : false;
+const isActive = isHome || isOtherPages;
+---
+
+<header class='bg-gray-400 py-6'>
+  <nav class='max-w-4xl mx-auto px-4 lg:px-0 flex justify-between text-lg'>
+    <div class='flex gap-4 font-display font-medium'>
+      <HeaderLink href='/'>Home</HeaderLink>
+      <HeaderLink href='/blogs'>Blog</HeaderLink>
+      <HeaderLink href='/projects'>Projects</HeaderLink>
+    </div>
+
+    <div>
+      <a href=''>Search</a>
+      <a href=''>Github</a>
+      <a href=''>RSS</a>
+      <a href=''>Theme</a>
+    </div>
+  </nav>
 </header>

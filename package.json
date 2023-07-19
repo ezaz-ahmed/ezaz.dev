@@ -10,8 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/svelte": "^3.1.0",
     "@astrojs/tailwind": "^4.0.0",
+    "@fontsource/chivo": "^5.0.5",
+    "@fontsource/lato": "^5.0.5",
+    "@fontsource/work-sans": "^5.0.5",
     "astro": "^2.8.2",
+    "svelte": "^4.0.0",
     "tailwindcss": "^3.0.24"
   }
 }
