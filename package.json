@@ -1,7 +1,8 @@
 {
-  "name": "portfolio",
+  "name": "astroship",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,13 +11,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/svelte": "^3.1.0",
+    "@astrojs/image": "^0.14.1",
+    "@astrojs/mdx": "^0.19.7",
+    "@astrojs/sitemap": "^2.0.1",
     "@astrojs/tailwind": "^4.0.0",
-    "@fontsource/chivo": "^5.0.5",
-    "@fontsource/lato": "^5.0.5",
-    "@fontsource/work-sans": "^5.0.5",
-    "astro": "^2.8.2",
-    "svelte": "^4.0.0",
-    "tailwindcss": "^3.0.24"
+    "@fontsource/inter": "^4.5.15",
+    "astro": "^2.9.6",
+    "astro-feather-icons": "^1.0.2",
+    "astro-icon": "^0.8.1",
+    "astro-navbar": "^2.0.1",
+    "astro-seo": "^0.7.5",
+    "tailwindcss": "^3.3.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.9",
+    "sharp": "^0.32.4"
   }
 }
