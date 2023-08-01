@@ -1,7 +1,5 @@
 ---
 import Container from "@components/container.astro";
-import Link from "@components/ui/link.astro";
-import { Astronav, MenuItems, MenuIcon } from "astro-navbar";
 import { Icon } from "astro-icon";
 
 const menuitems = [
@@ -21,31 +19,42 @@ const menuitems = [
 ---
 
 <Container>
-  <header class="flex flex-col lg:flex-row justify-between items-center my-5">
-    <Astronav>
-      <div class="flex w-full lg:w-auto items-center justify-between">
-        <a href="/" class="text-lg"> Ezaz A. Ahmed</a>
-        <div class="block lg:hidden">
-          <MenuIcon class="w-4 h-4 text-gray-800" />
-        </div>
-      </div>
+  <header class="flex flex-row justify-between items-center my-5">
+    <div
+      class="flex flex-col sm:flex-row gap-3 w-full items-center justify-between">
+      <a href="/" class="group text-2xl text-sky-600 transition duration-300">
+        Ezaz A. Ahmed
 
-      <MenuItems class="hidden w-full lg:w-auto mt-2 lg:flex lg:mt-0">
-        <ul class="flex flex-col lg:flex-row lg:gap-6">
-          {
-            menuitems.map((item) => (
-              <li>
-                <a
-                  href={item.path}
-                  class="group text-sky-600 transition duration-300">
-                  {item.title}
-                  <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600" />
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </MenuItems>
-    </Astronav>
+        <span
+          class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600"
+        ></span>
+      </a>
+
+      <ul class="flex flex-row gap-6">
+        {
+          menuitems.map((item) => (
+            <li>
+              <a
+                href={item.path}
+                class="group text-sky-600 transition duration-300">
+                {item.title}
+                <span class="block max-w-0 group-hover:max-w-full transition-all duration-500 h-0.5 bg-sky-600" />
+              </a>
+            </li>
+          ))
+        }
+
+        <li>
+          <a>
+            <Icon
+              pack="tabler"
+              name="search"
+              size="24"
+              class="text-sky-600 cursor-pointer"
+            />
+          </a>
+        </li>
+      </ul>
+    </div>
   </header>
 </Container>
