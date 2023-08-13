@@ -24,14 +24,13 @@ const menuitems = [
       <a
         href="/"
         class="text-xl sm:text-2xl md:hover:text-marrsgreen dark:md:hover:text-carrigreen focus-visible:outline-marrsgreen dark:focus-visible:outline-carrigreen">
-        Ezaz
-        <span class="text-marrsgreen dark:text-carrigreen">.dev</span>
+        @Ezaz
       </a>
 
       <ul class="flex flex-row gap-6 lg:gap-12">
         {
           menuitems.map((item) => (
-            <li class=" h-full">
+            <li>
               <a
                 href={item.path}
                 class="group text-marrsgreen dark:text-carrigreen font-medium transition duration-300">

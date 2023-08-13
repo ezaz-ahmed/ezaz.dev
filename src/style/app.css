@@ -7,6 +7,24 @@
 } */
 
 @layer base {
+  :root {
+    --color-primary: 247 147 34;
+    --color-text: 33 33 33;
+    --color-success: 0 200 81;
+    --color-info: 51 181 229;
+    --color-warn: 255 187 51;
+    --color-error: 254 78 78;
+  }
+
+  :root[class~="dark"] {
+    --color-primary: 247 147 34;
+    --color-text: 33 33 33;
+    --color-success: 0 200 81;
+    --color-info: 51 181 229;
+    --color-warn: 255 187 51;
+    --color-error: 254 78 78;
+  }
+
   html {
     @apply scroll-smooth overflow-y-scroll;
   }
@@ -37,7 +55,7 @@
   }
 }
 
-@layer components {
+/* @layer components {
   .section {
     @apply py-11 md:pt-16 lg:pt-20 px-4 sm:px-8 md:px-20 max-w-6xl mx-auto lg:min-h-[768px];
   }
@@ -62,4 +80,4 @@
   .lower-glassmorphism {
     @apply !bg-opacity-50 dark:!bg-opacity-60 after:!backdrop-blur-xl after:w-full after:h-full after:absolute after:top-0 after:left-0 after:-z-10;
   }
-}
+} */
