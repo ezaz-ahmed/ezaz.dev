@@ -1,4 +1,5 @@
 ---
+import "../style/app.css";
 import { SEO } from "astro-seo";
 import Footer from "@components/Footer.astro";
 import Navbar from "@components/Navbar/Navbar.astro";
@@ -18,7 +19,7 @@ const { title } = Astro.props;
 
 const makeTitle = title
   ? title + " | " + "Ezaz"
-  : "Ezaz - A developer who writes code for fun";
+  : "Ezaz - A Full-stack Developer";
 ---
 
 <!DOCTYPE html>
@@ -42,7 +43,7 @@ const makeTitle = title
         basic: {
           url: canonicalURL,
           type: "website",
-          title: `Astroship - Starter Template for Astro`,
+          title: "Ezaz - A Full-stack Developer",
           image: resolvedImageWithDomain,
         },
         image: {
@@ -51,16 +52,10 @@ const makeTitle = title
       }}
     />
   </head>
+
   <body>
     <Navbar />
     <slot />
     <Footer />
-    <style is:global>
-      /* Improve Page speed */
-      /* https://css-tricks.com/almanac/properties/c/content-visibility/ */
-      img {
-        content-visibility: auto;
-      }
-    </style>
   </body>
 </html>
