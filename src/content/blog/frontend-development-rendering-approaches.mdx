@@ -1,0 +1,89 @@
+---
+draft: false
+title: "Frontend Development: Approaches to Web Page Rendering"
+snippet: "Frontend development is captivating. But using the right tools matters. Let's understand, Static Site Generation (SSG), Server-Side Rendering (SSR), Client-Side Rendering (CSR)"
+publishDate: "2023-08-14 15:06"
+image:
+  {
+    src: "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?&fit=crop&w=430&h=240",
+    alt: "frontend programming",
+  }
+category: "Frontend"
+author: "Ezaz Ahmed"
+tags: [React, Rendering, Frontend, LevelUp, Programming]
+---
+
+Frontend Development is truly intriguing, especially when you leverage the right tools for the right tasks. However, I've noticed many developers building their own blog sites with React.js, which might not always be the best choice – like making a mountain out of a molehill.
+
+To fully grasp this topic, let's delve into the diverse rendering possibilities in frontend and weigh the pros & cons of each.
+
+## 1. Static Site Generation (SSG)
+
+In SSG, web pages are pre-rendered during build time and served as static HTML pages.
+
+**Pros:**
+
+- Faster loading time due to its static nature.
+- High security; no risks of SQL injection or Server-Side scripting vulnerabilities.
+- Cost-effective solution.
+- Excellent for SEO and low maintenance.
+
+**Cons:**
+
+- Not suited for frequently updated content.
+- Unsuitable for user-generated content.
+
+**Ideal for:**
+
+- Documentation websites
+- Personal Blogs
+- Personal Portfolios
+- Business Landing pages, etc.
+
+## 2. Server-Side Rendering (SSR)
+
+SSR generates fully rendered web pages on the server and delivers them to the client.
+
+**Pros:**
+
+- Enables highly dynamic content as it's server-generated.
+- Boosts search engine rankings through fully rendered content.
+- Achieves a quicker First Contentful Paint (FCP) compared to Client-Side Rendering (CSR).
+
+**Cons:**
+
+- Slightly slower initial Load Time due to server processing.
+- Server load increases; scalability concerns under heavy traffic.
+- Complexity escalates with growing dynamic content.
+
+**Ideal for:**
+
+- Ecommerce Sites
+- News Sites
+- Multilingual Sites
+- Dynamic Dashboards
+- Social media, etc.
+
+## 3. Client-Side Rendering (CSR)
+
+CSR involves using JavaScript to load and dynamically render web page content in the user's browser after receiving the initial HTML page from the server.
+
+**Pros:**
+
+- Highly interactive content that engages users.
+- Front-end developers wield more UI control, creating intricate interactions.
+- Reduces server load; ideal for Progressive Web Apps (PWAs).
+
+**Cons:**
+
+- Slower initial Load Time; JavaScript download and execution required.
+- Impacts SEO and discoverability as search engine bots can't index JavaScript-loaded content.
+- May feel sluggish on devices with slower processors.
+
+**Ideal for:**
+
+- Single Page Applications (SPA)
+- Websites that require real-time data interaction
+- Interactive games, etc.
+
+Remember, there are more rendering possibilities like ISR, native, and canvas. We'll dive into those another time. For now, choose the right rendering approach based on your project's requirements and take your frontend skills to the next level!
