@@ -107,7 +107,7 @@ const Hero: FC = () => {
               alt='Sat Naing character illustration'
             />
           </div>
-          <div className='laptop absolute top-14 sm:top-16 left-0 scale-[.41] xs:scale-[.45] pointer-events-none'>
+          {/* <div className='laptop absolute top-14 sm:top-16 left-0 scale-[.41] xs:scale-[.45] pointer-events-none'>
             <Image
               src='/laptop-illustration.webp'
               width={559}
@@ -115,7 +115,7 @@ const Hero: FC = () => {
               aria-hidden='true'
               alt='Laptop illustration'
             />
-          </div>
+          </div> */}
         </div>
       </div>
 
