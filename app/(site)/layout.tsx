@@ -4,6 +4,7 @@ import { Jost } from 'next/font/google';
 import { Suspense } from 'react';
 import Loader from '~/components/ui/Loader';
 import Header from '~/components/sections/Header';
+import Hero from '~/components/sections/Hero';
 
 const jost = Jost({ subsets: ['latin'] });
 
@@ -33,6 +34,9 @@ export default function RootLayout({
         <div className='bg-bglight dark:bg-bgdark overflow-hidden'>
           <div className='selection:bg-marrsgreen selection:text-bglight dark:selection:bg-carrigreen dark:selection:text-bgdark'>
             <Header />
+            <main id='main'>
+              <Hero />
+            </main>
             {/* <SkipToMain />
             <Header />
             <main id='main'>
