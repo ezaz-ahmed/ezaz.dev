@@ -5,6 +5,7 @@ import { Suspense } from 'react';
 import Loader from '~/components/ui/Loader';
 import Header from '~/components/sections/Header';
 import Hero from '~/components/sections/Hero';
+import About from '~/components/sections/About';
 
 const jost = Jost({ subsets: ['latin'] });
 
@@ -36,6 +37,7 @@ export default function RootLayout({
             <Header />
             <main id='main'>
               <Hero />
+              <About />
             </main>
             {/* <SkipToMain />
             <Header />
