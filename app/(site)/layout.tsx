@@ -1,11 +1,14 @@
 import '~/styles/globals.css';
-import type { Metadata } from 'next';
+import type { GetStaticProps, Metadata } from 'next';
 import { Jost } from 'next/font/google';
 import { Suspense } from 'react';
 import Loader from '~/components/ui/Loader';
 import Header from '~/components/sections/Header';
 import Hero from '~/components/sections/Hero';
 import About from '~/components/sections/About';
+import Project from '~/components/sections/Project';
+import Blog from '~/components/sections/Blog';
+import { GraphQLClient } from 'graphql-request';
 
 const jost = Jost({ subsets: ['latin'] });
 
@@ -20,11 +23,15 @@ export const metadata: Metadata = {
   title: 'Ezaz Ahmed | Software Developer',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const data = await getAllPosts();
+
+  console.log(data);
+
   return (
     <html lang='en'>
       <body className={jost.className}>
@@ -38,6 +45,8 @@ export default function RootLayout({
             <main id='main'>
               <Hero />
               <About />
+              <Project />
+              <Blog posts={data.blogs} />
             </main>
             {/* <SkipToMain />
             <Header />
@@ -55,4 +64,44 @@ export default function RootLayout({
       </body>
     </html>
   );
+}
+
+async function getAllPosts() {
+  const hygraph = new GraphQLClient(
+    'https://api-ap-south-1.hygraph.com/v2/clkrxbcan31rq01t6goqef4z7/master'
+  );
+
+  const { projects, blogs } = await hygraph.request(
+    `
+   {
+      projects {
+        title
+        desc
+        bgColor {
+          css
+        }
+        codeUrl
+        image
+        liveUrl
+      }
+      blogs {
+        id
+        title
+        slug
+        content {
+          text
+        }
+        tags
+        category {
+          title
+        }
+      }
+    }
+    `
+  );
+
+  return {
+    projects,
+    blogs,
+  };
 }
