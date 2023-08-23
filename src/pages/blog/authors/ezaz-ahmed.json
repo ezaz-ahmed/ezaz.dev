@@ -1,0 +1,26 @@
+{
+  "id": "ezaz-ahmed",
+  "name": "Ezaz Ahmed",
+  "image": "/uploads/me.webp",
+  "rol": "Software Engineer",
+  "bio": "I'm a very outgoing and curious person, who's passionate about coding, space, nature, and sports. I enjoy creating awesome software, whether that be websites, applications, or anything in between. My goal is always to create products that deliver high performance.",
+  "email": "ezaznahmed@gmail.com",
+  "lang": "en",
+  "social": [
+    {
+      "name": "github",
+      "url": "https://www.github.com/ezaz-ahmed",
+      "icon": "uit:github-alt"
+    },
+    {
+      "name": "linkedin",
+      "url": "https://www.linkedin.com/in/ezaz-ahmed-abdullah",
+      "icon": "uit:linkedin-alt"
+    },
+    {
+      "name": "twitter",
+      "url": "https://www.twitter.com/BugXFix",
+      "icon": "uit:twitter-alt"
+    }
+  ]
+}
