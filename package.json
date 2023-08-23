@@ -9,8 +9,7 @@
     "preview": "astro preview",
     "astro": "astro"
   },
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "astro": "^2.10.12"
   }
 }
