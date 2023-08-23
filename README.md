@@ -1,34 +1,39 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+![Astro + Netlify CMS](https://raw.githubusercontent.com/delucis/astro-netlify-cms/HEAD/header.png)
 
-## Getting Started
+<h1 align="center">Astro Blog Starter with Netlify CMS</h1>
 
-First, run the development server:
+This example is based on [the basic Astro blog starter kit][starter], and
+adds [the Astro Netlify CMS integration][integration].
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+## Quick deploy
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)][deploy]
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+☝️ Click this button to copy this project to your own GitHub (or GitLab)
+account and set up continuous deployment with Netlify as if by magic. ✨
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Once you’ve got the project set up, you do need to
+[activate Netlify Identity in the Netlify UI][identity] and then enable
+[“Git Gateway”][gateway] to allow e-mail/password authentication.
 
-## Learn More
+## Commands
 
-To learn more about Next.js, take a look at the following resources:
+All commands are run from the root of the project, from a terminal:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Command            | Action                                             |
+| :----------------- | :------------------------------------------------- |
+| `pnpm install`     | Installs dependencies                              |
+| `pnpm run dev`     | Starts local dev & Netlify CMS proxy servers       |
+| `pnpm run build`   | Build your production site to `./dist/`            |
+| `pnpm run preview` | Serve `./dist/` & run the Netlify CMS proxy server |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+> **Note**
+> These commands are using [`pnpm`][pnpm], a fast and efficient package manager.
+> You can choose to use `npm` or `yarn` instead if you prefer, but remember to update the config in [`netlify.toml`](netlify.toml) to match.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+[starter]: https://astro.new/blog?on=github
+[integration]: https://github.com/delucis/astro-netlify-cms
+[deploy]: https://app.netlify.com/start/deploy?repository=https://github.com/delucis/astro-netlify-cms-starter
+[identity]: https://docs.netlify.com/visitor-access/identity/
+[gateway]: https://docs.netlify.com/visitor-access/git-gateway/
+[pnpm]: https://pnpm.io/
