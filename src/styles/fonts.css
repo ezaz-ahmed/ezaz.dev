@@ -1,0 +1,9 @@
+/* Matter-Regular  */
+@font-face {
+  font-display: swap;
+  font-family: 'Matter';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Matter-Regular.woff2') format('woff2'),
+    url('/fonts/Matter-Regular.woff') format('woff');
+}
