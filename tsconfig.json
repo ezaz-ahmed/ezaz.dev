@@ -28,8 +28,8 @@
       "~/*": [
         "src/*"
       ],
-      "atoms:*": [
-        "components/atoms/*.astro"
+      "sections:*": [
+        "components/sections/*.astro"
       ],
       "ui:*": [
         "components/ui/*.astro"
@@ -37,8 +37,8 @@
       "organisms:*": [
         "components/organisms/*.astro"
       ],
-      "templates:*": [
-        "components/templates/*.astro"
+      "layouts:*": [
+        "components/layouts/*.astro"
       ]
     }
   }

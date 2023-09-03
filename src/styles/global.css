@@ -32,3 +32,6 @@
   }
 }
 
+.content-wrapper > main {
+	background-color: var(--bg-background-primary);
+}

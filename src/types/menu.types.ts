@@ -4,3 +4,9 @@ export interface Menu {
   title: string
   link: string
 }
+
+export interface SocialMedia {
+  name: string
+  url: string
+  icon: string
+}
