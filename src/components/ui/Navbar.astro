@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import Menus from 'ui:Menus';
+---
+
+<header id='navbar-header' class='fixed z-50 w-full'>
+  <nav
+    id='acosta-navbar'
+    class='relative flex w-full flex-wrap items-center justify-between py-2 md:py-4 px-4'
+  >
+    <a id='logo' href='/' class='border-none'>
+      <Image
+        src='/logo.svg'
+        class='w-10'
+        alt='ezaz-logo'
+        height='10'
+        width='10'
+      />
+    </a>
+
+    <div class='hidden lg:block'>
+      <Menus drawer={false} />
+    </div>
+
+    <!-- <Drawer />
+
+    <div class='hidden lg:block'>
+      <Menus drawer={false} />
+    </div> -->
+  </nav>
+</header>

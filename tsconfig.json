@@ -1,3 +1,45 @@
 {
-  "extends": "astro/tsconfigs/strict"
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "node",
+    "baseUrl": "src",
+    "isolatedModules": true,
+    "paths": {
+      "@store:*": [
+        "store/*"
+      ],
+      "@components:*": [
+        "components/*"
+      ],
+      "@models:*": [
+        "models/*"
+      ],
+      "@types:*": [
+        "types/*"
+      ],
+      "@utils:*": [
+        "utils/*"
+      ],
+      "@/*": [
+        "src/*"
+      ],
+      "~/*": [
+        "src/*"
+      ],
+      "atoms:*": [
+        "components/atoms/*.astro"
+      ],
+      "ui:*": [
+        "components/ui/*.astro"
+      ],
+      "organisms:*": [
+        "components/organisms/*.astro"
+      ],
+      "templates:*": [
+        "components/templates/*.astro"
+      ]
+    }
+  }
 }
