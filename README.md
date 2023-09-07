@@ -1,54 +1,42 @@
-# Astro Starter Kit: Basics
+# Milky-Way
 
+This is a portfolio template built using CSS, HTML, JavaScript, and Astro. It serves as a starting point for creating your personal portfolio website or showcasing your projects online. The template is open-source and released under the MIT license, meaning you are free to use, modify, and distribute it for personal or commercial purposes.
+
+## Features
+
+- Simple and clean design, perfect for showcasing your work.
+- Responsive layout for seamless viewing across different devices.
+- Fast and efficient, thanks to the Astro static site generator.
+- Easy to customize with CSS and straightforward HTML structure.
+
+## Getting Started
+
+To get started with using this portfolio template, follow these steps:
+
+1. **Clone the Repository:** Clone this repository to your local machine using Git.
+
+```scheme
+git clone https://github.com/ttomczak3/Milky-Way.git
+cd Milky-Way
 ```
-npm create astro@latest -- --template basics
-```
+2. **Install Dependencies:** Ensure you have Node.js and npm installed. Then, install the project dependencies.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
-
-```
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
+```scheme
+npm install
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+3. **Start the Development Server:** Launch the development server to preview your portfolio.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+```scheme
+npm run dev
+```
 
-Any static assets, like images, can be placed in the `public/` directory.
+4. **Customize Your Portfolio:** Edit the HTML files in the `src/pages` directory to add your projects, experiences, and personal information. You can also modify the CSS styles in `src/styles` to match your preferences.
 
-## 🧞 Commands
+## Contributing
 
-All commands are run from the root of the project, from a terminal:
+Contributions to this project are welcome. If you find a bug or have a suggestion for improvement, please open an issue or submit a pull request.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## License
 
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This project is licensed under the MIT License. See the `LICENSE` file for details.
