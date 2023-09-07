@@ -54,6 +54,13 @@ p {
     text-indent: 1em;
 }
 
+strong {
+    display: block;
+    font-family: 'Josefin Sans', sans-serif;
+    font-size: 1.4em;
+    margin: 13px 0;
+    line-height: 1.5;
+}
 
 /* Gifs */
 .gif {
@@ -63,9 +70,11 @@ p {
 
 /* Navigation Bar */
 .nav-bar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     margin-top: 0.8rem;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
 }
 
 .title-link, .nav-links {
@@ -80,7 +89,7 @@ p {
 
 .title-link a:hover, .nav-links a:hover, a:focus {
     text-decoration: underline #375a7f;
-    text-decoration-thickness: 2px;
+    text-decoration-thickness: 3px;
     text-underline-offset: 6px;
 }
 
@@ -91,7 +100,7 @@ p {
 }
 
 .nav-links a {
-    margin: 0 13px;
+    margin: 0 7px;
 }
 
 /* Card listing */
@@ -147,6 +156,6 @@ html.light {
     }
 
     .nav-links a {
-        margin: 0 11px;
+        margin: 0 7px;
     }
 }
