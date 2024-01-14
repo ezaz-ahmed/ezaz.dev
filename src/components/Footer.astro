@@ -1,32 +1,89 @@
 ---
+import { Icon } from "astro-icon/components";
 const year = new Date().getFullYear();
 ---
 
 <footer>
-  <div>
-    <small>
-      &copy; {year}
-      {' '}
-      <a href='https://github.com/ezaz-ahmed'>Ezaz Ahmed</a>. All Rights
-      Reserved.</small
-    >
-    <p>Your privacy matters to me. I don't track your data.</p>
+  <hr />
+
+  <div class="footer-container">
+    <p>Ezaz Ahmed</p>
+
+    <div class="icon-container">
+      <a href="/rss.xml">
+        <Icon name="rss" />
+      </a>
+      <a href="/sitemap-index.xml">
+        <Icon name="sitemap" />
+      </a>
+      <a href="mailto:ezaznahmed@gmail.com">
+        <Icon name="mail" />
+      </a>
+      <a href="https://github.com/ezaz-ahmed" target="_blank">
+        <Icon name="github" />
+      </a>
+      <a
+        href="https://www.linkedin.com/in/ezaz-ahmed-abdullah/"
+        target="_blank"
+      >
+        <Icon name="linkedin" />
+      </a>
+      <a href="https://twitter.com/bugxfix" target="_blank">
+        <Icon name="twitter" />
+      </a>
+    </div>
   </div>
 </footer>
 
 <style>
-  div {
-    margin: 4rem 0;
+  footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
+    font-family: "Josefin Sans", sans-serif;
+  }
+
+  hr {
+    width: 100%;
+    border: none;
+    background-color: var(--steel-blue);
+    height: 4px;
+    margin: 2rem 0;
+  }
+
+  .footer-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .icon-container {
+    display: flex;
+    gap: 10px;
+  }
+
+  .icon-container a {
+    color: var(--light-pastel);
   }
 
   small {
-    font-family: 'Josefin Sans', sans-serif;
   }
 
   small a {
     color: #2b81dc;
-    text-decoration: none;
+    text-decoration: 2px solid;
+  }
+
+  .social-icons {
+    margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+  }
+
+  .social-icons img {
+    width: 30px; /* Adjust the size as needed */
   }
 
   p {
