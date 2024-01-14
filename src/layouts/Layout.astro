@@ -1,19 +1,36 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import '../styles/global.css';
+import { ViewTransitions } from "astro:transitions";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import "../styles/global.css";
 const { pageTitle } = Astro.props;
 ---
 
 <!doctype html>
-<html lang='en'>
+<html lang="en">
   <head>
-    <meta charset='utf-8' />
-    <meta name='description' content='Astro description' />
-    <meta name='viewport' content='width=device-width' />
-    <link rel='icon' type='image/gif' href='/favicon.gif' />
-    <meta name='generator' content={Astro.generator} />
+    <meta charset="utf-8" />
+    <meta
+      name="description"
+      content="A seasoned software developer with 3+ years of expertise in MERN, Next.js, Nest.js, and more"
+    />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/gif" href="/favicon.gif" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      type="image/gif"
+      href="/favicon.gif"
+    />
+
+    <meta
+      name="keywords"
+      content="MERN stack developer, Next.js expert, Nest.js specialist, Web application developer, JavaScript coding, Full-stack development, React.js proficiency, Node.js expertise, Software engineering portfolio, Innovative coding solutions, UI/UX design, Responsive web development, MongoDB integration, Server-side rendering, Progressive web applications (PWAs)"
+    />
+
+    <link rel="manifest" href="/manifest.json" />
+    <meta name="generator" content={Astro.generator} />
+
     <title>{pageTitle}</title>
     <ViewTransitions />
   </head>

@@ -1,29 +1,29 @@
 ---
-import { Image } from 'astro:assets';
-interface Props {
+import { Image } from "astro:assets";
+type Props = {
   href: string;
   image: string;
   title: string;
   body: string;
-}
+};
 
 const { href, image, title, body } = Astro.props;
 ---
 
-<li class='link-card'>
-  <a href={href} target='_blank'>
-    <div class='img'>
+<li class="link-card">
+  <a href={href} target="_blank">
+    <div class="img">
       <Image
-        width='226'
-        height='127'
+        width="226"
+        height="127"
         src={image}
-        class='card-img'
-        alt='ProjectImage'
+        class="card-img"
+        alt="ProjectImage"
       />
-      <h3 class='card-title'>
+      <h3 class="card-title">
         {title}
       </h3>
-      <p class='card-txt'>
+      <p class="card-txt">
         {body}
       </p>
     </div>
@@ -54,7 +54,7 @@ const { href, image, title, body } = Astro.props;
 
     h3 {
       margin: 0;
-      font-family: 'Josefin Sans', sans-serif;
+      font-family: "Josefin Sans", sans-serif;
       font-size: 1.5rem;
       font-weight: normal;
       text-align: center;

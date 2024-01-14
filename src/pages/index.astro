@@ -1,16 +1,17 @@
 ---
-import { Image } from 'astro:assets';
-import Layout from '../layouts/Layout.astro';
-const pageTitle = 'Ezaz Ahmed | Software Developer';
+import { Image } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Intro from "@assets/intro.webp";
+const pageTitle = "Ezaz Ahmed | Software Developer";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class='gif'>
+  <div class="gif">
     <Image
-      width='300'
-      height='259'
-      alt='https://giphy.com/iroiro1/'
-      src='/intro.webp'
+      width="300"
+      height="259"
+      alt="Gif collected from https://giphy.com/iroiro1/"
+      src={Intro}
     />
   </div>
   <h1>Ezaz Ahmed</h1>
@@ -37,66 +38,78 @@ const pageTitle = 'Ezaz Ahmed | Software Developer';
     Let's connect and explore the limitless possibilities of the digital
     landscape together!
   </p>
-  <div class='button'>
-    <a href='/Ezaz-Ahmed(resume).pdf' target='_blank'>
+  <div class="button">
+    <a href="/Ezaz-Ahmed(resume).pdf" target="_blank">
       <button>My Resume</button>
     </a>
   </div>
   <h2>Skills</h2>
-  <div class='link-images'>
+  <div class="link-images">
     <Image
-      width='46'
-      height='46'
-      alt='JavaScript'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg'
+      width="46"
+      height="46"
+      alt="JavaScript"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='TypeScript'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg'
+      width="46"
+      height="46"
+      alt="TypeScript"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='React'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg'
+      width="46"
+      height="46"
+      alt="React"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='Svelte'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg'
+      width="46"
+      height="46"
+      alt="Svelte"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='MongoDB'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg'
+      width="46"
+      height="46"
+      alt="MongoDB"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='Next.js'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg'
+      width="46"
+      height="46"
+      alt="Next.js"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='Nestjs'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg'
+      width="46"
+      height="46"
+      alt="Nestjs"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='Golang'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg'
+      width="46"
+      height="46"
+      alt="Golang"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg"
     />
     <Image
-      width='46'
-      height='46'
-      alt='PostGres'
-      src='https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg'
+      width="46"
+      height="46"
+      alt="PostGres"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg"
+    />
+    <Image
+      width="46"
+      height="46"
+      alt="MySql"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
+    />
+    <Image
+      width="46"
+      height="46"
+      alt="Docker"
+      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg"
     />
   </div>
 
@@ -115,7 +128,7 @@ const pageTitle = 'Ezaz Ahmed | Software Developer';
     background-color: #584966;
     color: #fdebf3;
     border-radius: 6px;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-weight: 600;
     padding: 0.3em 0.6em 0.2em;
   }
@@ -127,7 +140,7 @@ const pageTitle = 'Ezaz Ahmed | Software Developer';
     border-radius: 8px;
     color: #78c2ad;
     font:
-      600 16px 'Josefin Sans',
+      600 16px "Josefin Sans",
       sans-serif;
     padding: 8px 16px;
     transition:
@@ -147,7 +160,10 @@ const pageTitle = 'Ezaz Ahmed | Software Developer';
 
   /* Skill images */
   .link-images img {
+    width: 50px;
+    height: 50px;
     margin: 16px 4px;
+    box-sizing: border-box;
   }
 
   @media only screen and (max-width: 600px) {

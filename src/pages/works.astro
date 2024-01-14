@@ -1,45 +1,47 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
-import { Image } from 'astro:assets';
-const pageTitle = 'Works';
+import { Image } from "astro:assets";
+import Layout from "@layouts/Layout.astro";
+import Card from "@components/Card.astro";
+import Laptop from "@assets/laptop.webp";
+
+const pageTitle = "Works | Ezaz Ahmed";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class='gif'>
+  <div class="gif">
     <Image
-      width='300'
-      height='259'
-      alt='https://giphy.com/iroiro1/'
-      src='/laptop.webp'
+      width="300"
+      height="259"
+      alt="Gif collected from https://giphy.com/iroiro1/"
+      src={Laptop}
     />
   </div>
 
   <h2>Projects</h2>
-  <ul role='list' class='link-card-grid'>
+  <ul role="list" class="link-card-grid">
     <Card
-      href='https://github.com/ezaz-ahmed/donation-collection-system'
-      image='/projects/donation-hero.webp'
-      title='Donation Hero'
+      href="https://github.com/ezaz-ahmed/donation-collection-system"
+      image="/projects/donation-hero.webp"
+      title="Donation Hero"
       body="Become the hero of someone's story"
     />
     <Card
-      href='https://tickets4travel.com/'
-      image='/projects/tickets-for-travel.webp'
-      title='Tickets4Travel'
-      body='One-stop solution for all your trip plan'
+      href="https://tickets4travel.com/"
+      image="/projects/tickets-for-travel.webp"
+      title="Tickets4Travel"
+      body="One-stop solution for all your trip plan"
     />
     <Card
-      href='https://github.com/ezaz-ahmed/svelti-prime'
-      image='/projects/svelte-prime.webp'
-      title='Svelti Prime'
-      body='Netflix Clone of Svelte Version'
+      href="https://github.com/ezaz-ahmed/svelti-prime"
+      image="/projects/svelte-prime.webp"
+      title="Svelti Prime"
+      body="Netflix Clone of Svelte Version"
     />
     <Card
-      href='https://github.com/ezaz-ahmed/pocket-url'
-      image='/projects/pocket-url.webp'
-      title='Pocket Url'
-      body='Simple URL Converter'
+      href="https://github.com/ezaz-ahmed/pocket-url"
+      image="/projects/pocket-url.webp"
+      title="Pocket Url"
+      body="Simple URL Converter"
     />
   </ul>
 </Layout>
