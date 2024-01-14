@@ -1,7 +1,7 @@
 {
   "name": "ezaz.dev",
   "type": "module",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,7 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^3.2.3",
+    "astro": "^4.1.2",
     "astro-icon": "^1.0.2"
   }
 }
