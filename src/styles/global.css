@@ -71,7 +71,7 @@ strong {
 
 /* Gifs */
 .gif {
-    margin: 20px 0 0 0;
+    margin: 40px 0;
     text-align: center;
 }
 
@@ -112,6 +112,31 @@ a:focus {
 
 .nav-links a {
     margin: 0 7px;
+}
+
+.button {
+    text-align: center;
+}
+
+.button button {
+    background: rgba(0, 0, 0, 0);
+    border: 2px solid #78c2ad;
+    border-radius: 8px;
+    text-align: center;
+    color: #78c2ad;
+    font:
+        600 16px "Josefin Sans",
+        sans-serif;
+    padding: 8px 16px;
+    transition:
+        background-color 0.4s,
+        color 0.4s;
+}
+
+.button button:hover {
+    background-color: #78c2ad;
+    color: #fdebf3;
+    cursor: pointer;
 }
 
 /* Card listing */
