@@ -1,8 +1,18 @@
 ---
-import Navigation from './Navigation.astro';
+const pathname = new URL(Astro.request.url).pathname;
 ---
+
 <header>
-    <nav>
-        <Navigation />
-    </nav>
+  <nav>
+    <div class="nav-bar">
+      <div class="title-link">
+        <a href="/">@Ezaz</a>
+      </div>
+
+      <div class="nav-links">
+        <a href="/work/" class={pathname === "/work/" ? "active" : ""}>Work</a>
+        <a href="/blog/" class={pathname === "/blog/" ? "active" : ""}>Blog</a>
+      </div>
+    </div>
+  </nav>
 </header>

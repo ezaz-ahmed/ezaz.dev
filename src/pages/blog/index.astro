@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import opinion from "@assets/thums-up.webp";
 import Layout from "@layouts/Layout.astro";
 import Card from "@components/Card.astro";
+
 const pageTitle = "Blogs | Ezaz Ahmed";
 ---
 
@@ -15,13 +16,31 @@ const pageTitle = "Blogs | Ezaz Ahmed";
       src={opinion}
     />
   </div>
-  <h2>Blog</h2>
+
+  <!-- <h2>Latest Blogs</h2>
   <ul role="list" class="link-card-grid">
     <Card
       href="https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg"
       image="/blog/web-page-rendering.webp"
       title="Frontend Development: Approaches to Web Page Rendering"
       body="Here I discussed About Different type of rendering strategy"
+    />
+
+    <Card
+      href="https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg"
+      image="/blog/web-page-rendering.webp"
+      title="Approaches to Web Page Rendering"
+      body=""
+    />
+  </ul> -->
+
+  <h2>Other Blogs</h2>
+  <ul role="list" class="link-card-grid">
+    <Card
+      href="https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg"
+      image="/blog/web-page-rendering.webp"
+      title="Approaches to Web Page Rendering"
+      body="Explore diverse frontend rendering approaches in my blog, shedding light on web page display strategies for effective development"
     />
   </ul>
 </Layout>

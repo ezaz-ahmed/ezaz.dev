@@ -105,6 +105,12 @@ a:focus {
     text-underline-offset: 6px;
 }
 
+.nav-links .active {
+    text-decoration: underline var(--steel-blue);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+}
+
 .nav-links {
     font-family: 'Josefin Sans', sans-serif;
     font-size: 1.1rem;
