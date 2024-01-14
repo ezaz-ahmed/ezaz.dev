@@ -2,6 +2,7 @@
 :root {
     --steel-blue: #375a7f;
     --light-pastel: #fdebf3;
+    --dark-indigo: #33334f;
 }
 
 @font-face {
@@ -22,7 +23,7 @@
 
 /* Global styles */
 html {
-    background-color: #1e1e2e;
+    background-color: var(--dark-indigo);
     color: var(--light-pastel);
 }
 
@@ -145,32 +146,6 @@ a:focus {
     grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
     gap: 1rem;
     padding: 0;
-}
-
-/* Theme Icon */
-html.light {
-    background-color: var(--light-pastel);
-    color: #1e1e2e;
-}
-
-.light .title-link a {
-    color: #1e1e2e;
-}
-
-.light .card-title {
-    color: #1e1e2e;
-}
-
-.light .card-txt {
-    color: #1e1e2e;
-}
-
-.light .nav-links a {
-    color: #1e1e2e;
-}
-
-.light .link-card>a {
-    color: #1e1e2e;
 }
 
 /* Media Query */
