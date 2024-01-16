@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
 import type { BlogType } from "src/content/config";
 
@@ -20,5 +21,6 @@ const { blog } = Astro.props;
 ---
 
 <BaseLayout>
-  <h1>{blog.data.title}</h1>
+  <Image width={500} height={300} src={blog.data.image} alt={blog.data.title} />
+  <h2>{blog.data.title}</h2>
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection, type CollectionEntry } from "astro:content";
+import { Cloudinary } from "astro-cloudinary-image";
 import opinion from "@assets/thums-up.webp";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Card from "@components/ArticleCard.astro";
@@ -21,6 +22,16 @@ const pageTitle = "Blogs | Ezaz Ahmed";
       height="259"
       alt="Gif collceted from https://giphy.com/iroiro1/"
       src={opinion}
+    />
+
+    <Cloudinary
+      width="300"
+      height="259"
+      resize="fill"
+      gravity="auto"
+      alt="A sample image"
+      src="cld-sample"
+      errorImage="NotFound.svg"
     />
   </div>
 
