@@ -1,0 +1,88 @@
+---
+import { Image } from "astro:assets";
+type Props = {
+  href: string;
+  image: string;
+  title: string;
+  tags: string[];
+};
+
+const { href, image, title, tags } = Astro.props;
+
+console.log(image);
+---
+
+<li class="link-card">
+  <a href={href}>
+    <div class="img">
+      <Image
+        width="226"
+        height="127"
+        src={image}
+        class="card-img"
+        alt="ProjectImage"
+      />
+      <h3 class="card-title">
+        {title}
+      </h3>
+    </div>
+  </a>
+
+  <div class="tags">
+    {
+      tags.map((tag) => (
+        <div class="button">
+          <a href={`/tag/${tag}`}>
+            <button>{tag}</button>
+          </a>
+        </div>
+      ))
+    }
+  </div>
+</li>
+
+<style>
+  .link-card {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    background-size: 400%;
+    padding: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  .link-card > a {
+    width: 100%;
+    text-decoration: none;
+    line-height: 1.4;
+    border-radius: 8px;
+    color: #fdebf3;
+  }
+
+  .img {
+    text-align: center;
+  }
+
+  img {
+    border-radius: 16px;
+  }
+
+  .tags {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  h3 {
+    margin: 0;
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 1.5rem;
+    font-weight: normal;
+    text-align: center;
+  }
+
+  .link-card:hover {
+    transform: scale(1.05);
+  }
+</style>

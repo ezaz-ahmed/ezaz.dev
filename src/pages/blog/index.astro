@@ -1,13 +1,20 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection, type CollectionEntry } from "astro:content";
 import opinion from "@assets/thums-up.webp";
-import Layout from "@layouts/Layout.astro";
-import Card from "@components/Card.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Card from "@components/ArticleCard.astro";
+import type { BlogType } from "src/content/config";
+
+const allBlogs: BlogType[] = (await getCollection("blog")).sort(
+  (a: BlogType, b: BlogType) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
 const pageTitle = "Blogs | Ezaz Ahmed";
 ---
 
-<Layout pageTitle={pageTitle}>
+<BaseLayout pageTitle={pageTitle}>
   <div class="gif">
     <Image
       width="300"
@@ -17,22 +24,19 @@ const pageTitle = "Blogs | Ezaz Ahmed";
     />
   </div>
 
-  <!-- <h2>Latest Blogs</h2>
+  <h2>Latest Blogs</h2>
   <ul role="list" class="link-card-grid">
-    <Card
-      href="https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg"
-      image="/blog/web-page-rendering.webp"
-      title="Frontend Development: Approaches to Web Page Rendering"
-      body="Here I discussed About Different type of rendering strategy"
-    />
-
-    <Card
-      href="https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg"
-      image="/blog/web-page-rendering.webp"
-      title="Approaches to Web Page Rendering"
-      body=""
-    />
-  </ul> -->
+    {
+      allBlogs.map((blog) => (
+        <Card
+          href={`/blog/${blog.slug}`}
+          image={blog.data.image}
+          title={blog.data.title}
+          tags={blog.data.tags}
+        />
+      ))
+    }
+  </ul>
 
   <h2>Other Blogs</h2>
   <ul role="list" class="link-card-grid">
@@ -40,7 +44,7 @@ const pageTitle = "Blogs | Ezaz Ahmed";
       href="https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg"
       image="/blog/web-page-rendering.webp"
       title="Approaches to Web Page Rendering"
-      body="Explore diverse frontend rendering approaches in my blog, shedding light on web page display strategies for effective development"
+      tags={["Frontend", "React"]}
     />
   </ul>
-</Layout>
+</BaseLayout>

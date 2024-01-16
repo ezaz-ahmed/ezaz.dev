@@ -1,0 +1,24 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import type { BlogType } from "src/content/config";
+
+export async function getStaticPaths() {
+  const allBlogs: BlogType[] = await getCollection("blog");
+
+  return allBlogs.map((blog) => ({
+    params: {
+      slug: blog.slug,
+    },
+    props: {
+      blog,
+    },
+  }));
+}
+
+const { blog } = Astro.props;
+---
+
+<BaseLayout>
+  <h1>{blog.data.title}</h1>
+</BaseLayout>

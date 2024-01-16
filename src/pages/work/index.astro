@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import Layout from "@layouts/Layout.astro";
-import Card from "@components/Card.astro";
+import Layout from "@layouts/BaseLayout.astro";
+import ProjectCard from "@components/ProjectCard.astro";
 import Laptop from "@assets/laptop.webp";
 
 const pageTitle = "Works | Ezaz Ahmed";
@@ -19,21 +19,21 @@ const pageTitle = "Works | Ezaz Ahmed";
 
   <h2>Open Source Projects</h2>
   <ul role="list" class="link-card-grid">
-    <Card
+    <ProjectCard
       href="https://github.com/ezaz-ahmed/svelti-prime"
       image="/projects/svelte-prime.webp"
       title="Svelti Prime"
       body="Svelte Version of Netflix"
     />
 
-    <Card
+    <ProjectCard
       href="https://github.com/ezaz-ahmed/pocket-url"
       image="/projects/pocket-url.webp"
       title="Pocket Url"
       body="URL Converter"
     />
 
-    <Card
+    <ProjectCard
       href="https://github.com/ezaz-ahmed/donation-collection-system"
       image="/projects/donation-hero.webp"
       title="Donation Hero"
