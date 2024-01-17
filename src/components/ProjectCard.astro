@@ -1,5 +1,5 @@
 ---
-import { Image } from "astro:assets";
+import { Image } from "@unpic/astro";
 type Props = {
   href: string;
   image: string;
@@ -14,8 +14,8 @@ const { href, image, title, body } = Astro.props;
   <a href={href} target="_blank">
     <div class="img">
       <Image
-        width="226"
-        height="127"
+        width={400}
+        height={260}
         src={image}
         class="card-img"
         alt="ProjectImage"

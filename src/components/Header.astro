@@ -12,6 +12,12 @@ const pathname = new URL(Astro.request.url).pathname;
       <div class="nav-links">
         <a href="/work/" class={pathname === "/work/" ? "active" : ""}>Work</a>
         <a href="/blog/" class={pathname === "/blog/" ? "active" : ""}>Blog</a>
+
+        <div class="button">
+          <a href="/Ezaz-Ahmed(resume).pdf" target="_blank">
+            <button>Resume</button>
+          </a>
+        </div>
       </div>
     </div>
   </nav>

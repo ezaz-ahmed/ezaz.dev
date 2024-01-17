@@ -91,6 +91,11 @@ strong {
     font-size: 1.3rem;
 }
 
+.nav-links {
+    display: flex;
+    align-items: center;
+}
+
 .title-link a,
 .nav-links a {
     color: var(--light-pastel);
@@ -170,9 +175,8 @@ a:focus {
 
     .nav-links {
         text-align: center;
-    }
-
-    .nav-links a {
-        margin: 0 7px;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
     }
 }

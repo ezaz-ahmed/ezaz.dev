@@ -5,6 +5,37 @@ import ProjectCard from "@components/ProjectCard.astro";
 import Laptop from "@assets/laptop.webp";
 
 const pageTitle = "Works | Ezaz Ahmed";
+
+type ProjectCardType = {
+  link: string;
+  image: string;
+  title: string;
+  body: string;
+};
+
+const publicProjects: ProjectCardType[] = [
+  {
+    link: "https://github.com/ezaz-ahmed/svelti-prime",
+    image:
+      "https://res.cloudinary.com/ezaz/image/upload/v1705501665/projects/ncw8cniv4a1xk8gz89mx.png",
+    title: "Svelti Prime",
+    body: "Svelte Version of Netflix",
+  },
+  {
+    link: "https://github.com/ezaz-ahmed/donation-collection-system",
+    image:
+      "https://res.cloudinary.com/ezaz/image/upload/v1705501663/projects/t6de61kyimvog7dg9sbs.png",
+    title: "Donation Hero",
+    body: "Become the hero of someone's story",
+  },
+  {
+    link: "https://github.com/ezaz-ahmed/pocket-url",
+    image:
+      "https://res.cloudinary.com/ezaz/image/upload/v1705501656/projects/ae9w2rkkypbuqdhe5di7.png",
+    title: "Pocket Url",
+    body: "URL Converter",
+  },
+];
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -17,27 +48,17 @@ const pageTitle = "Works | Ezaz Ahmed";
     />
   </div>
 
-  <h2>Open Source Projects</h2>
+  <h2>Public Projects</h2>
   <ul role="list" class="link-card-grid">
-    <ProjectCard
-      href="https://github.com/ezaz-ahmed/svelti-prime"
-      image="/projects/svelte-prime.webp"
-      title="Svelti Prime"
-      body="Svelte Version of Netflix"
-    />
-
-    <ProjectCard
-      href="https://github.com/ezaz-ahmed/pocket-url"
-      image="/projects/pocket-url.webp"
-      title="Pocket Url"
-      body="URL Converter"
-    />
-
-    <ProjectCard
-      href="https://github.com/ezaz-ahmed/donation-collection-system"
-      image="/projects/donation-hero.webp"
-      title="Donation Hero"
-      body="Become the hero of someone's story"
-    />
+    {
+      publicProjects.map((project) => (
+        <ProjectCard
+          href={project.link}
+          title={project.title}
+          image={project.image}
+          body={project.body}
+        />
+      ))
+    }
   </ul>
 </Layout>
