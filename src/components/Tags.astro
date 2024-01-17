@@ -1,0 +1,28 @@
+---
+const { tags } = Astro.props;
+
+type Props = {
+  tags: string[];
+};
+---
+
+<div class="tags">
+  {
+    tags.map((tag) => (
+      <div class="button">
+        <a href={`/tag/${tag}`}>
+          <button>{tag}</button>
+        </a>
+      </div>
+    ))
+  }
+</div>
+
+<style>
+  .tags {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

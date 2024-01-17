@@ -2,7 +2,98 @@
 import { Image } from "astro:assets";
 import Layout from "@layouts/BaseLayout.astro";
 import Intro from "@assets/intro.webp";
+import type { BlogType } from "src/content/config";
+import ArticleCard from "@components/ArticleCard.astro";
+import { getCollection } from "astro:content";
+import { HOMEPAGE_ARTICLE_LIMIT } from "src/constants";
 const pageTitle = "Ezaz Ahmed | Software Developer";
+
+const allBlogs: BlogType[] = (await getCollection("blog")).sort(
+  (a: BlogType, b: BlogType) =>
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+type SkillType = {
+  name: string;
+  width: number;
+  height: number;
+  src: string;
+};
+
+const skills: SkillType[] = [
+  {
+    name: "JavaScript",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg",
+  },
+  {
+    name: "TypeScript",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg",
+  },
+  {
+    name: "React",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  },
+  {
+    name: "Svelte",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg",
+  },
+  {
+    name: "MongoDB",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+  },
+  {
+    name: "Nextjs",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+  },
+  {
+    name: "Nestjs",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg",
+  },
+  {
+    name: "Golang",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg",
+  },
+  {
+    name: "PostgreSQL",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg",
+  },
+  {
+    name: "MySQL",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+  },
+  {
+    name: "Docker",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg",
+  },
+  {
+    name: "Git",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg",
+  },
+];
 ---
 
 <Layout pageTitle={pageTitle}>
@@ -38,81 +129,19 @@ const pageTitle = "Ezaz Ahmed | Software Developer";
     Let's connect and explore the limitless possibilities of the digital
     landscape together!
   </p>
- 
+
   <h2>Skills</h2>
   <div class="link-images">
-    <Image
-      width="46"
-      height="46"
-      alt="JavaScript"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="TypeScript"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="React"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="Svelte"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="MongoDB"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="Next.js"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="Nestjs"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="Golang"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="PostGres"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="MySql"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="Docker"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg"
-    />
-    <Image
-      width="46"
-      height="46"
-      alt="Docker"
-      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg"
-    />
+    {
+      skills.map((skill) => (
+        <Image
+          width={skill.width}
+          height={skill.height}
+          alt={skill.name}
+          src={skill.src}
+        />
+      ))
+    }
   </div>
 
   <h2>Interests</h2>
@@ -123,6 +152,22 @@ const pageTitle = "Ezaz Ahmed | Software Developer";
     animation and reactivity experiments. Let's chat about developer experience,
     anime, or startup concepts – I'm always up for engaging discussions!
   </p>
+
+  <h2>Latest Blogs</h2>
+  <ul role="list" class="link-card-grid">
+    {
+      allBlogs
+        .slice(0, HOMEPAGE_ARTICLE_LIMIT)
+        .map((blog) => (
+          <ArticleCard
+            href={`/blog/${blog.slug}`}
+            image={blog.data.image}
+            title={blog.data.title}
+            tags={blog.data.tags}
+          />
+        ))
+    }
+  </ul>
 </Layout>
 <style>
   /* small */

@@ -1,7 +1,8 @@
 ---
+layout: ../../layouts/BlogLayout.astro
 title: "Astro: The Best Frontend Framework?"
-pubDate: 18-Jan-24
-image: "https://res.cloudinary.com/ezaz/image/upload/v1705504903/blogs/rknetyww75yqkudqwbda.png"
+pubDate: 2024-01-18
+image: https://res.cloudinary.com/ezaz/image/upload/v1705504903/blogs/rknetyww75yqkudqwbda.png
 tags: ["astro", "frontend"]
 slug: astro-best-frontend-framework
 ---

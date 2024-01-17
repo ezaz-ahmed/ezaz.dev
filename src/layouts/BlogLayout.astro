@@ -1,13 +1,74 @@
 ---
+import Tags from "@components/Tags.astro";
 import BaseLayout from "./BaseLayout.astro";
+import { Image } from "@unpic/astro";
+import { formatDate } from "src/utils";
 const { frontmatter } = Astro.props;
 ---
 
 <BaseLayout pageTitle={frontmatter.title}>
-  <p>{frontmatter.pubDate.slice(0, 10)}</p>
-  <p><em>{frontmatter.description}</em></p>
-  <p>Written by: {frontmatter.author}</p>
-  <img src={frontmatter.image.url} width="300" alt={frontmatter.image.alt} />
-  <slot />
-  <slot />
+  <div class="gif">
+    <Image
+      src={frontmatter.image}
+      width={540}
+      height={400}
+      alt="Aurora"
+      unstyled
+    />
+  </div>
+
+  <h2>{frontmatter.title}</h2>
+
+  <div class="segment">
+    <div>
+      <span>Tags:</span>
+      <Tags tags={frontmatter.tags} />
+    </div>
+
+    <small>Posted on {formatDate(frontmatter.pubDate)}</small>
+  </div>
 </BaseLayout>
+
+<style>
+  .gif img {
+    object-fit: cover;
+    width: 100%;
+  }
+  h2 {
+    font-family: "Josefin Sans", sans-serif;
+    font-size: 2.4em;
+    text-align: center;
+    text-wrap: balance;
+    line-height: 1.2;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  article h2 {
+    font-family: "Josefin Sans", sans-serif;
+  }
+
+  .segment {
+    font-family: "Josefin Sans", sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px 0 30px 0;
+
+    div {
+      display: flex;
+      align-items: center;
+
+      span {
+        margin-right: 10px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .segment {
+      flex-direction: column;
+      row-gap: 10px;
+    }
+  }
+</style>

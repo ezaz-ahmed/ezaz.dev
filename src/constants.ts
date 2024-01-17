@@ -1,0 +1,1 @@
+export const HOMEPAGE_ARTICLE_LIMIT = 4;
