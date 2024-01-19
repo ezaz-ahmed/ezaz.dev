@@ -160,7 +160,7 @@ const skills: SkillType[] = [
         .slice(0, HOMEPAGE_ARTICLE_LIMIT)
         .map((blog) => (
           <ArticleCard
-            href={`/blog/${blog.slug}`}
+            href={`/blogs/${blog.slug}`}
             image={blog.data.image}
             title={blog.data.title}
             tags={blog.data.tags}
