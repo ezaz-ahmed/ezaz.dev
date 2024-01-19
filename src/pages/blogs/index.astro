@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import { Image as Unpic } from "@unpic/astro";
 import opinion from "@assets/thums-up.webp";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
@@ -47,7 +46,7 @@ const otherBlogs: OtherBlogType[] = [
     {
       allBlogs.map((blog) => (
         <ArticleCard
-          href={`/blog/${blog.slug}`}
+          href={`/blogs/${blog.slug}`}
           image={blog.data.image}
           title={blog.data.title}
           tags={blog.data.tags}

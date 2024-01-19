@@ -12,7 +12,7 @@ const { frontmatter } = Astro.props;
       src={frontmatter.image}
       width={540}
       height={400}
-      alt="Aurora"
+      alt={frontmatter.title}
       unstyled
     />
   </div>
@@ -27,6 +27,10 @@ const { frontmatter } = Astro.props;
 
     <small>Posted on {formatDate(frontmatter.pubDate)}</small>
   </div>
+
+  <div class="content">
+    <slot />
+  </div>
 </BaseLayout>
 
 <style>
@@ -34,18 +38,40 @@ const { frontmatter } = Astro.props;
     object-fit: cover;
     width: 100%;
   }
-  h2 {
-    font-family: "Josefin Sans", sans-serif;
-    font-size: 2.4em;
-    text-align: center;
-    text-wrap: balance;
-    line-height: 1.2;
-    text-decoration: none;
-    font-weight: bold;
+
+  .content {
+    img {
+      margin-top: 20px;
+      width: 100%;
+      height: auto;
+    }
+    h1,
+    h2,
+    h3 {
+      font-family: "Josefin Sans", sans-serif;
+      word-spacing: 1px;
+      text-align: left;
+      text-decoration: underline var(--steel-blue);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 6px;
+    }
+
+    a {
+      color: var(--steel-blue);
+      text-decoration: none;
+      transition: transform 0.3s ease;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
   }
 
-  article h2 {
+  h2 {
     font-family: "Josefin Sans", sans-serif;
+    text-wrap: balance;
+    text-align: center;
+    text-decoration: none;
   }
 
   .segment {

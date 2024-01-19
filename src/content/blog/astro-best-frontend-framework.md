@@ -11,7 +11,7 @@ The word "best" is very subjective. But in frontend development, Astro could be 
 
 ## Bring Your Own Frameworks
 
-![Use multiple frameworks in the same project](https://res.cloudinary.com/ezaz/image/upload/v1705507629/blog-images/mawxf8tcbedwwxx3vzr5.png)
+<img src="https://res.cloudinary.com/ezaz/image/upload/v1705507629/blog-images/mawxf8tcbedwwxx3vzr5.png" alt="Multiple Frameworks">
 
 Astro's island architecture seamlessly combines various frontend frameworks like React, Vue, and Svelte in one project. This approach lets developers selectively add client-side interactivity to specific webpage components, giving them the flexibility to choose their preferred frameworks. The result is a powerful application that benefits from both static rendering and dynamic interactivity.
 
@@ -21,9 +21,9 @@ Reducing the amount of JavaScript code can lead to better performance. Astro int
 
 ## Effortless Scalability
 
-![Islands Architecture](https://res.cloudinary.com/wedding-website/image/upload/v1596766231/islands-architecture-1.png)
+<img src="https://res.cloudinary.com/wedding-website/image/upload/v1596766231/islands-architecture-1.png" alt="Islands Architecture">
 
-_Source: [Islands Architecture: Jason Miller](https://jasonformat.com/islands-architecture/)_
+<span style="font-style: italic;display: flex;justify-content: end;">Source: <a href="https://jasonformat.com/islands-architecture/">Islands Architecture: Jason Miller</a></span>
 
 Astro's innovative "Islands" architecture introduces effortless JS-to-HTML streaming, elevating the scalability of your applications. Whether you opt for Server-Side Rendering (SSR) on specific pages or components, or desire a fully Static Site Generated (SSG) website, Astro has you covered. Emphasizing scalability, Astro empowers you to integrate your preferred client-side interactivity framework seamlessly into its structure, providing a dynamic and customizable development experience.
 

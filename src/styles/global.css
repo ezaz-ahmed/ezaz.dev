@@ -28,9 +28,10 @@ html {
 }
 
 body {
-    max-width: 540px;
+    max-width: 900px;
     margin: 0 auto;
     text-align: justify;
+    overflow-x: hidden;
 }
 
 /* Headings */
@@ -160,6 +161,13 @@ a:focus {
 }
 
 /* Media Query */
+@media only screen and (max-width: 1024px) {
+    body {
+        width: 540px;
+    }
+}
+
+
 @media only screen and (max-width: 600px) {
     body {
         width: 320px;
