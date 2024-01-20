@@ -1,10 +1,6 @@
 ---
-import Tags from "@components/Tags.astro";
-import BaseLayout from "@layouts/BaseLayout.astro";
-import { Source, Image } from "@unpic/astro";
 import { getCollection } from "astro:content";
 import type { BlogType } from "src/content/config";
-import { formatDate } from "src/utils";
 
 export async function getStaticPaths() {
   const allBlogs: BlogType[] = await getCollection("blog");

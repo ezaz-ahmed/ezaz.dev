@@ -48,7 +48,7 @@ const { frontmatter } = Astro.props;
     h1,
     h2,
     h3 {
-      font-family: "Josefin Sans", sans-serif;
+      font-family: var(--sans-serif-font);
       word-spacing: 1px;
       text-align: left;
       text-decoration: underline var(--steel-blue);
@@ -68,14 +68,14 @@ const { frontmatter } = Astro.props;
   }
 
   h2 {
-    font-family: "Josefin Sans", sans-serif;
+    font-family: var(--sans-serif-font);
     text-wrap: balance;
     text-align: center;
     text-decoration: none;
   }
 
   .segment {
-    font-family: "Josefin Sans", sans-serif;
+    font-family: var(--sans-serif-font);
     display: flex;
     align-items: center;
     justify-content: space-between;

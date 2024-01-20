@@ -1,24 +1,12 @@
 /* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Pacifico&display=swap');
+
 :root {
     --steel-blue: #375a7f;
     --light-pastel: #fdebf3;
     --dark-indigo: #33334f;
-}
-
-@font-face {
-    font-family: 'Pacifico';
-    src: url('/fonts/Pacifico-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
-}
-
-@font-face {
-    font-family: 'Josefin Sans';
-    src: url('/fonts/JosefinSans-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+    --cursive-font: 'Pacifico', cursive;
+    --sans-serif-font: 'Josefin Sans', sans-serif;
 }
 
 /* Global styles */
@@ -37,7 +25,7 @@ body {
 /* Headings */
 h1,
 h2 {
-    font-family: 'Pacifico', cursive;
+    font-family: var(--cursive-font);
     font-weight: normal;
 }
 
@@ -56,7 +44,7 @@ h2 {
 
 /* Paragraphs */
 p {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--sans-serif-font);
     font-size: 1.1em;
     hyphens: auto;
     line-height: 1.5;
@@ -65,7 +53,7 @@ p {
 
 strong {
     display: block;
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--sans-serif-font);
     font-size: 1.4em;
     margin: 13px 0;
     line-height: 1.5;
@@ -88,7 +76,7 @@ strong {
 
 .title-link,
 .nav-links {
-    font-family: 'Pacifico', cursive;
+    font-family: var(--cursive-font);
     font-size: 1.3rem;
 }
 
@@ -118,7 +106,7 @@ a:focus {
 }
 
 .nav-links {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: var(--sans-serif-font);
     font-size: 1.1rem;
     text-align: right;
 }
@@ -137,9 +125,7 @@ a:focus {
     border-radius: 8px;
     text-align: center;
     color: #78c2ad;
-    font:
-        600 16px "Josefin Sans",
-        sans-serif;
+    font: 600 16px var(--sans-serif-font);
     padding: 8px 16px;
     transition:
         background-color 0.4s,
