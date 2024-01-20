@@ -1,6 +1,7 @@
 ---
 import { Image } from "@unpic/astro";
 import Tags from "./Tags.astro";
+
 type Props = {
   href: string;
   image: string;
@@ -13,18 +14,18 @@ const { href, image, title, tags } = Astro.props;
 
 <li class="link-card">
   <a href={href}>
-    <div class="img">
-      <Image
-        width={400}
-        height={127}
-        src={image}
-        class="card-img"
-        alt="ProjectImage"
-      />
-      <h3 class="card-title">
-        {title}
-      </h3>
-    </div>
+    <Image
+      width={400}
+      height={400}
+      src={image}
+      class="card-img"
+      alt="ProjectImage"
+      fetchpriority="low"
+      sizes="auto"
+    />
+    <h3 class="card-title">
+      {title}
+    </h3>
   </a>
 
   <Tags tags={tags} />
@@ -38,30 +39,27 @@ const { href, image, title, tags } = Astro.props;
     background-size: 400%;
     padding: 20px;
     transition: transform 0.3s ease;
-  }
 
-  .link-card > a {
-    width: 100%;
-    text-decoration: none;
-    line-height: 1.4;
-    border-radius: 8px;
-    color: #fdebf3;
-  }
+    a {
+      width: 100%;
+      text-decoration: none;
+      line-height: 1.4;
+      border-radius: 8px;
+      color: #fdebf3;
+      text-align: center;
 
-  .img {
-    text-align: center;
-  }
+      img {
+        border-radius: 16px;
+      }
 
-  img {
-    border-radius: 16px;
-  }
-
-  h3 {
-    margin: 0;
-    font-family: var(--sans-serif-font);
-    font-size: 1.5rem;
-    font-weight: normal;
-    text-align: center;
+      h3 {
+        margin: 0;
+        font-family: var(--sans-serif-font);
+        font-size: 1.5rem;
+        font-weight: normal;
+        text-align: center;
+      }
+    }
   }
 
   .link-card:hover {
