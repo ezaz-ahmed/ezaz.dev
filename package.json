@@ -1,7 +1,7 @@
 {
   "name": "ezaz.dev",
   "type": "module",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -10,6 +10,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/mdx": "^2.0.5",
     "@astrojs/rss": "^4.0.2",
     "@astrojs/sitemap": "^3.0.4",
     "@unpic/astro": "^0.0.38",
