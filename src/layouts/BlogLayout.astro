@@ -57,17 +57,23 @@ const { frontmatter } = Astro.props;
     border-radius: 16px;
   }
 
+  h2 {
+    text-wrap: balance;
+    text-align: center;
+  }
+
   .content {
     img {
       margin-top: 20px;
+      margin-bottom: 10px;
       width: 100%;
       height: auto;
       border-radius: 16px;
     }
+
     h1,
     h2,
     h3 {
-      font-family: var(--sans-serif-font);
       word-spacing: 1px;
       text-align: left;
       text-decoration: underline var(--steel-blue);
@@ -84,13 +90,6 @@ const { frontmatter } = Astro.props;
     a:hover {
       text-decoration: underline;
     }
-  }
-
-  h2 {
-    font-family: var(--sans-serif-font);
-    text-wrap: balance;
-    text-align: center;
-    text-decoration: none;
   }
 
   .segment {

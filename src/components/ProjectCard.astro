@@ -10,7 +10,7 @@ type Props = {
 const { href, image, title, body } = Astro.props;
 ---
 
-<li class="link-card">
+<li class="project-card">
   <a href={href} target="_blank">
     <div class="img">
       <Image
@@ -20,10 +20,10 @@ const { href, image, title, body } = Astro.props;
         class="card-img"
         alt="ProjectImage"
       />
-      <h3 class="card-title">
+      <h3>
         {title}
       </h3>
-      <p class="card-txt">
+      <p>
         {body}
       </p>
     </div>
@@ -31,47 +31,45 @@ const { href, image, title, body } = Astro.props;
 </li>
 
 <style>
-  .link-card {
+  .project-card {
     list-style: none;
     display: flex;
-    background-size: 400%;
     padding: 20px;
     transition: transform 0.3s ease;
   }
 
-  .link-card > a {
+  .project-card > a {
     width: 100%;
     text-decoration: none;
     line-height: 1.4;
     border-radius: 8px;
     color: #fdebf3;
+    text-align: left;
+
+    .img {
+      text-align: center;
+
+      img {
+        border-radius: 16px;
+      }
+
+      h3 {
+        margin: 0;
+        font-family: var(--cursive-font);
+        font-size: 1.5rem;
+        font-weight: 900;
+      }
+
+      p {
+        font-size: 1em;
+        line-height: 1.5;
+        text-indent: 0;
+        margin: 0.5rem 0;
+      }
+    }
   }
 
-  .img {
-    text-align: center;
-  }
-
-  img {
-    border-radius: 16px;
-  }
-
-  h3 {
-    margin: 0;
-    font-family: var(--sans-serif-font);
-    font-size: 1.5rem;
-    font-weight: normal;
-    text-align: center;
-  }
-
-  p {
-    font-size: 1em;
-    line-height: 1.5;
-    text-indent: 0;
-    text-align: center;
-    margin: 0.5rem 0 0;
-  }
-
-  .link-card:hover {
+  .project-card:hover {
     transform: scale(1.05);
   }
 </style>

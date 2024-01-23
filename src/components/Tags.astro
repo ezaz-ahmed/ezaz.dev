@@ -9,11 +9,9 @@ type Props = {
 <div class="tags">
   {
     tags.map((tag) => (
-      <div class="button">
-        <a href={`/tags/${tag}`}>
-          <button>{tag}</button>
-        </a>
-      </div>
+      <a href={`/tags/${tag}`} class="tag">
+        #{tag}
+      </a>
     ))
   }
 </div>
@@ -21,8 +19,41 @@ type Props = {
 <style>
   .tags {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     justify-content: center;
-    flex-wrap: wrap;
+
+    .tag {
+      position: relative;
+      display: inline-block;
+      border-radius: 6px;
+      clip-path: polygon(20px 0px, 100% 0px, 100% 100%, 0% 100%, 0% 20px);
+      background: var(--color-front);
+      padding: 8px 22px;
+      font-weight: 600;
+      font-size: 18px;
+      color: var(--dark-indigo);
+      transition: clip-path 500ms;
+    }
+
+    .tag:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      background: var(--color-back);
+      box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 0 0 6px 0;
+      transition: transform 500ms;
+    }
+
+    .tag:hover {
+      clip-path: polygon(0px 0px, 100% 0px, 100% 100%, 0% 100%, 0% 0px);
+    }
+
+    .tag:hover:after {
+      transform: translate(-100%, -100%);
+    }
   }
 </style>
