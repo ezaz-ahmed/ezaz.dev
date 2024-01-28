@@ -1,23 +1,25 @@
 ---
+import { Image } from "astro:assets";
+
+import logo from "@assets/logo.png";
+
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header>
-  <nav>
-    <div class="nav-bar">
-      <div class="title-link">
-        <a href="/">@Ezaz</a>
-      </div>
+  <nav class="nav-bar">
+    <a href="/" class="title-link">
+      <Image src={logo} width={88} height={26} alt="Ezaz Logo" />
+    </a>
 
-      <div class="nav-links">
-        <a href="/works/" class={pathname === "/works/" && "active"}>Works</a>
-        <a href="/blogs/" class={pathname === "/blogs/" && "active"}>Blogs</a>
+    <div class="nav-links">
+      <a href="/works/" class={pathname === "/works/" && "active"}>Works</a>
+      <a href="/blogs/" class={pathname === "/blogs/" && "active"}>Blogs</a>
 
-        <div class="button">
-          <a href="/Ezaz-Ahmed(resume).pdf" target="_blank">
-            <button>Resume</button>
-          </a>
-        </div>
+      <div class="button">
+        <a href="/Ezaz-Ahmed(resume).pdf" target="_blank">
+          <button>Resume</button>
+        </a>
       </div>
     </div>
   </nav>

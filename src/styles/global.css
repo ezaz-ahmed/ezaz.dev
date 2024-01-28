@@ -3,8 +3,6 @@
     --light-pastel: #fdebf3;
     --dark-indigo: #33334f;
     --muted-teal: hsl(163, 38%, 40%);
-    --cursive-font: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;;
-    --sans-serif-font:  Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;;
 
     /* Tag Design */
     --color-front: hsl(163, 38%, 40%);
@@ -23,11 +21,12 @@ body {
     max-width: 900px;
     margin: 0 auto;
     text-align: justify;
+    font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+    font-weight: normal;
 }
 
 /* Headings */
 h1, h2, h3 {
-    font-family: var(--cursive-font);
     font-weight: normal;
 }
 
@@ -48,14 +47,12 @@ h2 {
 
 /* Paragraphs */
 a, p {
-    font-family: var(--sans-serif-font);
     font-size: 1.1em;
     font-weight: 400;
 }
 
 strong {
     display: block;
-    font-family: var(--sans-serif-font);
     font-size: 1.4em;
     margin: 13px 0;
     line-height: 1.5;
@@ -74,7 +71,7 @@ strong {
 
 /* Navigation Bar */
 .nav-bar {
-    margin-top: 0.8rem;
+    margin-top: 1rem;
     display: flex;
     flex-direction: row;
     align-items: baseline;
@@ -84,7 +81,7 @@ strong {
 .title-link a {
     font-size: 1.3rem;
     font-weight: 900;
-    font-family: var(--cursive-font);
+
     color: var(--light-pastel);
     text-decoration: none;
 }
@@ -114,7 +111,6 @@ strong {
 }
 
 .nav-links {
-    font-family: var(--sans-serif-font);
     font-size: 1.1rem;
     text-align: right;
 }
