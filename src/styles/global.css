@@ -1,14 +1,12 @@
 :root {
-    --steel-blue: #375a7f;
-    --light-pastel: #fdebf3;
-    --dark-indigo: #33334f;
-    --muted-teal: hsl(163, 38%, 40%);
+    --light-pastel: #fdebf3;   /* Text Color */
+    --dark-indigo: #33334f;    /* Background Color */
+    --light-blue: #1765b8;     /* Highlight Color */
 
-    /* Tag Design */
+    /* Tag Design Color */
     --color-front: hsl(163, 38%, 40%);
     --color-back: hsl(163, 38%, 60%);
 }
-
 
 
 /* Global styles */
@@ -37,7 +35,7 @@ h1 {
 }
 
 h2 {
-    text-decoration: underline var(--steel-blue);
+    text-decoration: underline var(--light-blue);
     text-decoration-thickness: 4px;
     text-underline-offset: 6px;
     font-weight: 600;
@@ -45,17 +43,38 @@ h2 {
     margin-bottom: 0;
 }
 
-/* Paragraphs */
-a, p {
-    font-size: 1.1em;
-    font-weight: 400;
-}
-
 strong {
     display: block;
     font-size: 1.4em;
     margin: 13px 0;
     line-height: 1.5;
+}
+
+p {
+    font-size: 1.1em;
+    hyphens: auto;
+    line-height: 1.5;
+    text-indent: 1em;
+} 
+
+a {
+    color: var(--light-blue);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style-type: none;  
+    margin: 0;             
+    padding: 0;            
+}
+
+li {
+    list-style: none;
 }
 
 /* Gifs */
@@ -67,79 +86,6 @@ strong {
 .gif img {
     width: 35%;
     height: auto;
-}
-
-/* Navigation Bar */
-.nav-bar {
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    justify-content: space-between;
-}
-
-.title-link a {
-    font-size: 1.3rem;
-    font-weight: 900;
-
-    color: var(--light-pastel);
-    text-decoration: none;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-}
-
-.nav-links a {
-    color: var(--light-pastel);
-    text-decoration: none;
-    font-weight: 500;
-}
-
-.title-link a:hover, .nav-links a:hover, a:focus {
-    text-decoration: underline var(--steel-blue);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
-}
-
-.nav-links .active {
-    text-decoration: underline var(--steel-blue);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
-    font-weight: 900;
-}
-
-.nav-links {
-    font-size: 1.1rem;
-    text-align: right;
-}
-
-.nav-links a {
-    margin: 0 7px;
-}
-
-.button {
-    text-align: center;
-}
-
-.button button {
-    background: rgba(0, 0, 0, 0);
-    border: 2px solid #78c2ad;
-    border-radius: 8px;
-    text-align: center;
-    color: #78c2ad;
-    font: 600 16px var(--sans-serif-font);
-    padding: 8px 16px;
-    transition:
-        background-color 0.4s,
-        color 0.4s;
-}
-
-.button button:hover {
-    background-color: #78c2ad;
-    color: #fdebf3;
-    cursor: pointer;
 }
 
 /* Card listing */
@@ -162,24 +108,8 @@ strong {
     }
 }
 
-
 @media only screen and (max-width: 600px) {
     body {
         width: 320px;
-    }
-
-    .nav-bar {
-        display: initial;
-    }
-
-    .title-link {
-        text-align: center;
-    }
-
-    .nav-links {
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        margin: 20px 0;
     }
 }

@@ -17,7 +17,7 @@ const { frontmatter } = Astro.props;
     />
   </div>
 
-  <h2>{frontmatter.title}</h2>
+  <h1>{frontmatter.title}</h1>
 
   <div class="segment">
     <div>
@@ -69,26 +69,6 @@ const { frontmatter } = Astro.props;
       width: 100%;
       height: auto;
       border-radius: 16px;
-    }
-
-    h1,
-    h2,
-    h3 {
-      word-spacing: 1px;
-      text-align: left;
-      text-decoration: underline var(--steel-blue);
-      text-decoration-thickness: 2px;
-      text-underline-offset: 6px;
-    }
-
-    a {
-      color: var(--steel-blue);
-      text-decoration: none;
-      transition: transform 0.3s ease;
-    }
-
-    a:hover {
-      text-decoration: underline;
     }
   }
 

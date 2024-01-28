@@ -1,0 +1,47 @@
+<a href="/Ezaz-Ahmed(resume).pdf" target="_blank">
+  <button type="button">Resume</button>
+</a>
+
+<style>
+  button {
+    background: transparent;
+    border: none;
+    font-size: 1.4em;
+    cursor: pointer;
+  }
+
+  button {
+    --b: 3px;
+    --s: 0.15em;
+    --c: var(--light-blue);
+
+    padding: calc(0.05em + var(--s)) calc(0.3em + var(--s));
+    color: var(--light-pastel);
+    --_p: var(--s);
+
+    background: conic-gradient(
+        from 90deg at var(--b) var(--b),
+        #0000 90deg,
+        var(--c) 0
+      )
+      var(--_p) var(--_p) / calc(100% - var(--b) - 2 * var(--_p))
+      calc(100% - var(--b) - 2 * var(--_p));
+
+    transition:
+      0.3s linear,
+      color 0s,
+      background-color 0s;
+    outline: var(--b) solid #0000;
+    outline-offset: 0.2em;
+  }
+  button:hover,
+  button:focus-visible {
+    --_p: 0px;
+    outline-color: var(--c);
+    outline-offset: 0.05em;
+  }
+  button:active {
+    background: var(--c);
+    color: #fff;
+  }
+</style>
