@@ -15,6 +15,7 @@
     "@astrojs/sitemap": "^3.0.4",
     "@unpic/astro": "^0.0.38",
     "astro": "^4.1.2",
+    "astro-compress": "^2.2.8",
     "astro-icon": "^1.0.2"
   }
 }

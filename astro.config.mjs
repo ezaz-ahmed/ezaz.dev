@@ -1,10 +1,9 @@
 import { defineConfig } from "astro/config";
 import icon from "astro-icon";
-
 import mdx from "@astrojs/mdx";
+import compress from "astro-compress";
 
-// https://astro.build/config
 export default defineConfig({
   site: "https://ezaz.dev",
-  integrations: [icon(), mdx()]
+  integrations: [icon(), mdx(), compress()],
 });
