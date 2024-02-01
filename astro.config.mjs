@@ -8,8 +8,8 @@ export default defineConfig({
   integrations: [
     icon(),
     mdx(),
-    compress({
-      CSS: false,
-    }),
+    // compress({
+    //   CSS: false,
+    // }),
   ],
 });
