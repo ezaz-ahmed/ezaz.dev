@@ -1,14 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import opinion from "@assets/thums-up.webp";
+import opinion from "@assets/thumbs-up.gif";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
 import type { BlogType } from "src/content/config";
 
 const allBlogs: BlogType[] = (await getCollection("blog")).sort(
   (a: BlogType, b: BlogType) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
 const pageTitle = "Blogs | Ezaz Ahmed";
