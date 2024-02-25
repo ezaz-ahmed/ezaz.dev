@@ -1,15 +1,13 @@
 ---
 import { Image } from "astro:assets";
-import Tags from "./Tags.astro";
 
 type Props = {
   href: string;
   image: string;
   title: string;
-  tags: string[];
 };
 
-const { href, image, title, tags } = Astro.props;
+const { href, image, title } = Astro.props;
 ---
 
 <li class="article-card">
@@ -27,8 +25,6 @@ const { href, image, title, tags } = Astro.props;
     <h3>
       {title}
     </h3>
-
-    <Tags tags={tags} />
   </a>
 </li>
 

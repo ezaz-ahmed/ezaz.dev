@@ -11,8 +11,6 @@ const allBlogs: BlogType[] = (await getCollection("blog")).sort(
     b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 
-console.log(allBlogs[0].data.pubDate);
-
 const pageTitle = "Blogs | Ezaz Ahmed";
 
 type OtherBlogType = {
@@ -26,18 +24,6 @@ const otherBlogs: OtherBlogType[] = [
   {
     link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
     image: "https://ik.imagekit.io/ezaz/web-page-rendering.jpg",
-    title: "Approaches to Web Page Rendering",
-    tags: ["Frontend", "React"],
-  },
-  {
-    link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
-    image: "https://ik.imagekit.io/ezaz/the-ultimate-framework.jpg",
-    title: "Approaches to Web Page Rendering",
-    tags: ["Frontend", "React"],
-  },
-  {
-    link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
-    image: "https://ik.imagekit.io/ezaz/Background.jpg",
     title: "Approaches to Web Page Rendering",
     tags: ["Frontend", "React"],
   },
@@ -62,7 +48,6 @@ const otherBlogs: OtherBlogType[] = [
           href={`/blogs/${blog.slug}`}
           image={blog.data.image}
           title={blog.data.title}
-          tags={blog.data.tags}
         />
       ))
     }
@@ -72,12 +57,7 @@ const otherBlogs: OtherBlogType[] = [
   <ul role="list" class="link-card-grid">
     {
       otherBlogs.map((blog) => (
-        <ArticleCard
-          title={blog.title}
-          href={blog.link}
-          image={blog.image}
-          tags={blog.tags}
-        />
+        <ArticleCard title={blog.title} href={blog.link} image={blog.image} />
       ))
     }
   </ul>
