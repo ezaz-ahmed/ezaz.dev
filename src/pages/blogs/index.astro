@@ -8,8 +8,10 @@ import type { BlogType } from "src/content/config";
 
 const allBlogs: BlogType[] = (await getCollection("blog")).sort(
   (a: BlogType, b: BlogType) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
+
+console.log(allBlogs[0].data.pubDate);
 
 const pageTitle = "Blogs | Ezaz Ahmed";
 
@@ -23,8 +25,19 @@ type OtherBlogType = {
 const otherBlogs: OtherBlogType[] = [
   {
     link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
-    image:
-      "https://res.cloudinary.com/ezaz/image/upload/v1705780966/other-blogs/fl5ma7ukkuyiwlhnvswq.jpg",
+    image: "https://ik.imagekit.io/ezaz/web-page-rendering.jpg",
+    title: "Approaches to Web Page Rendering",
+    tags: ["Frontend", "React"],
+  },
+  {
+    link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
+    image: "https://ik.imagekit.io/ezaz/the-ultimate-framework.jpg",
+    title: "Approaches to Web Page Rendering",
+    tags: ["Frontend", "React"],
+  },
+  {
+    link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
+    image: "https://ik.imagekit.io/ezaz/Background.jpg",
     title: "Approaches to Web Page Rendering",
     tags: ["Frontend", "React"],
   },

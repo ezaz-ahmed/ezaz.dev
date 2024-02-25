@@ -1,5 +1,5 @@
 ---
-import { Image } from "@unpic/astro";
+import { Image } from "astro:assets";
 import Tags from "./Tags.astro";
 
 type Props = {
@@ -15,8 +15,8 @@ const { href, image, title, tags } = Astro.props;
 <li class="article-card">
   <a href={href}>
     <Image
-      width={500}
-      height={240}
+      width={250}
+      height={141}
       src={image}
       class="card-img"
       alt="ProjectImage"
@@ -36,10 +36,8 @@ const { href, image, title, tags } = Astro.props;
   .article-card {
     list-style: none;
     display: flex;
-    /* width: 100%; */
     align-items: center;
     flex-direction: column;
-    padding: 20px;
     transition: transform 0.3s ease;
 
     a {
