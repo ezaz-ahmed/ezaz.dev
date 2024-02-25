@@ -6,35 +6,35 @@ import { Icon } from "astro-icon/components";
   <hr />
 
   <div class="footer-container">
-    <p>Ezaz Ahmed</p>
+    <p>Powered by caffeine 🍵</p>
 
     <div class="icon-container">
       <a href="/rss.xml" aria-label="RSS">
-        <Icon name="rss" />
+        <Icon name="rss" width={20} height={20} />
       </a>
-      <a href="mailto:ezaznahmed@gmail.com" aria-label="Mail">
-        <Icon name="mail" />
+      <a href="mailto:contact@ezaz.dev" aria-label="Mail">
+        <Icon name="mail" width={20} height={20} />
       </a>
       <a
         href="https://github.com/ezaz-ahmed"
         target="_blank"
         aria-label="Github"
       >
-        <Icon name="github" />
+        <Icon name="github" width={20} height={20} />
       </a>
       <a
         href="https://www.linkedin.com/in/ezaz-ahmed-abdullah/"
         target="_blank"
         aria-label="Linkedin"
       >
-        <Icon name="linkedin" />
+        <Icon name="linkedin" width={20} height={20} />
       </a>
       <a
-        href="https://twitter.com/bugxfix"
+        href="https://twitter.com/EzazDev"
         target="_blank"
         aria-label="Twitter"
       >
-        <Icon name="twitter" />
+        <Icon name="twitter" width={20} height={20} />
       </a>
     </div>
   </div>
@@ -69,6 +69,7 @@ import { Icon } from "astro-icon/components";
 
   .icon-container {
     display: flex;
+    gap: 1rem;
   }
 
   .icon-container a {

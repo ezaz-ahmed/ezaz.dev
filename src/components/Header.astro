@@ -7,9 +7,7 @@ const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header class="header">
-  <a href="/">
-    <Image src={logo} width={80} height={25} alt="Ezaz Logo" />
-  </a>
+  <a href="/">Ezaz</a>
 
   <nav class="nav-bar">
     <ul class="nav-links">
@@ -27,14 +25,15 @@ const pathname = new URL(Astro.request.url).pathname;
 </header>
 
 <style>
-  .header > img {
-    width: 100%;
-    object-fit: fill;
-    height: auto;
+  .header a {
+    font-weight: 900;
+    font-size: 40px;
+    text-transform: uppercase;
+    color: #fff;
   }
 
   .header {
-    margin-top: 1rem;
+    margin-top: 0.1rem;
     display: flex;
     flex-direction: row;
     align-items: baseline;
