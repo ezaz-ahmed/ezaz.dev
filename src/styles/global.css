@@ -90,10 +90,17 @@ li {
 
 /* Card listing */
 .link-card-grid {
+    margin-top: 2rem;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(28ch, 1fr));
     gap: 1rem;
     padding: 0;
+
+    img {
+        width: 100%;
+        height: auto;
+        border-radius: 1rem;
+    }
 }
 
 /* Media Query */

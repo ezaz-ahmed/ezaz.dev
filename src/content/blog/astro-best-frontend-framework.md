@@ -2,20 +2,16 @@
 layout: "../../layouts/BlogLayout.astro"
 title: "Astro: The ultimate Framework?"
 pubDate: 2024-01-18
-image: https://res.cloudinary.com/ezaz/image/upload/v1706646210/blogs/astro-the-ultimate-frmaework_tdl2kk.jpg
+image: https://ik.imagekit.io/ezaz/the-ultimate-framework.jpg
 tags: ["astro", "frontend"]
 slug: astro-the-ultimate-framework
 ---
-
-import { Image } from "@unpic/astro";
 
 In frontend development, Astro could be revolutionary. The specific requirements of each project necessitate the consideration of flexibility, scalability, and performance as crucial elements when selecting the appropriate framework. If you haven't checked [Astro](https://astro.build/) yet, Here are few reasons you may consider it for your next application.
 
 ## Bring Your Own Frameworks
 
-<Image
-  width={"100%"}
-  height={"auto"}
+<img
   src="https://res.cloudinary.com/ezaz/image/upload/v1705507629/blog-images/mawxf8tcbedwwxx3vzr5.png"
   alt="Multiple Frameworks"
 />
@@ -28,9 +24,7 @@ Reducing the amount of JavaScript code can lead to better performance. Astro int
 
 ## Effortless Scalability
 
-<Image
-  width={"100%"}
-  height={"auto"}
+<img
   src="https://res.cloudinary.com/wedding-website/image/upload/v1596766231/islands-architecture-1.png"
   alt="Islands Architecture"
 />

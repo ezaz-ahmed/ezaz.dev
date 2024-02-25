@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import opinion from "@assets/thums-up.webp";
+import opinion from "@assets/thumbs-up.gif";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import ArticleCard from "@components/ArticleCard.astro";
 import type { BlogType } from "src/content/config";
@@ -23,8 +23,7 @@ type OtherBlogType = {
 const otherBlogs: OtherBlogType[] = [
   {
     link: "https://dev.to/ezaz-ahmed/frontend-development-approaches-to-web-page-rendering-47gg",
-    image:
-      "https://res.cloudinary.com/ezaz/image/upload/v1705780966/other-blogs/fl5ma7ukkuyiwlhnvswq.jpg",
+    image: "https://ik.imagekit.io/ezaz/web-page-rendering.jpg",
     title: "Approaches to Web Page Rendering",
     tags: ["Frontend", "React"],
   },
@@ -49,7 +48,6 @@ const otherBlogs: OtherBlogType[] = [
           href={`/blogs/${blog.slug}`}
           image={blog.data.image}
           title={blog.data.title}
-          tags={blog.data.tags}
         />
       ))
     }
@@ -59,12 +57,7 @@ const otherBlogs: OtherBlogType[] = [
   <ul role="list" class="link-card-grid">
     {
       otherBlogs.map((blog) => (
-        <ArticleCard
-          title={blog.title}
-          href={blog.link}
-          image={blog.image}
-          tags={blog.tags}
-        />
+        <ArticleCard title={blog.title} href={blog.link} image={blog.image} />
       ))
     }
   </ul>
