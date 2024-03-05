@@ -28,7 +28,6 @@ const pathname = new URL(Astro.request.url).pathname;
   .header a {
     font-weight: 900;
     font-size: 40px;
-    text-transform: uppercase;
     color: #fff;
   }
 
@@ -60,7 +59,8 @@ const pathname = new URL(Astro.request.url).pathname;
     gap: 0.8em;
   }
 
-  .nav-links li a {
+  .nav-links li a,
+  header a {
     position: relative;
     z-index: 1;
     text-align: center;
@@ -78,7 +78,8 @@ const pathname = new URL(Astro.request.url).pathname;
     transition: all 0.3s ease-in-out;
   }
 
-  .nav-links li a:before {
+  .nav-links li a:before,
+  header a:before {
     display: block;
     content: "";
     width: 0;
@@ -92,11 +93,13 @@ const pathname = new URL(Astro.request.url).pathname;
     transition: all 0.3s ease-in-out;
   }
 
-  .nav-links li a:hover {
+  .nav-links li a:hover,
+  header a:hover {
     background-position: 0%;
   }
 
-  .nav-links li a:hover:before {
+  .nav-links li a:hover:before,
+  header a:hover:before {
     width: 100%;
   }
 
