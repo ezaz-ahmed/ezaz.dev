@@ -1,6 +1,6 @@
 ---
-import { ViewTransitions } from "astro:transitions";
 import "@styles/global.css";
+import Header from "@components/Header.astro";
 const { pageTitle } = Astro.props;
 ---
 
@@ -30,9 +30,9 @@ const { pageTitle } = Astro.props;
     <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
 
     <title>{pageTitle}</title>
-    <ViewTransitions />
   </head>
   <body>
+    <Header />
     <slot />
   </body>
 </html>
