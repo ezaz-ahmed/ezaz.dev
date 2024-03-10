@@ -6,6 +6,9 @@
       "@assets/*": [
         "./src/assets/*"
       ],
+      "@lib/*": [
+        "./src/lib/*"
+      ],
       "@layouts/*": [
         "./src/layouts/*"
       ],

@@ -1,1 +1,24 @@
-<header>bruh 👋🏻👋🏻</header>
+---
+import { ThemeToggle } from "./ThemeToggle";
+import me from "@assets/me.png";
+import { Image } from "astro:assets";
+---
+
+<header class="mx-auto max-w-xl lg:max-w-5xl">
+  <div class="flex justify-between items-center">
+    <Image src={me} alt="My image" width={36} height={36} />
+
+    <nav>
+      <ul class="flex">
+        <li>About</li>
+        <li>Blogs</li>
+        <li>Projects</li>
+        <li>Uses</li>
+      </ul>
+    </nav>
+
+    <ThemeToggle client:load />
+
+    <!-- theme toggle -->
+  </div>
+</header>
