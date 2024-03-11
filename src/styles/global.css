@@ -1,14 +1,12 @@
 :root {
-    --light-pastel: #fdebf3;   /* Text Color */
-    --dark-indigo: #33334f;    /* Background Color */
-    --light-blue: #1765b8;     /* Highlight Color */
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
 
     /* Tag Design Color */
     --color-front: hsl(163, 38%, 40%);
     --color-back: hsl(163, 38%, 60%);
     --font-body: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 }
-
 
 /* Global styles */
 html {
@@ -62,11 +60,9 @@ a {
     color: var(--light-blue);
     text-decoration: none;
     transition: transform 0.3s ease;
-}
+} 
 
-
-
-  button {
+button {
     background: var(--light-blue);
     outline: none;
     color: white;

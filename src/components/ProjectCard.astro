@@ -1,0 +1,72 @@
+---
+import { Image } from "astro:assets";
+
+const { image, date, title, description, tags } = Astro.props;
+---
+
+<div class="blog-card">
+  <Image
+    src="https://via.placeholder.com/150"
+    alt="Blog"
+    width={16}
+    height={9}
+    class="blog-image"
+  />
+  <div class="blog-content">
+    <p class="blog-date">March 11, 2024</p>
+    <h2 class="blog-title">Sample Blog Post</h2>
+    <p class="blog-description">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae
+      tortor id odio elementum aliquet.
+    </p>
+    <a href="#" class="read-article-btn">Read article</a>
+  </div>
+</div>
+
+<style>
+  .blog-card {
+    width: 100%;
+    border: 1px solid #ddd;
+    padding: 20px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+  }
+
+  .blog-card:hover {
+    background-color: #f0f0f0;
+  }
+
+  .blog-image {
+    width: auto;
+    height: 100px; /* Adjust height as needed */
+    margin-right: 20px;
+  }
+
+  .blog-date {
+    margin: 0;
+    color: #888;
+  }
+
+  .blog-title {
+    margin: 10px 0;
+    color: #333;
+  }
+
+  .blog-description {
+    margin-bottom: 20px;
+  }
+
+  .read-article-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+
+  .read-article-btn:hover {
+    background-color: #0056b3;
+  }
+</style>

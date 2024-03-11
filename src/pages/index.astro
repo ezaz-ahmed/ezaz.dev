@@ -1,18 +1,10 @@
 ---
 import { Image } from "astro:assets";
-import BlogCard from "@components/BlogCard.astro";
+
 import Layout from "@layouts/BaseLayout.astro";
 import Intro from "@assets/intro.gif";
-import type { BlogType } from "src/content/config";
-import ArticleCard from "@components/ArticleCard.astro";
-import { getCollection } from "astro:content";
-import { HOMEPAGE_ARTICLE_LIMIT } from "src/constants";
-const pageTitle = "Ezaz Ahmed | Software Developer";
 
-const allBlogs: BlogType[] = (await getCollection("blog")).sort(
-  (a: BlogType, b: BlogType) =>
-    b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const pageTitle = "Ezaz Ahmed | Software Developer";
 
 type SkillType = {
   name: string;
@@ -150,7 +142,7 @@ const skills: SkillType[] = [
 
   <h2>Latest Blogs</h2>
   <ul role="list" class="link-card-grid">
-    {allBlogs.slice(0, HOMEPAGE_ARTICLE_LIMIT).map((blog) => <BlogCard />)}
+    <!-- {allBlogs.slice(0, HOMEPAGE_ARTICLE_LIMIT).map((blog) => )} -->
   </ul>
 </Layout>
 <style>
