@@ -1,117 +1,83 @@
 ---
 import { Image } from "astro:assets";
-import ResumeButton from "@components/ResumeButton.astro";
-import logo from "@assets/logo.png";
-
+import signature from "@assets/signature.png";
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
 <header class="header">
-  <a href="/">Ezaz</a>
+  <a href="/" class="link">
+    <Image src={signature} alt="ezaz-signature" width={100} />
+  </a>
 
-  <nav class="nav-bar">
-    <ul class="nav-links">
-      <li>
-        <a href="/works/" class={pathname === "/works/" && "active"}>Works</a>
-      </li>
+  <nav>
+    <a
+      href="/projects/"
+      class={"link " + (pathname === "/projects/" ? "active" : "")}
+    >
+      Projects
+    </a>
 
-      <li>
-        <a href="/blogs/" class={pathname === "/blogs/" && "active"}>Blogs</a>
-      </li>
-    </ul>
-
-    <ResumeButton />
+    <a href="https://blog.ezaz.dev" target="_blank">
+      <button>Explore My Blog</button>
+    </a>
   </nav>
 </header>
 
 <style>
-  .header a {
-    font-weight: 900;
-    font-size: 40px;
-    text-transform: uppercase;
-    color: #fff;
-  }
-
   .header {
-    margin-top: 0.1rem;
+    margin-top: 0.6rem;
     display: flex;
-    flex-direction: row;
-    align-items: baseline;
     justify-content: space-between;
-  }
-
-  .nav-bar {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 0.8em;
-  }
 
-  .nav-bar a {
-    color: var(--light-pastel);
-    text-decoration: none;
-    padding: 0.3em 0.2em;
-    font-weight: 500;
-    font-size: 1.2em;
-  }
+    .link {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(
+        to right,
+        var(--light-blue),
+        var(--light-blue) 50%,
+        #fff 50%
+      );
+      font-size: 1.3rem;
+      background-size: 200% 100%;
+      background-position: -100%;
+      font-weight: 600;
+      transition: all 0.3s ease-in-out;
+    }
 
-  .nav-links {
-    display: flex;
-    gap: 0.8em;
-  }
+    .link:before {
+      display: block;
+      content: "";
+      width: 0;
+      height: 3px;
+      bottom: -0.5rem;
+      left: 0;
+      z-index: 0;
+      position: absolute;
+      background: var(--light-blue);
+      transition: all 0.3s ease-in-out;
+    }
 
-  .nav-links li a {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-image: linear-gradient(
-      to right,
-      var(--light-blue),
-      var(--light-blue) 50%,
-      #fff 50%
-    );
-    background-size: 200% 100%;
-    background-position: -100%;
-    font-weight: 600;
-    transition: all 0.3s ease-in-out;
-  }
+    .link:hover {
+      background-position: 0%;
+    }
 
-  .nav-links li a:before {
-    display: block;
-    content: "";
-    width: 0;
-    height: 3px;
-    bottom: 5px;
-    left: 0;
-    bottom: -3px;
-    z-index: 0;
-    position: absolute;
-    background: var(--light-blue);
-    transition: all 0.3s ease-in-out;
-  }
+    .link:hover:before {
+      width: 100%;
+    }
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
 
-  .nav-links li a:hover {
-    background-position: 0%;
-  }
-
-  .nav-links li a:hover:before {
-    width: 100%;
-  }
-
-  .nav-links li a.active:before {
-    width: 100%;
-    display: block;
-    content: "";
-    height: 3px;
-    bottom: 5px;
-    left: 0;
-    bottom: -3px;
-    z-index: 0;
-    position: absolute;
-    background: var(--light-blue);
-    transition: all 0.3s ease-in-out;
+    img {
+      width: auto;
+      height: 100%;
+    }
   }
 
   @media only screen and (max-width: 600px) {

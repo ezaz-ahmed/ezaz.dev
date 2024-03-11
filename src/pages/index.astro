@@ -1,5 +1,6 @@
 ---
 import { Image } from "astro:assets";
+import BlogCard from "@components/BlogCard.astro";
 import Layout from "@layouts/BaseLayout.astro";
 import Intro from "@assets/intro.gif";
 import type { BlogType } from "src/content/config";
@@ -25,73 +26,73 @@ const skills: SkillType[] = [
     name: "JavaScript",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-plain.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/javascript/javascript-plain.svg",
   },
   {
     name: "TypeScript",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-plain.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-plain.svg",
   },
   {
     name: "React",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg",
   },
   {
     name: "Svelte",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/svelte/svelte-original.svg",
-  },
-  {
-    name: "MongoDB",
-    width: 46,
-    height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/svelte/svelte-original.svg",
   },
   {
     name: "Nextjs",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg",
   },
   {
     name: "Nestjs",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nestjs/nestjs-plain.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nestjs/nestjs-original.svg",
   },
   {
     name: "Golang",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/go/go-original-wordmark.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/go/go-original-wordmark.svg",
+  },
+  {
+    name: "MongoDB",
+    width: 46,
+    height: 46,
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mongodb/mongodb-original.svg",
   },
   {
     name: "PostgreSQL",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postgresql/postgresql-plain.svg",
   },
   {
     name: "MySQL",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/mysql/mysql-original.svg",
   },
   {
     name: "Docker",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-plain.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/docker/docker-plain.svg",
   },
   {
     name: "Git",
     width: 46,
     height: 46,
-    src: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-plain.svg",
+    src: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-plain.svg",
   },
 ];
 ---
@@ -106,24 +107,31 @@ const skills: SkillType[] = [
     />
   </div>
   <h1>Ezaz Ahmed</h1>
-  <small>Code Artisan (Developer)</small>
+  <small>Software Engineer</small>
   <strong>
-    I craft software for enjoyment and to make a positive impact on the world.
+    While sipping coffee, I love working on software that contributes to making
+    the world a better place. JavaScript is my superpower, empowering me to
+    bring innovative solutions to life.
   </strong>
 
   <h2>About</h2>
   <p>
-    I specialize in crafting exceptional web applications using TypeScript,
-    JavaScript, and a touch of creativity. My passion for digital craftsmanship
-    goes beyond the ordinary. With a commitment to excellence, I thrive on
-    transforming innovative concepts into cutting-edge realities.
+    I excel in developing top-notch web applications using TypeScript and
+    JavaScript, infused with creativity. With a dedication to quality, I enjoy
+    bringing imaginative ideas to life with innovative designs. My passion lies
+    in creating websites that not only look great but also perform exceptionally
+    well. I'm enthusiastic about contributing to open-source projects and
+    constantly seek new knowledge to fuel my creativity.
   </p>
+
+  <h2>Interests</h2>
+
   <p>
-    My journey in the digital realm revolves around crafting web applications
-    that seamlessly blend aesthetics and performance. I find joy in turning
-    mundane designs into captivating experiences, actively contributing to the
-    world of open-source projects, and relentlessly pursuing knowledge to create
-    something new and exciting.
+    Besides coding, I enjoy mentoring, exploring startup concepts, and delving
+    into serverless and functional programming. I'm deeply curious about
+    cybersecurity and ethical hacking. Let's talk about developer experience,
+    anime, or startup ideas – I'm always open to stimulating conversations! Oh,
+    and I make a mean cup of coffee too!
   </p>
 
   <h2>Skills</h2>
@@ -140,29 +148,9 @@ const skills: SkillType[] = [
     }
   </div>
 
-  <h2>Interests</h2>
-
-  <p>
-    Beyond coding, I'm passionate about mentoring, exploring startup ideas, and
-    diving into serverless and functional programming. I'm also into 3D
-    animation and reactivity experiments. Let's chat about developer experience,
-    anime, or startup concepts – I'm always up for engaging discussions!
-  </p>
-
   <h2>Latest Blogs</h2>
   <ul role="list" class="link-card-grid">
-    {
-      allBlogs
-        .slice(0, HOMEPAGE_ARTICLE_LIMIT)
-        .map((blog) => (
-          <ArticleCard
-            href={`/blogs/${blog.slug}`}
-            image={blog.data.image}
-            title={blog.data.title}
-            tags={blog.data.tags}
-          />
-        ))
-    }
+    {allBlogs.slice(0, HOMEPAGE_ARTICLE_LIMIT).map((blog) => <BlogCard />)}
   </ul>
 </Layout>
 <style>

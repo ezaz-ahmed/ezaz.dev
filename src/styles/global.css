@@ -6,6 +6,7 @@
     /* Tag Design Color */
     --color-front: hsl(163, 38%, 40%);
     --color-back: hsl(163, 38%, 60%);
+    --font-body: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 }
 
 
@@ -19,7 +20,7 @@ body {
     max-width: 900px;
     margin: 0 auto;
     text-align: justify;
-    font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+    font-family: var(--font-body);
     font-weight: normal;
 }
 
@@ -62,10 +63,28 @@ a {
     text-decoration: none;
     transition: transform 0.3s ease;
 }
-  
-a:hover {
-    text-decoration: underline;
-}
+
+
+
+  button {
+    background: var(--light-blue);
+    outline: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.3rem 0.5rem;
+    border: none;
+    font-family: var(--font-body);
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+  }
 
 ul {
     list-style-type: none;  
