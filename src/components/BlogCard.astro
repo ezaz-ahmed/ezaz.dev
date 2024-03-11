@@ -1,3 +1,15 @@
+---
+type Props = {
+  title: string;
+  date: string;
+  brief: string;
+  url: string;
+  image: string;
+};
+
+const { brief } = Astro.props;
+---
+
 <div class="blog-card">
   <div class="blog-content">
     <p class="blog-date">March 11, 2024</p>

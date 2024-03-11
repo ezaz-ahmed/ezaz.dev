@@ -8,7 +8,7 @@ import { Icon } from "astro-icon/components";
   <div class="footer-container">
     <p>Powered by caffeine 🍵</p>
 
-    <!-- <div class="icon-container">
+    <div class="icon-container">
       <a href="/rss.xml" aria-label="RSS">
         <Icon name="rss" width={20} height={20} />
       </a>
@@ -36,7 +36,7 @@ import { Icon } from "astro-icon/components";
       >
         <Icon name="twitter" width={20} height={20} />
       </a>
-    </div> -->
+    </div>
   </div>
 </footer>
 
@@ -74,11 +74,34 @@ import { Icon } from "astro-icon/components";
 
   .icon-container a {
     color: var(--light-pastel);
-  }
+    display: inline-block;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
 
-  small a {
-    color: #2b81dc;
-    text-decoration: 2px solid;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -4px;
+      height: 4px;
+      background: rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      transition: inherit;
+    }
+
+    &:hover::after {
+      transform: scale(1.1);
+    }
+
+    &:active {
+      transform: translateY(2px);
+    }
+
+    &:hover {
+      transform: translateY(-2px);
+    }
   }
 
   .social-icons {

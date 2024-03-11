@@ -1,0 +1,52 @@
+---
+import {
+  HASHNODE_API_URL,
+  HASHNODE_USERNAME,
+  BLOG_PAGE_SIZE,
+  BLOG_PAGE_NUMBER,
+} from "@src/constants.ts";
+import { type DataResponseType } from "@src/types.ts";
+import BlogCard from "./BlogCard.astro";
+
+const response = await fetch(HASHNODE_API_URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    query: `
+    query GetPostsByUserId($name: String!, $page: Int!, $pageSize: Int!) {
+      user(username: $name) {
+        id
+        name
+        posts(page: $page, pageSize: $pageSize) {
+          edges {
+            node {
+              title
+              url
+              publishedAt
+              readTimeInMinutes
+              coverImage {
+                attribution
+                photographer
+                url
+              }
+              tags {
+                name
+              }
+            }
+          }
+        }
+      }
+    }
+    `,
+    variables: {
+      name: HASHNODE_USERNAME,
+      page: BLOG_PAGE_NUMBER,
+      pageSize: BLOG_PAGE_SIZE,
+    },
+  }),
+});
+
+const { data } = (await response.json()) as DataResponseType;
+---
+
+{data.user.posts.edges.map((edge) => <BlogCard />)}
