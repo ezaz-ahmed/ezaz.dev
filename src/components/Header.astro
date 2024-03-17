@@ -1,0 +1,110 @@
+---
+import { Image } from "astro:assets";
+import signature from "@assets/signature.png";
+import { HASHNODE_URL } from "@src/constants";
+import StrongButton from "./Button/StrongButton.astro";
+const pathname = new URL(Astro.request.url).pathname;
+---
+
+<header class="header">
+  <a href="/" class="link">
+    <Image src={signature} alt="ezaz-signature" width={100} />
+  </a>
+
+  <nav>
+    <StrongButton newTabTarget={true} url={HASHNODE_URL} label="Blog Button">
+      Explore My Blog
+    </StrongButton>
+  </nav>
+</header>
+
+<style>
+  .header {
+    margin-top: 0.6rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .link {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-image: linear-gradient(
+        to right,
+        var(--light-blue),
+        var(--light-blue) 50%,
+        #fff 50%
+      );
+      font-size: 1.3rem;
+      background-size: 200% 100%;
+      background-position: -100%;
+      font-weight: 600;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .link:before {
+      display: block;
+      content: "";
+      width: 0;
+      height: 3px;
+      bottom: -0.5rem;
+      left: 0;
+      z-index: 0;
+      position: absolute;
+      background: var(--light-blue);
+      transition: all 0.3s ease-in-out;
+    }
+
+    .link:hover {
+      background-position: 0%;
+    }
+
+    .link:hover:before {
+      width: 100%;
+    }
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    img {
+      width: auto;
+      height: 100%;
+    }
+  }
+
+  button {
+    background: var(--light-blue);
+    outline: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.3rem 0.5rem;
+    border: none;
+    font-family: var(--font-body);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    &:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+  }
+
+  @media only screen and (max-width: 600px) {
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1em;
+    }
+  }
+</style>

@@ -1,29 +1,86 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@layouts/BaseLayout.astro";
-import { Icon } from "astro-icon/components";
+import Intro from "@assets/intro.gif";
+import BlogPosts from "@components/BlogPosts.astro";
+
 const pageTitle = "Ezaz Ahmed | Software Developer";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class="object">
-    <div class="object-rope"></div>
-    <div class="object-shape">
-      Coming <span class="soon">Soon</span>
-    </div>
+  <div class="banner">
+    <Image
+      width={300}
+      height={300}
+      alt="Gif collected from https://giphy.com/iroiro1/"
+      src={Intro}
+    />
   </div>
+  <h1>Ezaz Ahmed</h1>
+  <small>Software Engineer</small>
+  <strong>
+    While sipping coffee, I love working on software that contributes to making
+    the world a better place. JavaScript is my superpower, empowering me to
+    bring innovative solutions to life.
+  </strong>
 
-  <div class="content">
-    <Icon name="building" size={260} />
+  <h2>About</h2>
+  <p>
+    I'm a seasoned web developer skilled in TypeScript and JavaScript, dedicated
+    to crafting visually stunning and high-performing web applications. I'm
+    committed to excellence, translating imaginative ideas into innovative
+    designs. My focus is on creating websites that excel in both aesthetics and
+    functionality. I actively contribute to open-source projects and
+    continuously seek new knowledge to fuel my creativity.
+  </p>
 
-    <p class="message">
-      My brand new website will be launched soon. Shoot me an email if you want
-      to get in contact.
-    </p>
+  <p>
+    Besides coding, I enjoy mentoring, exploring startup concepts, and delving
+    into serverless and functional programming. I'm deeply curious about
+    cybersecurity and ethical hacking. Let's talk about developer experience,
+    anime, or startup ideas – I'm always open to stimulating conversations! Oh,
+    and I make a mean cup of coffee too!
+  </p>
 
-    <p class="mailtoaddress">
-      <em>
-        <a href="mailto:contact@ezaz.dev">contact@ezaz.dev</a>
-      </em>
-    </p>
-  </div>
+  <h2>Latest Articls</h2>
+
+  <BlogPosts />
 </Layout>
+<style>
+  h1 {
+    font-size: 2.6em;
+    margin: 0;
+    font-weight: 700;
+  }
+
+  h2 {
+    text-decoration: underline var(--light-blue);
+    text-decoration-thickness: 4px;
+    text-underline-offset: 6px;
+    font-weight: 600;
+    font-size: 2.1em;
+    margin-bottom: 0;
+  }
+
+  p {
+    font-size: 1.1rem;
+    hyphens: auto;
+    line-height: 1.5;
+    text-indent: 1em;
+  }
+
+  strong {
+    display: block;
+    font-size: 1.4em;
+    margin: 13px 0;
+    line-height: 1.5;
+  }
+
+  small {
+    background-color: #584966;
+    color: #fdebf3;
+    border-radius: 6px;
+    font-weight: 600;
+    padding: 0.3em 0.6em 0.2em;
+  }
+</style>

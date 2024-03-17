@@ -1,29 +1,40 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "@layouts/BaseLayout.astro";
-import { Icon } from "astro-icon/components";
-const pageTitle = "Ezaz Ahmed | Software Developer";
+import NotFound from "@assets/not-found.gif";
+import StrongButton from "@components/Button/StrongButton.astro";
+
+const pageTitle = "Not Found | Ezaz Ahmed";
 ---
 
 <Layout pageTitle={pageTitle}>
-  <div class="object">
-    <div class="object-rope"></div>
-    <div class="object-shape">
-      Coming <span class="soon">Soon</span>
+  <div class="banner">
+    <Image
+      width={300}
+      height={300}
+      alt="Gif collceted from https://giphy.com/iroiro1/"
+      src={NotFound}
+    />
+  </div>
+  <div class="container">
+    <h2>404</h2>
+    <h1>What are you searching for?</h1>
+    <p>
+      Oops! The page you are looking for might be under construction or does not
+      exist.
+    </p>
+
+    <div class="center-wrapper">
+      <StrongButton url="/" newTabTarget={false}> Return Home </StrongButton>
     </div>
   </div>
-
-  <div class="content">
-    <Icon name="building" size={260} />
-
-    <p class="message">
-      My brand new website will be launched soon. Shoot me an email if you want
-      to get in contact.
-    </p>
-
-    <p class="mailtoaddress">
-      <em>
-        <a href="mailto:contact@ezaz.dev">contact@ezaz.dev</a>
-      </em>
-    </p>
-  </div>
 </Layout>
+
+<style>
+  .center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 0;
+  }
+</style>

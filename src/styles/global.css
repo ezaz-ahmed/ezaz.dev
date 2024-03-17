@@ -1,101 +1,56 @@
+:root {
+    --light-pastel: #fdebf3;   /* Text Color */
+    --dark-indigo: #33334f;    /* Background Color */
+    --light-blue: #1765b8;     /* Highlight Color */
+
+    /* Tag Design Color */
+    --color-front: hsl(163, 38%, 40%);
+    --color-back: hsl(163, 38%, 60%);
+
+    /* font */
+    --font: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+}
+
+
+/* Global styles */
+html {
+    background-color: var(--dark-indigo);
+    color: var(--light-pastel);
+}
+
 body {
-  background: #33334F;
-  width: 100%;
-  overflow-x: hidden;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: justify;
+    font-family: var(--font);
+    font-weight: normal;
 }
 
-a {
-  color: white;
-  text-decoration: none;
-  position: relative; 
+.banner {
+    margin: 40px 0;
+    text-align: center;
 }
 
-a:hover {
-  text-decoration: none; 
+.banner img {
+    width: 35%;
+    height: auto;
 }
 
+/* Media Query */
 
-a:hover::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -6px; 
-  width: 100%;
-  height: 2px; 
-  background-color: white;
-}
+@media only screen and (max-width: 1024px) {
+    body {
+        width: 540px;
+    }
 
-@keyframes sway {
-  0% {
-    transform: rotate(8deg);
- }
-  50% {
-    transform: rotate(-8deg);
- }
-  100% {
-    transform: rotate(8deg);
- }
+    .banner img {
+        width: 50%;
+        height: auto;
+    }
 }
 
-.object {
-  position: absolute;
-  animation: sway 2.4s infinite;
-  animation-timing-function: ease-in-out;
-  -webkit-transform-origin: top;
-  -moz-transform-origin: top;
-  transform-origin: top;
-  left: 0;
-  right: 0;
-  height: 5%;
-  z-index: 999;
-  text-transform: uppercase;
-}
-.object-shape {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  display: block;
-  background-color: #2187c7;
-  margin: 0 auto;
-  position: relative;
-  color: #fff;
-  text-align: center;
-  padding-top: 25px;
-  font-weight: 800;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-.object-shape span {
-  font-size: 22px;
-  color: white;
-}
-.object-rope {
-  height: 100%;
-  width: 5px;
-  background-color: #2187c7;
-  content: "";
-  display: block;
-  margin-left: 50%;
-}
-.content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-  max-width: 500px;
-  padding: 30vh 20px 20px 20px;
-}
-.logo {
-  max-width: 300px;
-}
-p {
-  font-family: sans-serif;
-  text-align: center;
-}
-.message {
-  font-family: cursive;
-  font-size: large;
-  color: white;
-  margin-top: 40px;
+@media only screen and (max-width: 600px) {
+    body {
+        width: 320px;
+    }
 }

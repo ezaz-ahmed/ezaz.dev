@@ -1,0 +1,67 @@
+---
+import {
+  HASHNODE_API_URL,
+  HASHNODE_USERNAME,
+  BLOG_PAGE_SIZE,
+  BLOG_PAGE_NUMBER,
+} from "@src/constants.ts";
+import { type BlogsResType } from "@src/types.ts";
+import BlogCard from "./BlogCard.astro";
+
+const response = await fetch(HASHNODE_API_URL, {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    query: `
+      query {
+        user(username: "ezaz") {
+          posts(page: 1, pageSize: 4) {
+            edges {
+              node {
+                title
+                url
+                publishedAt
+                readTimeInMinutes
+                brief
+                coverImage {
+                  url
+                }
+                tags {
+                  name
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+    variables: {
+      name: HASHNODE_USERNAME,
+      page: BLOG_PAGE_NUMBER,
+      pageSize: BLOG_PAGE_SIZE,
+    },
+  }),
+});
+
+const { data } = (await response.json()) as BlogsResType;
+---
+
+<div>
+  {
+    data.user.posts.edges.map((edge) => (
+      <BlogCard
+        title={edge.node.title}
+        brief={edge.node.brief}
+        image={edge.node.coverImage.url}
+        url={edge.node.url}
+        date={edge.node.publishedAt}
+      />
+    ))
+  }
+</div>
+
+<style>
+  div {
+    margin: 2rem 0;
+  }
+</style>
