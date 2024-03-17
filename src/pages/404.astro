@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import Layout from "@layouts/BaseLayout.astro";
 import NotFound from "@assets/not-found.gif";
+import StrongButton from "@components/Button/StrongButton.astro";
 
 const pageTitle = "Not Found | Ezaz Ahmed";
 ---
@@ -24,9 +25,7 @@ const pageTitle = "Not Found | Ezaz Ahmed";
     </p>
 
     <div class="center-wrapper">
-      <a href="/">
-        <button>Return Home</button>
-      </a>
+      <StrongButton url="/" newTabTarget={false}> Return Home </StrongButton>
     </div>
   </div>
 </Layout>
@@ -36,5 +35,6 @@ const pageTitle = "Not Found | Ezaz Ahmed";
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1rem 0 0;
   }
 </style>

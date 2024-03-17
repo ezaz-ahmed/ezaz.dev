@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import SmallButton from "./Button/SmallButton.astro";
 ---
 
 <footer>
@@ -9,33 +10,37 @@ import { Icon } from "astro-icon/components";
     <p>Powered by caffeine 🍵</p>
 
     <div class="icon-container">
-      <a href="/rss.xml" aria-label="RSS">
-        <Icon name="rss" width={20} height={20} />
-      </a>
-      <a href="mailto:contact@ezaz.dev" aria-label="Mail">
-        <Icon name="mail" width={20} height={20} />
-      </a>
-      <a
-        href="https://github.com/ezaz-ahmed"
-        target="_blank"
-        aria-label="Github"
+      <SmallButton
+        url="mailto:contact@ezaz.dev"
+        newTabTarget={false}
+        label="Mail"
       >
-        <Icon name="github" width={20} height={20} />
-      </a>
-      <a
-        href="https://www.linkedin.com/in/ezaz7"
-        target="_blank"
-        aria-label="Linkedin"
+        <Icon name="mail" width={22} height={22} />
+      </SmallButton>
+
+      <SmallButton
+        url="https://github.com/ezaz-ahmed"
+        newTabTarget={true}
+        label="github"
       >
-        <Icon name="linkedin" width={20} height={20} />
-      </a>
-      <a
-        href="https://twitter.com/EzazDev"
-        target="_blank"
-        aria-label="Twitter"
+        <Icon name="github" width={22} height={22} />
+      </SmallButton>
+
+      <SmallButton
+        url="https://www.linkedin.com/in/ezaz7"
+        newTabTarget={true}
+        label="linkedin"
       >
-        <Icon name="twitter" width={20} height={20} />
-      </a>
+        <Icon name="linkedin" width={22} height={22} />
+      </SmallButton>
+
+      <SmallButton
+        url="https://twitter.com/EzazDev"
+        newTabTarget={true}
+        label="twitter"
+      >
+        <Icon name="twitter" width={22} height={22} />
+      </SmallButton>
     </div>
   </div>
 </footer>
@@ -58,6 +63,7 @@ import { Icon } from "astro-icon/components";
 
   p {
     text-indent: 0;
+    font-size: 1.2rem;
   }
 
   .footer-container {
@@ -78,18 +84,6 @@ import { Icon } from "astro-icon/components";
     transition:
       transform 0.3s,
       box-shadow 0.3s;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      right: 0;
-      bottom: -4px;
-      height: 4px;
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-      transition: inherit;
-    }
 
     &:hover::after {
       transform: scale(1.1);

@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import signature from "@assets/signature.png";
+import { HASHNODE_URL } from "@src/constants";
+import StrongButton from "./Button/StrongButton.astro";
 const pathname = new URL(Astro.request.url).pathname;
 ---
 
@@ -10,16 +12,9 @@ const pathname = new URL(Astro.request.url).pathname;
   </a>
 
   <nav>
-    <a
-      href="/projects/"
-      class={"link " + (pathname === "/projects/" ? "active" : "")}
-    >
-      Projects
-    </a>
-
-    <a href="https://blog.ezaz.dev" target="_blank">
-      <button>Explore My Blog</button>
-    </a>
+    <StrongButton newTabTarget={true} url={HASHNODE_URL} label="Blog Button">
+      Explore My Blog
+    </StrongButton>
   </nav>
 </header>
 

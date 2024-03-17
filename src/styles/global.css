@@ -6,6 +6,9 @@
     /* Tag Design Color */
     --color-front: hsl(163, 38%, 40%);
     --color-back: hsl(163, 38%, 60%);
+
+    /* font */
+    --font: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
 }
 
 
@@ -19,18 +22,8 @@ body {
     max-width: 900px;
     margin: 0 auto;
     text-align: justify;
-    font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+    font-family: var(--font);
     font-weight: normal;
-}
-
-ul {
-    list-style-type: none;  
-    margin: 0;             
-    padding: 0;            
-}
-
-li {
-    list-style: none;
 }
 
 .banner {
@@ -44,6 +37,7 @@ li {
 }
 
 /* Media Query */
+
 @media only screen and (max-width: 1024px) {
     body {
         width: 540px;

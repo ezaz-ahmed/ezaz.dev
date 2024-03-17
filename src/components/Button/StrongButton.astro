@@ -1,0 +1,46 @@
+---
+type Props = {
+  url: string;
+  newTabTarget: boolean;
+  label?: string;
+};
+
+const { url, newTabTarget, label } = Astro.props;
+---
+
+<a href={url} target={newTabTarget && "_blank"} aria-label={label}>
+  <button>
+    <slot />
+  </button>
+</a>
+
+<style>
+  a {
+    text-decoration: none;
+  }
+
+  button {
+    display: flex;
+    background: var(--light-blue);
+    outline: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.2rem;
+    padding: 0.3rem 0.5rem;
+    border: none;
+    font-family: var(--font-body);
+    transition:
+      transform 0.3s ease,
+      box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    }
+
+    &:active {
+      transform: translateY(2px);
+      box-shadow: none;
+    }
+  }
+</style>

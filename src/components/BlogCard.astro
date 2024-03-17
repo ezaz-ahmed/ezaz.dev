@@ -1,63 +1,104 @@
 ---
+import { Image } from "astro:assets";
+import { formattedDate } from "@src/utils";
+
 type Props = {
   title: string;
-  date: string;
+  date: Date;
   brief: string;
   url: string;
   image: string;
 };
 
-const { brief } = Astro.props;
+const { title, brief, url, image, date } = Astro.props;
 ---
 
-<div class="blog-card">
-  <div class="blog-content">
-    <p class="blog-date">March 11, 2024</p>
-    <h2 class="blog-title">Sample Blog Post</h2>
-    <p class="blog-description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae
-      tortor id odio elementum aliquet.
-    </p>
-    <a href="#" class="read-article-btn">Read article</a>
+<a href={url} class="blog-card">
+  <div class="image-box">
+    <Image class="img" src={image} alt={title} width={285} height={150} />
   </div>
-</div>
+
+  <div class="content">
+    <div class="time">
+      <span></span>
+      <p>{formattedDate(date)}</p>
+    </div>
+
+    <h2>{title}</h2>
+    <p class="blog-description">{brief}</p>
+  </div>
+</a>
 
 <style>
-  .blog-card {
-    width: 100%;
-    border: 1px solid #ddd;
-    padding: 20px;
-    transition: background-color 0.3s ease;
-  }
-
-  .blog-card:hover {
-    background-color: #f0f0f0;
-  }
-
-  .blog-date {
-    margin: 0;
-    color: #888;
-  }
-
-  .blog-title {
-    margin: 10px 0;
-    color: #333;
-  }
-
-  .blog-description {
-    margin-bottom: 20px;
-  }
-
-  .read-article-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
+  a {
+    color: inherit;
     text-decoration: none;
-    border-radius: 5px;
+    padding: 1rem;
+    border-radius: 1rem;
+
+    &:hover {
+      background: #48486a;
+    }
   }
 
-  .read-article-btn:hover {
-    background-color: #0056b3;
+  h2 {
+    margin: 0;
+    padding: 0.6rem 0;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+  }
+
+  button {
+    margin: 0;
+    padding: 0.6rem 0 0 0;
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    outline: none;
+    color: #ccc;
+  }
+
+  .blog-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .image-box {
+      flex: 1;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+
+    .content {
+      flex: 2;
+    }
+  }
+
+  .time {
+    display: flex;
+    align-items: center;
+
+    span {
+      background: var(--light-blue);
+      width: 0.2rem;
+      height: 1.4rem;
+      margin-right: 0.8rem;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    a {
+      display: flex;
+      flex-direction: column;
+    }
   }
 </style>

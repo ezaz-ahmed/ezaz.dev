@@ -1,4 +1,4 @@
-export type DataResponseType = {
+export type BlogsResType = {
   data: Data;
 };
 
@@ -23,6 +23,7 @@ export type Node = {
   url: string;
   publishedAt: Date;
   readTimeInMinutes: number;
+  brief: string;
   coverImage: CoverImage;
   tags: Tag[];
 };
