@@ -3,21 +3,6 @@
   "compilerOptions": {
     "baseUrl": "D:/Work/ezaz.dev",
     "paths": {
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@layouts/*": [
-        "./src/layouts/*"
-      ],
-      "@pages/*": [
-        "./src/pages/*"
-      ],
-      "@components/*": [
-        "./src/components/*"
-      ],
-      "@styles/*": [
-        "./src/styles/*"
-      ],
       "@src/*": [
         "./src/*"
       ]

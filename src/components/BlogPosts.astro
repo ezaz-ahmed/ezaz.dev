@@ -4,8 +4,8 @@ import {
   HASHNODE_USERNAME,
   BLOG_PAGE_SIZE,
   BLOG_PAGE_NUMBER,
-} from "@src/constants.ts";
-import { type BlogsResType } from "@src/types.ts";
+} from "../constants.ts";
+import { type BlogsResType } from "../types.ts";
 import BlogCard from "./BlogCard.astro";
 
 const response = await fetch(HASHNODE_API_URL, {
