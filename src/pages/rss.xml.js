@@ -30,8 +30,6 @@ export async function GET(context) {
 
   const { data } = await response.json();
 
-  console.log(data.user.posts)
-
   return rss({
     title: 'Ezaz.dev',
     description: 'A humble Astronaut’s guide to the stars',
