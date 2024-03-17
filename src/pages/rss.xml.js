@@ -1,8 +1,7 @@
 import rss from '@astrojs/rss';
-import { HASHNODE_API_URL, HASHNODE_USERNAME } from '@src/constants';
 
 export async function GET(context) {
-  const response = await fetch(HASHNODE_API_URL, {
+  const response = await fetch("https://gql.hashnode.com/", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -23,7 +22,7 @@ export async function GET(context) {
         }      
       `,
       variables: {
-        name: HASHNODE_USERNAME,
+        name: "ezaz",
       },
     }),
   });
