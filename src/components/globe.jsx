@@ -12,7 +12,7 @@ const slugs = [
   'nextdotjs',
   'prisma',
   'drizzle',
-  'amazonaws',
+  'amazonwebservices',
   'postgresql',
   'firebase',
   'nginx',
@@ -23,7 +23,6 @@ const slugs = [
   'docker',
   'git',
   'github',
-  'visualstudiocode',
   'nestjs',
   'figma',
 ]

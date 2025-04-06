@@ -1,8 +1,8 @@
 'use client'
-import { useEffect, useMemo, useState } from 'react'
-import { useTheme } from 'next-themes'
 
-import React, { Suspense } from 'react'
+import { useEffect, useMemo, useState, Suspense } from 'react'
+import { useTheme } from 'next-themes'
+import React from 'react'
 
 const Cloud = React.lazy(() =>
   import('react-icon-cloud').then((module) => ({
@@ -10,17 +10,7 @@ const Cloud = React.lazy(() =>
   }))
 )
 
-const fetchSimpleIcons = React.lazy(() =>
-  import('react-icon-cloud').then((module) => ({
-    default: module.fetchSimpleIcons,
-  }))
-)
-
-const renderSimpleIcon = React.lazy(() =>
-  import('react-icon-cloud').then((module) => ({
-    default: module.renderSimpleIcon,
-  }))
-)
+import { fetchSimpleIcons, renderSimpleIcon } from 'react-icon-cloud'
 
 export const cloudProps = {
   containerProps: {
@@ -69,18 +59,12 @@ export const renderCustomIcon = (icon, theme, imageArray) => {
   })
 }
 
-export default function IconCloud({
-  // Default to an empty array if not provided
-  iconSlugs = [],
-
-  imageArray,
-}) {
+export default function IconCloud({ iconSlugs = [], imageArray }) {
   const [data, setData] = useState(null)
   const { theme } = useTheme()
 
   useEffect(() => {
     if (iconSlugs.length > 0) {
-      // Check if iconSlugs is not empty
       fetchSimpleIcons({ slugs: iconSlugs }).then(setData)
     }
   }, [iconSlugs])

@@ -2,15 +2,13 @@ import React from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import IconCloudDemo from './globe'
-import { Code2, Paintbrush, Database, Layout, Cpu, Cloud } from 'lucide-react'
+import { Code2, Database, Layout, Cpu, Cloud } from 'lucide-react'
 import {
   FaReact,
   FaNodeJs,
-  FaPython,
   FaDocker,
   FaGitAlt,
   FaLinux,
-  FaFigma,
   FaAws,
 } from 'react-icons/fa'
 import {
@@ -19,10 +17,8 @@ import {
   SiTailwindcss,
   SiPostgresql,
   SiMongodb,
-  SiGraphql,
   SiJest,
   SiWebpack,
-  SiRedux,
   SiFirebase,
   SiVercel,
   SiVite,
@@ -213,19 +209,6 @@ const SkillsSection = () => {
           ))}
         </div>
       </section>
-      <style jsx>{`
-        @keyframes shimmer {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-      `}</style>
     </main>
   )
 }
