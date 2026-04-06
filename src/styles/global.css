@@ -1,56 +1,411 @@
-:root {
-    --light-pastel: #fdebf3;   /* Text Color */
-    --dark-indigo: #33334f;    /* Background Color */
-    --light-blue: #1765b8;     /* Highlight Color */
+@import "tailwindcss";
+@import "@fontsource-variable/plus-jakarta-sans";
+@import "@fontsource-variable/dm-sans";
+@import "@fontsource-variable/jetbrains-mono";
 
-    /* Tag Design Color */
-    --color-front: hsl(163, 38%, 40%);
-    --color-back: hsl(163, 38%, 60%);
+/* ─── Dark mode variant ────────────────────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
 
-    /* font */
-    --font: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+/* ─── Design tokens ────────────────────────────────────────────────────── */
+@theme {
+  /* Light mode colours */
+  --color-bg: #F5F5F7;
+  --color-surface: #FFFFFF;
+  --color-text-primary: #1D1D1F;
+  --color-text-secondary: #6E6E73;
+  --color-border: rgba(29, 29, 31, 0.08);
+
+  /* Dark mode colours */
+  --color-dark-bg: #0E1111;
+  --color-dark-surface: #161B22;
+  --color-dark-text-primary: #F5F5F7;
+  --color-dark-text-secondary: #8B949E;
+  --color-dark-border: rgba(245, 245, 247, 0.08);
+
+  /* Accent gradient endpoints */
+  --color-accent-from: #6366F1;
+  --color-accent-to: #A855F7;
+  --color-dark-accent-from: #818CF8;
+  --color-dark-accent-to: #C084FC;
+
+  /* Typography */
+  --font-heading: 'Plus Jakarta Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-body: 'DM Sans Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', monospace;
+
+  /* Motion */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+  --duration-fast: 150ms;
+  --duration-base: 250ms;
+
+  /* Layout */
+  --canvas-pt: 120px;
+  --canvas-max-w: 56rem;
+  /* ~896px  */
+  --canvas-px: 2rem;
 }
 
+/* ─── Base styles ──────────────────────────────────────────────────────── */
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 
-/* Global styles */
-html {
-    background-color: var(--dark-indigo);
-    color: var(--light-pastel);
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.75;
+    background-color: var(--color-bg);
+    color: var(--color-text-primary);
+    transition: background-color var(--duration-base) var(--ease-smooth),
+      color var(--duration-base) var(--ease-smooth);
+  }
+
+  .dark body {
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text-primary);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    line-height: 1.15;
+    font-weight: 700;
+  }
+
+  code,
+  kbd,
+  pre,
+  samp {
+    font-family: var(--font-mono);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-accent-from) 30%, transparent);
+  }
 }
 
-body {
-    max-width: 900px;
-    margin: 0 auto;
-    text-align: justify;
-    font-family: var(--font);
-    font-weight: normal;
+/* ─── Shared utilities ─────────────────────────────────────────────────── */
+@utility canvas {
+  padding-top: var(--canvas-pt);
+  max-width: var(--canvas-max-w);
+  margin-inline: auto;
+  padding-inline: var(--canvas-px);
 }
 
-.banner {
-    margin: 40px 0;
-    text-align: center;
+@utility accent-gradient {
+  background: linear-gradient(135deg, var(--color-accent-from), var(--color-accent-to));
 }
 
-.banner img {
-    width: 35%;
-    height: auto;
+.dark .accent-gradient,
+.dark .dark\:accent-gradient {
+  background: linear-gradient(135deg, var(--color-dark-accent-from), var(--color-dark-accent-to));
 }
 
-/* Media Query */
-
-@media only screen and (max-width: 1024px) {
-    body {
-        width: 540px;
-    }
-
-    .banner img {
-        width: 50%;
-        height: auto;
-    }
+@utility accent-text {
+  background: linear-gradient(135deg, var(--color-accent-from), var(--color-accent-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-@media only screen and (max-width: 600px) {
-    body {
-        width: 320px;
-    }
+.dark .accent-text,
+.dark .dark\:accent-text {
+  background: linear-gradient(135deg, var(--color-dark-accent-from), var(--color-dark-accent-to));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility surface {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.dark .surface,
+.dark .dark\:surface {
+  background-color: var(--color-dark-surface);
+  border-color: var(--color-dark-border);
+}
+
+@utility btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  background: linear-gradient(135deg, var(--color-accent-from), var(--color-accent-to));
+  color: #fff;
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-spring),
+    box-shadow var(--duration-fast) var(--ease-smooth),
+    opacity var(--duration-fast) var(--ease-smooth);
+}
+
+.btn-primary:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px color-mix(in srgb, var(--color-accent-from) 35%, transparent);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+@utility btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--font-heading);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: transform var(--duration-fast) var(--ease-spring),
+    background-color var(--duration-fast) var(--ease-smooth),
+    border-color var(--duration-fast) var(--ease-smooth);
+}
+
+.dark .btn-ghost,
+.dark .dark\:btn-ghost {
+  color: var(--color-dark-text-primary);
+  border-color: var(--color-dark-border);
+}
+
+.btn-ghost:hover {
+  transform: scale(1.03);
+  background-color: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
+}
+
+.dark .btn-ghost:hover {
+  background-color: color-mix(in srgb, var(--color-dark-text-primary) 6%, transparent);
+}
+
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+/* ─── Card hover spring ────────────────────────────────────────────────── */
+@utility card-hover {
+  transition: transform var(--duration-base) var(--ease-spring),
+    box-shadow var(--duration-base) var(--ease-smooth);
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px color-mix(in srgb, var(--color-text-primary) 10%, transparent);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 12px 32px color-mix(in srgb, #000 40%, transparent);
+}
+
+/* ─── Mesh gradient background ─────────────────────────────────────────── */
+@utility mesh-bg {
+  position: relative;
+  isolation: isolate;
+}
+
+.mesh-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse 60% 50% at 20% 40%, color-mix(in srgb, var(--color-accent-from) 12%, transparent) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 60% at 80% 60%, color-mix(in srgb, var(--color-accent-to) 10%, transparent) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+/* ─── Focus ring ───────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--color-accent-from);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ─── Scrollbar ────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-text-secondary) 30%, transparent);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--color-text-secondary) 60%, transparent);
+}
+
+/* ─── Prose (blog content) ─────────────────────────────────────────────── */
+@utility prose {
+  color: var(--color-text-primary);
+  max-width: 65ch;
+}
+
+.dark .prose,
+.dark .dark\:prose {
+  color: var(--color-dark-text-primary);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-top: 2em;
+  margin-bottom: 0.75em;
+}
+
+.dark .prose h1,
+.dark .prose h2,
+.dark .prose h3,
+.dark .prose h4 {
+  color: var(--color-dark-text-primary);
+}
+
+.prose h1 {
+  font-size: 2rem;
+}
+
+.prose h2 {
+  font-size: 1.5rem;
+}
+
+.prose h3 {
+  font-size: 1.25rem;
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+}
+
+.prose a {
+  color: var(--color-accent-from);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--duration-fast) var(--ease-smooth);
+}
+
+.dark .prose a {
+  color: var(--color-dark-accent-from);
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background: color-mix(in srgb, var(--color-text-primary) 8%, transparent);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+}
+
+.dark .prose code {
+  background: color-mix(in srgb, var(--color-dark-text-primary) 10%, transparent);
+}
+
+.prose pre {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  overflow-x: auto;
+  margin-bottom: 1.5em;
+}
+
+.dark .prose pre {
+  background: var(--color-dark-surface);
+  border-color: var(--color-dark-border);
+}
+
+.prose pre code {
+  background: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+.prose blockquote {
+  border-left: 3px solid var(--color-accent-from);
+  padding-left: 1.25rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin-inline: 0;
+  margin-block: 1.5em;
+}
+
+.dark .prose blockquote {
+  border-color: var(--color-dark-accent-from);
+  color: var(--color-dark-text-secondary);
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5em;
+}
+
+.prose li {
+  margin-bottom: 0.375em;
+}
+
+.prose hr {
+  border: none;
+  border-top: 1px solid var(--color-border);
+  margin-block: 2em;
+}
+
+.dark .prose hr {
+  border-color: var(--color-dark-border);
+}
+
+.prose img {
+  border-radius: 0.75rem;
+  max-width: 100%;
+  margin-block: 1.5em;
+}
+
+/* ─── Tag chip ─────────────────────────────────────────────────────────── */
+@utility tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2em 0.75em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--color-accent-from) 12%, transparent);
+  color: var(--color-accent-from);
+  letter-spacing: 0.02em;
+}
+
+.dark .tag,
+.dark .dark\:tag {
+  background: color-mix(in srgb, var(--color-dark-accent-from) 15%, transparent);
+  color: var(--color-dark-accent-from);
 }

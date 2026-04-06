@@ -1,86 +1,345 @@
 ---
-import { Image } from "astro:assets";
-import Layout from "../layouts/BaseLayout.astro";
-import Intro from "../assets/intro.gif";
-import BlogPosts from "../components/BlogPosts.astro";
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
 
-const pageTitle = "Ezaz Ahmed | Software Developer";
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const allProjects = await getCollection('projects');
+const featuredProjects = allProjects
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  .slice(0, 4);
 ---
 
-<Layout pageTitle={pageTitle}>
-  <div class="banner">
-    <Image
-      width={300}
-      height={300}
-      alt="Gif collected from https://giphy.com/iroiro1/"
-      src={Intro}
-    />
-  </div>
-  <h1>Ezaz Ahmed</h1>
-  <small>Software Engineer</small>
-  <strong>
-    While sipping coffee, I love working on software that contributes to making
-    the world a better place. JavaScript is my superpower, empowering me to
-    bring innovative solutions to life.
-  </strong>
+<Layout>
+  <!-- ── Hero ────────────────────────────────────────────────── -->
+  <section class="hero mesh-bg">
+    <div class="hero-inner canvas">
+      <div class="hero-badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Available for work
+      </div>
 
-  <h2>About</h2>
-  <p>
-    I'm a seasoned web developer skilled in TypeScript and JavaScript, dedicated
-    to crafting visually stunning and high-performing web applications. I'm
-    committed to excellence, translating imaginative ideas into innovative
-    designs. My focus is on creating websites that excel in both aesthetics and
-    functionality. I actively contribute to open-source projects and
-    continuously seek new knowledge to fuel my creativity.
-  </p>
+      <h1 class="hero-title">
+        Engineering ideas<br />
+        with <span class="accent-text">precision</span> &amp; craft.
+      </h1>
 
-  <p>
-    Besides coding, I enjoy mentoring, exploring startup concepts, and delving
-    into serverless and functional programming. I'm deeply curious about
-    cybersecurity and ethical hacking. Let's talk about developer experience,
-    anime, or startup ideas – I'm always open to stimulating conversations! Oh,
-    and I make a mean cup of coffee too!
-  </p>
+      <p class="hero-subtitle">
+        Software engineer. I write about building for the web —
+        performance, interface craft, systems thinking, and the
+        tools that make it all possible.
+      </p>
 
-  <h2>Latest Articls</h2>
+      <div class="hero-actions">
+        <a href="/blog" class="btn-primary">Read the blog</a>
+        <a href="/projects" class="btn-ghost">View projects</a>
+      </div>
+    </div>
+  </section>
 
-  <BlogPosts />
+  <!-- ── Recent posts ────────────────────────────────────────── -->
+  {recentPosts.length > 0 && (
+    <section class="section-posts">
+      <div class="canvas">
+        <div class="section-header">
+          <h2 class="section-title">Recent writing</h2>
+          <a href="/blog" class="section-link">All posts →</a>
+        </div>
+
+        <ul class="post-list" role="list">
+          {recentPosts.map((post) => (
+            <li>
+              <a href={`/blog/${post.id}`} class="post-card surface card-hover">
+                <div class="post-card-meta">
+                  <time datetime={post.data.pubDate.toISOString()} class="post-date">
+                    {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+                  </time>
+                  <div class="post-tags">
+                    {post.data.tags.slice(0, 2).map((tag: string) => (
+                      <span class="tag">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+                <h3 class="post-card-title">{post.data.title}</h3>
+                <p class="post-card-desc">{post.data.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <!-- ── Featured projects ───────────────────────────────────── -->
+  {featuredProjects.length > 0 && (
+    <section class="section-projects">
+      <div class="canvas">
+        <div class="section-header">
+          <h2 class="section-title">Selected projects</h2>
+          <a href="/projects" class="section-link">All projects →</a>
+        </div>
+
+        <ul class="project-grid" role="list">
+          {featuredProjects.map((project) => (
+            <li>
+              <a
+                href={project.data.url ?? `/projects#${project.id}`}
+                target={project.data.url ? '_blank' : undefined}
+                rel={project.data.url ? 'noopener noreferrer' : undefined}
+                class="project-card surface card-hover"
+              >
+                <div class="project-card-header">
+                  <h3 class="project-card-title">{project.data.title}</h3>
+                  <svg class="external-icon" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                </div>
+                <p class="project-card-desc">{project.data.description}</p>
+                <div class="project-tags">
+                  {project.data.tags.slice(0, 3).map((tag: string) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
 </Layout>
+
 <style>
-  h1 {
-    font-size: 2.6em;
-    margin: 0;
+  /* ── Hero ───────────────────────────────────────────── */
+  .hero {
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-inner {
+    padding-bottom: 5rem;
+    width: 100%;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+
+  :global(html.dark) .hero-badge { color: var(--color-dark-text-secondary); }
+
+  .badge-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 20%, transparent);
+    animation: pulse-badge 2.5s ease-in-out infinite;
+  }
+
+  @keyframes pulse-badge {
+    0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, #22c55e 20%, transparent); }
+    50%       { box-shadow: 0 0 0 6px color-mix(in srgb, #22c55e 8%, transparent); }
+  }
+
+  .hero-title {
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1.08;
+    margin: 0 0 1.5rem;
+    color: var(--color-text-primary);
+  }
+
+  :global(html.dark) .hero-title { color: var(--color-dark-text-primary); }
+
+  .hero-subtitle {
+    font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 48ch;
+    margin: 0 0 2.5rem;
+  }
+
+  :global(html.dark) .hero-subtitle { color: var(--color-dark-text-secondary); }
+
+  .hero-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* ── Sections ───────────────────────────────────────── */
+  .section-posts,
+  .section-projects {
+    padding-bottom: 5rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+  }
+
+  .section-title {
+    font-size: 1.375rem;
     font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin: 0;
   }
 
-  h2 {
-    text-decoration: underline var(--light-blue);
-    text-decoration-thickness: 4px;
-    text-underline-offset: 6px;
+  :global(html.dark) .section-title { color: var(--color-dark-text-primary); }
+
+  .section-link {
+    font-size: 0.875rem;
     font-weight: 600;
-    font-size: 2.1em;
-    margin-bottom: 0;
+    color: var(--color-accent-from);
+    text-decoration: none;
+    transition: opacity var(--duration-fast) var(--ease-smooth);
   }
 
-  p {
-    font-size: 1.1rem;
-    hyphens: auto;
-    line-height: 1.5;
-    text-indent: 1em;
+  :global(html.dark) .section-link { color: var(--color-dark-accent-from); }
+  .section-link:hover { opacity: 0.75; }
+
+  /* ── Post list ──────────────────────────────────────── */
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 
-  strong {
+  .post-card {
     display: block;
-    font-size: 1.4em;
-    margin: 13px 0;
-    line-height: 1.5;
+    padding: 1.5rem;
+    border-radius: 0.875rem;
+    text-decoration: none;
   }
 
-  small {
-    background-color: #584966;
-    color: #fdebf3;
-    border-radius: 6px;
-    font-weight: 600;
-    padding: 0.3em 0.6em 0.2em;
+  .post-card-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.625rem;
+  }
+
+  .post-date {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+  }
+
+  :global(html.dark) .post-date { color: var(--color-dark-text-secondary); }
+
+  .post-tags {
+    display: flex;
+    gap: 0.375rem;
+  }
+
+  .post-card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0 0 0.5rem;
+    letter-spacing: -0.015em;
+    transition: color var(--duration-fast) var(--ease-smooth);
+  }
+
+  :global(html.dark) .post-card-title { color: var(--color-dark-text-primary); }
+
+  .post-card:hover .post-card-title {
+    background: linear-gradient(135deg, var(--color-accent-from), var(--color-accent-to));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .post-card-desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  :global(html.dark) .post-card-desc { color: var(--color-dark-text-secondary); }
+
+  /* ── Project grid ───────────────────────────────────── */
+  .project-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.5rem;
+    border-radius: 0.875rem;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .project-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .project-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin: 0;
+    letter-spacing: -0.015em;
+    transition: color var(--duration-fast) var(--ease-smooth);
+  }
+
+  :global(html.dark) .project-card-title { color: var(--color-dark-text-primary); }
+
+  .external-icon {
+    color: var(--color-text-secondary);
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-smooth);
+  }
+
+  :global(html.dark) .external-icon { color: var(--color-dark-text-secondary); }
+  .project-card:hover .external-icon { opacity: 1; }
+
+  .project-card-desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin: 0;
+    flex: 1;
+  }
+
+  :global(html.dark) .project-card-desc { color: var(--color-dark-text-secondary); }
+
+  .project-tags {
+    display: flex;
+    gap: 0.375rem;
+    flex-wrap: wrap;
   }
 </style>

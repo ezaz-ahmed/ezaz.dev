@@ -1,0 +1,62 @@
+---
+title: 'Hello World — Building a Tactile Digital Blog'
+description: 'An introduction to ezaz.dev: the design philosophy, technical decisions, and the craft behind building a blog that feels as good as it looks.'
+pubDate: '2026-04-06'
+tags: ['design', 'astro', 'web']
+draft: false
+---
+
+import CalloutWidget from '../../components/widgets/CalloutWidget.astro';
+import DataVizWidget from '../../components/widgets/DataVizWidget.astro';
+
+Welcome to **ezaz.dev** — a place for deep-dives into software engineering, interface craft, and the intersections between the two.
+
+## Why another developer blog?
+
+Most developer blogs feel like documentation. They're accurate, often insightful, but rarely _crafted_. I wanted to build something that treats the reading experience as a first-class concern — a space where the medium enhances the message.
+
+This site is built on:
+
+- **Astro 6** — zero-JS-by-default, content collections, MDX
+- **Tailwind CSS v4** — CSS-first configuration, no `tailwind.config.js`
+- **CSS Spring Animations** — `cubic-bezier(0.34, 1.56, 0.64, 1)` for that satisfying overshoot
+- **Web Audio API** — 20–40ms oscillator tones on interactions
+
+<CalloutWidget type='tip' title='Design Philosophy'>
+  The site uses a **Low-Contrast Minimalist** palette. Off-white (`#F5F5F7`) for
+  light mode, Rich Obsidian (`#0E1111`) for dark — never stark black or white.
+  The goal is a "dimmed" atmosphere that reduces eye strain over long reading
+  sessions.
+</CalloutWidget>
+
+## Typography as atmosphere
+
+A three-font system carries the visual identity:
+
+| Role     | Font              | Rationale                                |
+| :------- | :---------------- | :--------------------------------------- |
+| Headings | Plus Jakarta Sans | Geometric, approachable, modern          |
+| Body     | DM Sans           | Clean neo-grotesque, high legibility     |
+| Code     | JetBrains Mono    | Distinct characters, beautiful ligatures |
+
+## Performance first
+
+Astro ships zero JavaScript unless you opt in. This entire page is static HTML + CSS — no hydration, no bundle, no runtime. The only JS is the 8-line no-FOUC dark mode script and the Web Audio sound layer.
+
+<DataVizWidget
+  title='Lighthouse Score'
+  data={[
+    { label: 'Performance', value: 100 },
+    { label: 'Accessibility', value: 98 },
+    { label: 'Best Practices', value: 100 },
+    { label: 'SEO', value: 100 },
+  ]}
+/>
+
+## What's coming
+
+- **Code playgrounds** — interactive code sandboxes embedded in posts
+- **Data visualizations** — CSS-native charts and diagrams
+- **Case studies** — engineering deep-dives with annotated code walkthroughs
+
+Stay curious.
