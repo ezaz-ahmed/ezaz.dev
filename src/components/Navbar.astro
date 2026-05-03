@@ -1,4 +1,7 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
+import SoundToggle from './SoundToggle.astro';
+
 const navLinks = [
   { label: 'Blog', href: '/blog' },
   { label: 'Projects', href: '/projects' },
@@ -34,45 +37,13 @@ const pathname = Astro.url.pathname;
 
     <div class="navbar-actions">
       <slot name="actions" />
-      <button
-        id="theme-toggle"
-        aria-label="Toggle dark mode"
-        title="Toggle dark mode"
-        data-sound="toggle"
-      >
-        {/* Sun icon — shown in dark mode */}
-        <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        {/* Moon icon — shown in light mode */}
-        <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+      <ThemeToggle />
+      <SoundToggle />
     </div>
   </div>
 </header>
 
 <script>
-  import { playSound } from '../utils/sound';
-
-  // ── Theme toggle ──────────────────────────────────────────
-  const btn = document.getElementById('theme-toggle');
-  btn?.addEventListener('click', () => {
-    playSound('toggle');
-    const isDark = document.documentElement.classList.toggle('dark');
-    try { localStorage.setItem('theme', isDark ? 'dark' : 'light'); } catch {}
-  });
-
-  // ── Nav link sound cues ───────────────────────────────────
-  document.querySelectorAll<HTMLElement>('[data-sound="click"]').forEach((el) => {
-    el.addEventListener('click', () => playSound('click'));
-  });
-
   // ── Scroll: add shadow when page is scrolled ──────────────
   const navbar = document.getElementById('navbar');
   const onScroll = () => {
@@ -90,27 +61,30 @@ const pathname = Astro.url.pathname;
     right: 0;
     z-index: 100;
     width: 100%;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid transparent;
     transition: background-color var(--duration-base) var(--ease-smooth),
                 box-shadow var(--duration-base) var(--ease-smooth),
                 border-color var(--duration-base) var(--ease-smooth);
+  }
+
+  :global(html.dark) header {
+    background-color: var(--color-dark-bg);
+  }
+
+  /* Scrolled: frosted glass */
+  header.scrolled {
     background-color: color-mix(in srgb, var(--color-bg) 70%, transparent);
     backdrop-filter: blur(12px) saturate(160%);
     -webkit-backdrop-filter: blur(12px) saturate(160%);
-    border-bottom: 1px solid transparent;
-  }
-
-  .dark header {
-    background-color: color-mix(in srgb, var(--color-dark-bg) 75%, transparent);
-  }
-
-  header.scrolled {
     border-bottom-color: var(--color-border);
     box-shadow: 0 1px 16px color-mix(in srgb, var(--color-text-primary) 5%, transparent);
   }
 
-  .dark header.scrolled {
+  :global(html.dark) header.scrolled {
+    background-color: color-mix(in srgb, var(--color-dark-bg) 70%, transparent);
     border-bottom-color: var(--color-dark-border);
-    box-shadow: 0 1px 16px color-mix(in srgb, #000 25%, transparent);
+    box-shadow: 0 1px 16px color-mix(in srgb, #000 30%, transparent);
   }
 
   .navbar-inner {
@@ -134,10 +108,11 @@ const pathname = Astro.url.pathname;
     color: var(--color-text-primary);
     text-decoration: none;
     flex-shrink: 0;
-    transition: opacity var(--duration-fast) var(--ease-smooth);
+    transition: color var(--duration-fast) var(--ease-smooth),
+                opacity var(--duration-fast) var(--ease-smooth);
   }
 
-  .dark .logo { color: var(--color-dark-text-primary); }
+  :global(html.dark) .logo { color: var(--color-dark-text-primary); }
   .logo:hover { opacity: 0.75; }
 
   .logo-dot {
@@ -148,10 +123,12 @@ const pathname = Astro.url.pathname;
     flex-shrink: 0;
   }
 
-  /* Nav */
-  nav {
-    flex: 1;
+  :global(html.dark) .logo-dot {
+    background: linear-gradient(135deg, var(--color-dark-accent-from), var(--color-dark-accent-to));
   }
+
+  /* Nav */
+  nav { flex: 1; }
 
   nav ul {
     list-style: none;
@@ -174,25 +151,24 @@ const pathname = Astro.url.pathname;
                 background-color var(--duration-fast) var(--ease-smooth);
   }
 
-  .dark .nav-link { color: var(--color-dark-text-secondary); }
+  :global(html.dark) .nav-link { color: var(--color-dark-text-secondary); }
 
   .nav-link:hover {
     color: var(--color-text-primary);
     background-color: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
   }
 
-  .dark .nav-link:hover {
+  :global(html.dark) .nav-link:hover {
     color: var(--color-dark-text-primary);
     background-color: color-mix(in srgb, var(--color-dark-text-primary) 8%, transparent);
   }
 
-  /* Active underline */
   .nav-link.active {
     color: var(--color-text-primary);
     font-weight: 600;
   }
 
-  .dark .nav-link.active { color: var(--color-dark-text-primary); }
+  :global(html.dark) .nav-link.active { color: var(--color-dark-text-primary); }
 
   .nav-link.active::after {
     content: '';
@@ -205,6 +181,10 @@ const pathname = Astro.url.pathname;
     background: linear-gradient(90deg, var(--color-accent-from), var(--color-accent-to));
   }
 
+  :global(html.dark) .nav-link.active::after {
+    background: linear-gradient(90deg, var(--color-dark-accent-from), var(--color-dark-accent-to));
+  }
+
   /* Actions */
   .navbar-actions {
     display: flex;
@@ -212,46 +192,4 @@ const pathname = Astro.url.pathname;
     gap: 0.5rem;
     margin-left: auto;
   }
-
-  /* Theme toggle button */
-  #theme-toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 0.5rem;
-    background: transparent;
-    border: 1px solid var(--color-border);
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    transition: transform var(--duration-fast) var(--ease-spring),
-                background-color var(--duration-fast) var(--ease-smooth),
-                color var(--duration-fast) var(--ease-smooth);
-  }
-
-  .dark #theme-toggle {
-    border-color: var(--color-dark-border);
-    color: var(--color-dark-text-secondary);
-  }
-
-  #theme-toggle:hover {
-    transform: scale(1.08);
-    background-color: color-mix(in srgb, var(--color-text-primary) 6%, transparent);
-    color: var(--color-text-primary);
-  }
-
-  .dark #theme-toggle:hover {
-    background-color: color-mix(in srgb, var(--color-dark-text-primary) 8%, transparent);
-    color: var(--color-dark-text-primary);
-  }
-
-  #theme-toggle:active { transform: scale(0.92); }
-
-  /* Icon visibility */
-  .icon-sun  { display: none; }
-  .icon-moon { display: block; }
-
-  :global(html.dark) .icon-sun  { display: block; }
-  :global(html.dark) .icon-moon { display: none; }
 </style>

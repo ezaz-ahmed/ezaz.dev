@@ -36,6 +36,11 @@ function ramp(
 }
 
 export function playSound(type: SoundType): void {
+  // Check if sound is enabled
+  if (typeof window !== 'undefined' && !(window as any).soundEnabled?.()) {
+    return;
+  }
+
   try {
     const audioCtx = getCtx();
     const osc = audioCtx.createOscillator();
