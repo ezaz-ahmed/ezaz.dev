@@ -1,6 +1,7 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import SoundToggle from './SoundToggle.astro';
+import RSSLink from './RSSLink.astro';
 
 const navLinks = [
   { label: 'Blog', href: '/blog' },
@@ -37,6 +38,7 @@ const pathname = Astro.url.pathname;
 
     <div class="navbar-actions">
       <slot name="actions" />
+      <RSSLink />
       <ThemeToggle />
       <SoundToggle />
     </div>
