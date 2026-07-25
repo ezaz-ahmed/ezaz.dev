@@ -1,0 +1,80 @@
+---
+interface Note {
+  hash: string;
+  date: string;
+  tag: string;
+  title: string;
+  href: string;
+  desc: string;
+}
+
+const notes: Note[] = [
+  {
+    hash: '#a3f19c',
+    date: '2026-07-22',
+    tag: 'astro',
+    title: 'Rebuilding my site as components without a framework',
+    href: '#',
+    desc: 'How I split a single HTML concept into Astro components with Tailwind v4 tokens — and why I skipped a JS island entirely.',
+  },
+  {
+    hash: '#7e02b1',
+    date: '2026-07-09',
+    tag: 'react',
+    title: 'The re-render I chased for two days',
+    href: '#',
+    desc: 'A new object reference on every render quietly nuked memoization. Notes on the three fixes I tried before the one that stuck.',
+  },
+  {
+    hash: '#519dfa',
+    date: '2026-06-30',
+    tag: 'systems',
+    title: 'Idempotency keys are a promise, not a checkbox',
+    href: '#',
+    desc: "What I got wrong the first few times I implemented exactly-once semantics that weren't.",
+  },
+  {
+    hash: '#c88a20',
+    date: '2026-06-14',
+    tag: 'career',
+    title: 'On writing docs nobody asked for',
+    href: '#',
+    desc: 'Why the undocumented internal tool became the thing that actually got me noticed.',
+  },
+];
+---
+
+<section class="mt-25 pt-8" id="writing">
+  <div class="mb-6.5 flex items-baseline gap-2.5">
+    <span class="text-accent font-mono text-[15px]">02</span>
+    <h2 class="font-mono text-[15px] tracking-[1.5px] uppercase">Field notes</h2>
+    <div class="bg-line h-px flex-1"></div>
+  </div>
+
+  {
+    notes.map((note) => (
+      <div class="border-line grid grid-cols-[74px_1fr] gap-4.5 border-b border-dashed py-4 first:border-t first:border-dashed max-[560px]:grid-cols-1">
+        <div class="text-accent pt-0.5 font-mono text-[13px] font-bold max-[560px]:pt-0">
+          {note.hash}
+        </div>
+        <div>
+          <div class="text-ink-soft mb-1.5 flex items-center gap-2.5 font-mono text-[11.5px]">
+            <span>{note.date}</span>
+            <span class="bg-tag-teal-bg text-tag-teal rounded-[3px] px-1.75 py-0.5">
+              {note.tag}
+            </span>
+          </div>
+          <h3 class="mb-1.5 text-[16px] font-semibold">
+            <a
+              href={note.href}
+              class="hover:decoration-accent no-underline hover:underline hover:decoration-2"
+            >
+              {note.title}
+            </a>
+          </h3>
+          <p class="text-ink-soft text-[14px] leading-[1.6]">{note.desc}</p>
+        </div>
+      </div>
+    ))
+  }
+</section>

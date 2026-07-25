@@ -1,0 +1,50 @@
+---
+const projects = [
+  {
+    stack: ['TypeScript', 'React', 'Node'],
+    title: 'Memberlounge — community membership platform',
+    href: '#',
+    desc: 'Full-stack SaaS for running paid communities: auth, billing, and a real-time member dashboard. Started as a side project, now runs day to day.',
+  },
+  {
+    stack: ['Astro', 'Tailwind', 'Cloudflare'],
+    title: 'ezaz.dev — this site',
+    href: '#',
+    desc: 'A component-driven portfolio and writing log built on Astro. Static-first, fast, and easy to extend one section at a time.',
+  },
+  {
+    stack: ['Next.js', 'Postgres', 'Prisma'],
+    title: 'Ledgerline — local-first budgeting tool',
+    href: '#',
+    desc: 'No account, no subscription. Your data lives in your browser and a file you can actually open and export.',
+  },
+];
+---
+
+<section class="mt-25 pt-8" id="work">
+  <div class="mb-6.5 flex items-baseline gap-2.5">
+    <span class="text-accent font-mono text-[15px]">01</span>
+    <h2 class="font-mono text-[15px] tracking-[1.5px] uppercase">Things I've shipped</h2>
+    <div class="bg-line h-px flex-1"></div>
+  </div>
+
+  {
+    projects.map((project) => (
+      <div class="border-line grid grid-cols-[100px_1fr] gap-5 border-b py-5 first:border-t max-[560px]:grid-cols-1">
+        <div class="text-ink-soft font-mono text-[12px] leading-[1.6]">
+          {project.stack.map((tech) => (
+            <div>{tech}</div>
+          ))}
+        </div>
+        <div>
+          <h3 class="mb-2 text-[18px] font-semibold">
+            <a href={project.href} class="hover:text-accent no-underline">
+              {project.title}
+            </a>
+          </h3>
+          <p class="text-ink-soft text-[14.5px] leading-[1.6]">{project.desc}</p>
+        </div>
+      </div>
+    ))
+  }
+</section>

@@ -1,0 +1,69 @@
+---
+const avatar = '/assets/ezaz-avatar.webp';
+---
+
+<section
+  class="mt-8 flex flex-col-reverse items-start gap-8 pt-32 pb-16 sm:flex-row sm:items-center sm:justify-between sm:gap-10"
+>
+  <div class="min-w-0">
+    <span
+      class="bg-tag-teal-bg text-tag-teal mb-5.5 inline-block rounded-[3px] px-2.5 py-1 font-mono text-[13px]"
+    >
+      status: probably shipping something
+    </span>
+
+    <h1
+      class="mb-4.5 font-mono text-[44px] leading-[1.15] font-extrabold tracking-[-0.5px] max-[560px]:text-[32px]"
+    >
+      Ezaz Ahmed<span class="cursor"></span>
+    </h1>
+
+    <p class="text-ink-soft mb-7 max-w-130 text-[17px] leading-[1.65]">
+      I build full-stack web apps end to end — from <strong class="text-ink font-semibold"
+        >clean interfaces</strong
+      > to the <strong class="text-ink font-semibold">APIs and data</strong> behind them. I write down
+      what breaks so future-me stops repeating past-me's mistakes.
+    </p>
+
+    <div class="flex gap-4 font-mono text-[13px]">
+      <a
+        href="#writing"
+        class="border-accent bg-ink text-paper-raised hover:border-accent hover:bg-accent rounded-[3px] border-[1.5px] px-4 py-2.25 no-underline transition-colors"
+      >
+        read the log
+      </a>
+      <a
+        href="#work"
+        class="border-ink hover:bg-ink hover:text-paper-raised rounded-[3px] border-[1.5px] px-4 py-2.25 no-underline transition-colors"
+      >
+        see the work
+      </a>
+    </div>
+  </div>
+
+  <div class="group relative shrink-0">
+    <!-- Comic speech bubble: hidden until image is hovered -->
+    <div
+      class="pointer-events-none absolute -top-2 left-1/2 z-10 w-50 -translate-x-1/2 -translate-y-full scale-95 opacity-0 transition-all duration-200 ease-out group-hover:-translate-y-[calc(100%+8px)] group-hover:scale-100 group-hover:opacity-100"
+    >
+      <div
+        class="border-ink bg-paper-raised relative rounded-[10px] border-2 px-3 py-2 text-center font-mono text-[12px] leading-[1.45] shadow-[2px_3px_0_rgba(20,23,15,0.12)]"
+      >
+        Currently building AI apps with RAG, and agents
+        <!-- tail -->
+        <span
+          class="border-ink bg-paper-raised absolute bottom-0 left-1/2 h-3 w-3 -translate-x-1/2 translate-y-1/2 rotate-45 border-r-2 border-b-2"
+        ></span>
+      </div>
+    </div>
+
+    <img
+      src={avatar}
+      width="200"
+      height="200"
+      alt="Illustrated portrait of Ezaz Ahmed"
+      loading="eager"
+      class="h-auto w-32.5 -rotate-2 rounded-xs shadow-[3px_5px_0_rgba(20,23,15,0.08)] transition-transform duration-300 ease-out group-hover:rotate-0 sm:w-42.5 lg:w-50"
+    />
+  </div>
+</section>

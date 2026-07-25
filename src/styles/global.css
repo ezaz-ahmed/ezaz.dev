@@ -1,1 +1,211 @@
 @import 'tailwindcss';
+
+@theme {
+  --color-paper: #f2f1ea;
+  --color-paper-raised: #fbfaf6;
+  --color-ink: #14170f;
+  --color-ink-soft: #54584c;
+  --color-accent: #ff5a36;
+  --color-line: #c7c3b4;
+  --color-tag-teal: #2f6f62;
+  --color-tag-teal-bg: #e4eee9;
+
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-sans: 'Inter', sans-serif;
+}
+
+/*
+  Dark theme — override the @theme color tokens so every color utility
+  (which compiles to a var(--color-...) reference) flips automatically.
+
+  Two things are load-bearing here:
+  1. Keep this UNLAYERED. Tailwind v4 emits its :root theme vars unlayered,
+     and unlayered rules beat @layer ones regardless of specificity, so an
+     override inside @layer base would lose to :root and never take effect.
+  2. Keep a real property (color-scheme) in the html.dark rule. Lightning CSS
+     prunes rules whose body is only custom-property declarations, which would
+     silently drop the whole override from the production build.
+*/
+html {
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-paper: #16150f;
+  --color-paper-raised: #201f18;
+  --color-ink: #f2f1ea;
+  --color-ink-soft: #a8a493;
+  --color-accent: #ff6b4a;
+  --color-line: #3a382e;
+  --color-tag-teal: #7fcbb8;
+  --color-tag-teal-bg: #22302b;
+}
+
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    background-image: radial-gradient(var(--color-line) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: var(--color-paper-raised);
+  }
+}
+
+/* Theme toggle — cross-fade + rotate between moon (light) and sun (dark) */
+.theme-toggle {
+  position: relative;
+  display: inline-flex;
+  height: 18px;
+  width: 18px;
+  color: var(--color-ink-soft);
+  transition: color 0.15s ease;
+}
+
+.theme-toggle:hover {
+  color: var(--color-accent);
+}
+
+.theme-toggle svg {
+  position: absolute;
+  inset: 0;
+  height: 18px;
+  width: 18px;
+  transition:
+    transform 0.45s cubic-bezier(0.5, 1.6, 0.4, 1),
+    opacity 0.35s ease;
+}
+
+.theme-toggle .icon-sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.4);
+}
+
+.theme-toggle .icon-moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+html.dark .theme-toggle .icon-sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+html.dark .theme-toggle .icon-moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.4);
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Blinking hero cursor block */
+.cursor {
+  display: inline-block;
+  width: 11px;
+  height: 36px;
+  margin-left: 4px;
+  transform: translateY(4px);
+  background: var(--color-accent);
+  animation: blink 1.1s step-start infinite;
+}
+
+/* Brand trailing slash — glitches through symbols then settles on "/" */
+@keyframes brand-glyph {
+  0% {
+    content: '.{';
+  }
+
+  8% {
+    content: '.#';
+  }
+
+  16% {
+    content: '.$';
+  }
+
+  24% {
+    content: '.>';
+  }
+
+  32% {
+    content: '.%';
+  }
+
+  40% {
+    content: '.&';
+  }
+
+  48% {
+    content: '.*';
+  }
+
+  56% {
+    content: '.~';
+  }
+
+  64% {
+    content: '.|';
+  }
+
+  72% {
+    content: '.<';
+  }
+
+  80% {
+    content: '.;';
+  }
+
+  88% {
+    content: '.\\';
+  }
+
+  100% {
+    content: '.dev';
+  }
+}
+
+.brand-slash::after {
+  content: '.dev';
+  color: var(--color-accent);
+  animation: brand-glyph 1.1s steps(1, end) both;
+}
+
+/* Replay on hover (different duration restarts the animation) */
+.brand:hover .brand-slash::after {
+  animation: brand-glyph 0.7s steps(1, end) both;
+}
+
+/* Animated accent underline for nav links */
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.18s ease;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
