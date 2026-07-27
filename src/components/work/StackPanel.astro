@@ -1,0 +1,40 @@
+---
+/*
+  Stack by layer rather than one flat pile of logos: which tech, and what job it
+  does in this project. Chips are plain bordered spans, not the grid's .chip —
+  those rest faded and only resolve on tile hover, which is wrong for a list
+  you're meant to read.
+*/
+import type { StackGroup } from '../../lib/types';
+
+type Props = { groups: StackGroup[]; class?: string };
+
+const { groups, class: extraClass } = Astro.props;
+---
+
+<article class:list={['tile', extraClass]}>
+  <dl class="relative flex flex-col p-5 sm:p-6">
+    {
+      groups.map((group, i) => (
+        <div
+          class:list={[
+            'grid gap-x-6 gap-y-2.5 sm:grid-cols-[110px_minmax(0,1fr)]',
+            i > 0 && 'border-line mt-4 border-t pt-4',
+          ]}
+        >
+          <dt class="text-ink-soft font-mono text-[11px] tracking-[1.2px] uppercase sm:pt-1">
+            {group.label}
+          </dt>
+
+          <dd class="flex flex-wrap gap-1.5">
+            {group.items.map((item) => (
+              <span class="border-line rounded-[3px] border px-2 py-0.75 font-mono text-[11.5px]">
+                {item}
+              </span>
+            ))}
+          </dd>
+        </div>
+      ))
+    }
+  </dl>
+</article>

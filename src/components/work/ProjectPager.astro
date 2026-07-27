@@ -1,0 +1,58 @@
+---
+/*
+  Previous/next case study in grid order. Keeps a reader moving through the work
+  instead of dead-ending them at the footer.
+*/
+import { projectHref } from '../../lib/projects';
+import type { Project } from '../../lib/types';
+
+type Props = { prev?: Project; next?: Project; class?: string };
+
+const { prev, next, class: extraClass } = Astro.props;
+
+const links = [
+  { project: prev, label: 'previous', arrow: '←' },
+  { project: next, label: 'next', arrow: '→' },
+].filter((link): link is { project: Project; label: string; arrow: string } =>
+  Boolean(link.project)
+);
+---
+
+{
+  links.length > 0 && (
+    <nav class:list={['grid gap-3.5 sm:grid-cols-2', extraClass]} aria-label="More projects">
+      {links.map(({ project, label, arrow }) => (
+        <article class:list={['tile', label === 'next' && 'sm:col-start-2']}>
+          <a href={projectHref(project.slug)} class="tile-link absolute inset-0 z-10" />
+
+          <div
+            class:list={[
+              'relative flex flex-col p-4.5 sm:p-5',
+              label === 'next' && 'sm:items-end sm:text-right',
+            ]}
+          >
+            <span class="text-ink-soft mb-2 font-mono text-[10.5px] tracking-[1.2px] uppercase">
+              {label}
+            </span>
+
+            <span class="flex items-baseline gap-2 font-mono text-[16px] font-bold">
+              {label === 'previous' && (
+                <span class="tile-arrow-back text-accent" aria-hidden="true">
+                  {arrow}
+                </span>
+              )}
+              {project.title}
+              {label === 'next' && (
+                <span class="tile-arrow text-accent" aria-hidden="true">
+                  {arrow}
+                </span>
+              )}
+            </span>
+
+            <span class="text-ink-soft mt-1 font-mono text-[11.5px]">{project.kicker}</span>
+          </div>
+        </article>
+      ))}
+    </nav>
+  )
+}

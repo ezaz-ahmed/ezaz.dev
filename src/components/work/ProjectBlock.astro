@@ -1,0 +1,33 @@
+---
+/*
+  Labelled lead paragraph plus numbered points. Used for both halves of the
+  argument — the problem and what was built for it — which sit side by side, so
+  the label lives inside the tile rather than above the pair.
+*/
+import type { ProjectBlock } from '../../lib/types';
+
+type Props = ProjectBlock & { heading: string; class?: string };
+
+const { heading, lead, points, class: extraClass } = Astro.props;
+---
+
+<article class:list={['tile', extraClass]}>
+  <div class="relative flex h-full flex-col p-5 sm:p-6">
+    <h3 class="text-ink-soft mb-4 font-mono text-[11px] tracking-[1.3px] uppercase">{heading}</h3>
+
+    <p class="mb-5 text-[15px] leading-[1.7] font-medium">{lead}</p>
+
+    <ol class="text-ink-soft flex flex-col gap-3.5 text-[14px] leading-[1.65]">
+      {
+        points.map((point, i) => (
+          <li class="flex gap-3">
+            <span class="text-accent shrink-0 pt-0.5 font-mono text-[11.5px] tabular-nums">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span>{point}</span>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</article>

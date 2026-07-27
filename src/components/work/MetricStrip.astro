@@ -1,0 +1,28 @@
+---
+/*
+  Four headline numbers under the hero. Values are strings, not numbers — "<1s"
+  and "1 file" say more here than anything that could be counted up.
+*/
+import type { ProjectMetric } from '../../lib/types';
+
+type Props = { metrics: ProjectMetric[]; class?: string };
+
+const { metrics, class: extraClass } = Astro.props;
+---
+
+{
+  metrics.length > 0 && (
+    <ul class:list={['grid grid-cols-2 gap-3.5 sm:grid-cols-4', extraClass]}>
+      {metrics.map((metric) => (
+        <li class="tile">
+          <div class="relative p-4.5 sm:p-5">
+            <p class="font-mono text-[24px] leading-none font-extrabold tracking-[-0.5px]">
+              {metric.value}
+            </p>
+            <p class="text-ink-soft mt-2 font-mono text-[11.5px] leading-snug">{metric.label}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  )
+}

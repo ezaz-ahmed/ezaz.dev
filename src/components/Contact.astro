@@ -1,77 +1,37 @@
 ---
-const fields = [
-  { name: 'name', label: 'Name', type: 'text', required: true, autocomplete: 'name' },
-  { name: 'email', label: 'Email', type: 'email', required: true, autocomplete: 'email' },
-  {
-    name: 'company',
-    label: 'Company',
-    type: 'text',
-    required: false,
-    autocomplete: 'organization',
-  },
-  { name: 'subject', label: 'Subject', type: 'text', required: true, autocomplete: 'off' },
-];
+/*
+  Contact form. Every control is its own ui/ component — this file owns nothing
+  but the copy source, the grid, and which component each field maps to.
+*/
+import contact from '../data/contact.json';
+import type { ContactContent } from '../lib/types';
+import Button from './ui/Button.astro';
+import EmailInput from './ui/EmailInput.astro';
+import SectionHeading from './ui/SectionHeading.astro';
+import SelectInput from './ui/SelectInput.astro';
+import TextArea from './ui/TextArea.astro';
+import TextInput from './ui/TextInput.astro';
 
-const inputClass =
-  'border-line bg-paper-raised text-ink placeholder:text-ink-soft/60 focus:border-accent w-full rounded-[3px] border-[1.5px] px-3 py-2.5 font-mono text-[14px] outline-none transition-colors';
+const { heading, intro, action, method, submitLabel, fields } = contact as ContactContent;
 ---
 
 <section class="mt-10 pt-8" id="contact">
-  <div class="mb-[26px] flex items-baseline gap-[10px]">
-    <span class="text-accent font-mono text-[15px]">03</span>
-    <h2 class="font-mono text-[15px] tracking-[1.5px] uppercase">Get in touch</h2>
-    <div class="bg-line h-px flex-1"></div>
-  </div>
+  <SectionHeading title={heading} />
 
-  <p class="text-ink-soft mb-7 max-w-[520px] text-[15px] leading-[1.65]">
-    Got a project, a question, or just want to say hi? Drop a note below — required fields are
-    marked <span class="text-accent">*</span>.
+  <p class="text-ink-soft mb-7 max-w-130 text-[15px] leading-[1.65]">
+    {/* Explicit space: the copy and the marker sit on separate source lines. */}
+    {intro}{' '}<span class="text-accent">*</span>.
   </p>
 
-  <!--
-    Astro is static — this form needs an external endpoint to actually send.
-    Replace action with your handler (Formspree, Netlify Forms, or your own API):
-      Formspree: action="https://formspree.io/f/XXXX" method="post"
-      Netlify:   add `netlify` + a hidden `form-name` input
-  -->
-  <form action="#" method="post" class="grid grid-cols-1 gap-5 sm:grid-cols-2">
-    {
-      fields.map((field) => (
-        <div class="flex flex-col gap-1.5">
-          <label for={field.name} class="text-ink font-mono text-[12px]">
-            {field.label}
-            {field.required ? (
-              <span class="text-accent">*</span>
-            ) : (
-              <span class="text-ink-soft"> (optional)</span>
-            )}
-          </label>
-          <input
-            id={field.name}
-            name={field.name}
-            type={field.type}
-            required={field.required}
-            autocomplete={field.autocomplete}
-            class={inputClass}
-          />
-        </div>
-      ))
-    }
-
-    <div class="flex flex-col gap-1.5 sm:col-span-2">
-      <label for="message" class="text-ink font-mono text-[12px]">
-        Message<span class="text-accent">*</span>
-      </label>
-      <textarea id="message" name="message" required rows="6" class={inputClass}></textarea>
-    </div>
+  <form {action} {method} class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+    <TextInput {...fields.name} />
+    <EmailInput {...fields.email} />
+    <TextInput {...fields.company} />
+    <SelectInput {...fields.subject} />
+    <TextArea {...fields.message} class="sm:col-span-2" />
 
     <div class="sm:col-span-2">
-      <button
-        type="submit"
-        class="border-accent bg-ink text-paper-raised hover:bg-accent rounded-[3px] border-[1.5px] px-5 py-[10px] font-mono text-[13px] no-underline transition-colors"
-      >
-        send message →
-      </button>
+      <Button type="submit" size="md" arrow>{submitLabel}</Button>
     </div>
   </form>
 </section>

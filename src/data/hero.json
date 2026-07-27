@@ -1,0 +1,22 @@
+{
+  "status": "status: building software, exploring systems, sharing the journey",
+  "name": "Ezaz Ahmed",
+  "intro": [
+    { "text": "I build software with a focus on " },
+    { "text": "clean code", "strong": true },
+    { "text": ", " },
+    { "text": "reliable systems", "strong": true },
+    { "text": ", and " },
+    { "text": "thoughtful engineering", "strong": true },
+    { "text": ". Here, I share my projects, experiments, and what I learn along the way." }
+  ],
+  "bubble": "Currently building AI apps with RAG, and agents",
+  "avatar": {
+    "src": "/assets/ezaz-avatar.webp",
+    "alt": "Illustrated portrait of Ezaz Ahmed"
+  },
+  "actions": [
+    { "href": "#writing", "label": "read the log", "variant": "primary" },
+    { "href": "#work", "label": "see the work", "variant": "secondary" }
+  ]
+}

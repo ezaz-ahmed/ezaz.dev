@@ -1,0 +1,100 @@
+---
+/*
+  Top of a case study: where it sits (back link), what it is (title, kicker,
+  summary), and the two links that matter — live preview and source. The artwork
+  sits beside the copy rather than above it so the fold still carries text.
+*/
+import type { Project } from '../../lib/types';
+import Button from '../ui/Button.astro';
+
+type Props = { project: Project };
+
+const { project } = Astro.props;
+const { title, kicker, img, preview, repo } = project;
+const { summary, year, role, status } = project.detail;
+
+const meta = [
+  { label: 'year', value: year },
+  { label: 'role', value: role },
+  { label: 'status', value: status },
+];
+---
+
+<header class="pt-2">
+  <a
+    href="/#work"
+    class="text-ink-soft hover:text-accent inline-flex items-center gap-1.5 font-mono text-[12.5px] no-underline transition-colors"
+  >
+    <span aria-hidden="true">←</span>
+    all work
+  </a>
+
+  <div
+    class="mt-6 grid items-start gap-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,400px)] lg:gap-10 lg:pt-1"
+  >
+    <div>
+      <p class="text-ink-soft mb-3 flex items-center gap-2 font-mono text-[11.5px]">
+        {/* A live project earns the pulsing dot; anything else gets a flat one. */}
+        <span class:list={[status === 'live' ? 'pulse-dot' : 'bg-line size-2 rounded-full']}></span>
+        {status}
+      </p>
+
+      <h1
+        class="font-mono text-[34px] leading-[1.05] font-extrabold tracking-[-1px] sm:text-[42px]"
+      >
+        {title}
+      </h1>
+      <p class="text-accent mt-2 font-mono text-[13.5px]">{kicker}</p>
+
+      <p class="text-ink-soft mt-5 max-w-140 text-[15.5px] leading-[1.7]">{summary}</p>
+
+      <div class="mt-7 flex flex-wrap gap-3">
+        {
+          preview && (
+            <Button href={preview} size="md" rel="noopener" arrow>
+              live preview
+            </Button>
+          )
+        }
+        {
+          repo && (
+            <Button
+              href={`https://github.com/${repo}`}
+              size="md"
+              variant="secondary"
+              rel="noopener"
+            >
+              source ↗
+            </Button>
+          )
+        }
+      </div>
+
+      <dl class="border-line mt-7 grid grid-cols-2 gap-x-6 gap-y-4 border-t pt-5 sm:grid-cols-3">
+        {
+          meta.map((item) => (
+            <div>
+              <dt class="text-ink-soft font-mono text-[10.5px] tracking-[1.2px] uppercase">
+                {item.label}
+              </dt>
+              <dd class="mt-1 font-mono text-[13px]">{item.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+    </div>
+
+    <div class="tile max-lg:order-first">
+      <div class="tile-media aspect-3/2">
+        <img
+          src={img}
+          alt=""
+          width="1200"
+          height="800"
+          decoding="async"
+          class="h-full w-full object-cover"
+        />
+      </div>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,44 @@
+---
+/* Email control. Separate from TextInput because the useful part isn't the
+   `type` attribute — it's the mobile keyboard, the killed autocapitalize, and
+   the browser-native format check that come with it. */
+import { controlClass } from '../../lib/ui';
+import Field from './Field.astro';
+
+type Props = {
+  name: string;
+  label: string;
+  id?: string;
+  required?: boolean;
+  autocomplete?: string;
+  placeholder?: string;
+  hint?: string;
+  class?: string;
+};
+
+const {
+  name,
+  label,
+  id = name,
+  required = false,
+  autocomplete = 'email',
+  placeholder,
+  hint,
+  class: extraClass,
+} = Astro.props;
+---
+
+<Field for={id} {label} {required} {hint} class={extraClass}>
+  <input
+    {id}
+    {name}
+    type="email"
+    inputmode="email"
+    autocapitalize="none"
+    spellcheck="false"
+    {required}
+    {autocomplete}
+    {placeholder}
+    class={controlClass}
+  />
+</Field>

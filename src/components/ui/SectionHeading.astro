@@ -1,0 +1,15 @@
+---
+/* Uppercase mono title with the rule that runs to the edge — the divider every
+   top-level section on the site opens with. */
+type Props = {
+  title: string;
+  class?: string;
+};
+
+const { title, class: extraClass } = Astro.props;
+---
+
+<div class:list={['mb-6.5 flex items-baseline gap-2.5', extraClass]}>
+  <h2 class="font-mono text-[15px] tracking-[1.5px] uppercase">{title}</h2>
+  <div class="bg-line h-px flex-1"></div>
+</div>

@@ -1,0 +1,29 @@
+---
+/*
+  Label + required marker + hint chrome, shared by every form control. The
+  control itself is the slot, so each input component owns nothing but its own
+  element and this file owns the label wiring.
+*/
+type Props = {
+  /** id of the control this label points at. */
+  for: string;
+  label: string;
+  required?: boolean;
+  /** Small helper line under the control. */
+  hint?: string;
+  class?: string;
+};
+
+const { for: htmlFor, label, required = false, hint, class: extraClass } = Astro.props;
+---
+
+<div class:list={['flex flex-col gap-1.5', extraClass]}>
+  <label for={htmlFor} class="text-ink font-mono text-[12px]">
+    {label}
+    {required ? <span class="text-accent">*</span> : <span class="text-ink-soft"> (optional)</span>}
+  </label>
+
+  <slot />
+
+  {hint && <p class="text-ink-soft font-mono text-[11px]">{hint}</p>}
+</div>

@@ -1,0 +1,157 @@
+{
+  "memberlounge": {
+    "summary": "A membership platform for people who run paid communities and were stitching one together out of a payment link, a spreadsheet, and a Discord invite bot.",
+    "year": "2024 — now",
+    "role": "solo — product, design, build, on-call",
+    "status": "live",
+    "problem": {
+      "lead": "Running a paid community is three jobs pretending to be one: take the money, decide who is still a member today, and get those people into the room. Every off-the-shelf answer solves one and leaves the other two as manual work.",
+      "points": [
+        "Payment links have no idea what a membership is — a failed renewal is an email nobody reads, not a revoked seat.",
+        "Access lived in a spreadsheet that went stale the moment a card expired, so people paid for weeks after losing access and others kept access for months after cancelling.",
+        "Owners had no honest read on churn: Stripe knew about charges, the community tool knew about logins, and nothing joined the two.",
+        "Every organiser rebuilt the same brittle glue with webhooks and zaps, and it broke silently."
+      ]
+    },
+    "solution": {
+      "lead": "One service owns the membership lifecycle end to end. Billing state is the source of truth, entitlements are derived from it, and every surface — dashboard, invite flow, API — reads the same derived state.",
+      "points": [
+        "Stripe webhooks land in an idempotent event log; entitlements are recomputed from that log rather than patched in place, so a replayed or out-of-order event can't corrupt access.",
+        "A single `hasAccess(member, feature)` check backs the UI, the API, and the invite bot — no second implementation to drift.",
+        "Dunning is a state machine, not a cron of emails: grace period, retry, downgrade, revoke, each step visible in the member's timeline.",
+        "Owner dashboard streams live over WebSockets — joins, renewals, cancellations, MRR — so the numbers match what Stripe says without an export step."
+      ]
+    },
+    "stack": [
+      {
+        "label": "frontend",
+        "items": ["TypeScript", "React", "Vite", "TanStack Query", "Tailwind"]
+      },
+      { "label": "backend", "items": ["Node", "Fastify", "tRPC", "Zod"] },
+      { "label": "data", "items": ["Postgres", "Prisma", "Redis"] },
+      { "label": "payments", "items": ["Stripe Billing", "Stripe Webhooks"] },
+      { "label": "infra", "items": ["Docker", "Fly.io", "GitHub Actions", "Sentry"] }
+    ],
+    "metrics": [
+      { "value": "3", "label": "manual jobs removed" },
+      { "value": "<1s", "label": "webhook → access change" },
+      { "value": "0", "label": "billing reconciliation scripts" },
+      { "value": "99.9%", "label": "uptime, rolling 90d" }
+    ],
+    "notes": [
+      {
+        "title": "Idempotency before features",
+        "body": "Stripe will deliver the same webhook twice and occasionally out of order. The first version applied deltas directly to a member row and drifted within a week. Storing raw events and deriving entitlements made the whole system replayable — a bug fix is a recompute, not a data migration."
+      },
+      {
+        "title": "One authorization path",
+        "body": "The invite bot originally had its own idea of who was a member, which meant two code paths and two sets of bugs. Collapsing everything onto one entitlement check cost a refactor and removed an entire class of support ticket."
+      },
+      {
+        "title": "Real-time without a second backend",
+        "body": "The dashboard needed live numbers but not a streaming platform. Postgres LISTEN/NOTIFY fanned out over a thin WebSocket layer keeps it to one database and one deployable, with polling as the automatic fallback."
+      }
+    ]
+  },
+  "ezaz-dev": {
+    "summary": "The site you're reading. A static-first portfolio and writing log built to be extended one section at a time, with no build step that needs the network to succeed.",
+    "year": "2026",
+    "role": "solo — design and build",
+    "status": "live",
+    "problem": {
+      "lead": "Portfolio sites rot. They get built on a framework that needs a rewrite every major version, hang off a CMS that outlives its usefulness, and pull live data at request time so a rate limit turns into a blank page.",
+      "points": [
+        "Template-driven portfolios all read the same and are painful to change past the parts the template anticipated.",
+        "Fetching GitHub stats in the browser spends the visitor's own 60-requests-per-hour anonymous quota and shifts layout when it lands.",
+        "Content buried in markup means a copy edit is a component edit and a git diff nobody can read.",
+        "A dark mode bolted on afterwards means every colour is written twice."
+      ]
+    },
+    "solution": {
+      "lead": "Static output, content in JSON, and a build that is a pure offline transform. Every dynamic-feeling detail is resolved before deploy.",
+      "points": [
+        "Copy lives in src/data/*.json, typed by src/lib/types.ts, so a typo surfaces at the import site instead of as a blank spot on the page.",
+        "GitHub numbers are fetched by a prebuild script into a committed cache — zero client JS, no layout shift, and a rate-limited API leaves the previous build's data in place instead of failing the deploy.",
+        "Theming is one set of CSS custom properties overridden under html.dark, so every Tailwind colour utility flips without a second class.",
+        "The bento grid is components in a grid, not a layout framework: sections are added by dropping a tile in and giving it a span."
+      ]
+    },
+    "stack": [
+      { "label": "framework", "items": ["Astro", "TypeScript"] },
+      { "label": "styling", "items": ["Tailwind v4", "CSS custom properties"] },
+      { "label": "content", "items": ["Typed JSON", "Astro view transitions"] },
+      { "label": "tooling", "items": ["ESLint", "Prettier", "Husky", "commitlint"] },
+      { "label": "infra", "items": ["Cloudflare Pages", "GitHub Actions"] }
+    ],
+    "metrics": [
+      { "value": "0", "label": "KB of framework JS" },
+      { "value": "1", "label": "source of truth per colour" },
+      { "value": "100%", "label": "static output" },
+      { "value": "0", "label": "runtime API calls" }
+    ],
+    "notes": [
+      {
+        "title": "The build must not need the network",
+        "body": "GitHub data is refreshed by a standalone script before Astro runs. Beyond keeping the build a pure transform, it dodges a real failure: Node 24 on Windows aborts with a libuv assertion when Astro exits after a socket has been used, turning a green build into a non-zero exit."
+      },
+      {
+        "title": "Dark mode is two load-bearing CSS rules",
+        "body": "The html.dark token override has to stay unlayered — Tailwind v4 emits its :root theme vars unlayered and those beat anything in @layer base — and it has to keep one real property, because Lightning CSS prunes rules that declare only custom properties and would silently drop the whole theme from production."
+      },
+      {
+        "title": "Hover effects belong to the CSS, not the component",
+        "body": "The tile spotlight is one delegated pointermove listener in the layout writing --mx/--my. It survives view transitions without rebinding, and any page that renders a .tile gets the effect for free."
+      }
+    ]
+  },
+  "ledgerline": {
+    "summary": "A budgeting app that never asks for a bank login. Your ledger is a file you own, the app works offline, and sync is opt-in rather than the price of entry.",
+    "year": "2025",
+    "role": "solo — build",
+    "status": "wip",
+    "problem": {
+      "lead": "Budgeting tools want your bank credentials, a subscription, and permanent custody of the most sensitive data you have — and when one shuts down, the history goes with it.",
+      "points": [
+        "Bank aggregation is the whole business model, so the tool needs an account, a server, and your credentials before it shows you a single number.",
+        "Exports, when they exist, are lossy CSV — the categories and rules you spent months tuning don't come with you.",
+        "The apps are useless on a plane or a bad connection, despite doing arithmetic on a few thousand rows.",
+        "Someone who just wants to know where the money went pays a monthly fee for infrastructure they never asked for."
+      ]
+    },
+    "solution": {
+      "lead": "Local-first by construction: the browser holds the working copy, a plain-text ledger file is the durable format, and the server is an optional relay that only ever sees encrypted blobs.",
+      "points": [
+        "All reads and writes hit IndexedDB, so every interaction is instant and the app is fully usable offline.",
+        "The canonical format is an append-only plain-text ledger you can open in any editor, diff in git, and hand to another tool.",
+        "Category rules are deterministic functions over transactions, re-runnable at any time — recategorising is a replay, not a mass edit.",
+        "Optional sync ships client-encrypted deltas to Postgres; without the passphrase the server holds nothing readable."
+      ]
+    },
+    "stack": [
+      { "label": "frontend", "items": ["Next.js", "React", "TypeScript", "Tailwind"] },
+      { "label": "local data", "items": ["IndexedDB", "Dexie", "Web Workers"] },
+      { "label": "sync", "items": ["Postgres", "Prisma", "WebCrypto"] },
+      { "label": "tooling", "items": ["Vitest", "Playwright", "pnpm"] }
+    ],
+    "metrics": [
+      { "value": "0", "label": "bank credentials stored" },
+      { "value": "100%", "label": "features work offline" },
+      { "value": "1 file", "label": "full data export" },
+      { "value": "~10k", "label": "rows reprojected under 16ms" }
+    ],
+    "notes": [
+      {
+        "title": "Local-first pushes the hard part to merges",
+        "body": "Making writes local is easy; making two devices agree is not. Modelling the ledger as an append-only event log with per-device ordering means conflicts resolve by concatenation, and the only genuinely ambiguous case — the same transaction edited twice — is surfaced to the user instead of silently picking a winner."
+      },
+      {
+        "title": "The main thread only paints",
+        "body": "Parsing and reprojecting the ledger runs in a Web Worker with a structured-cloned result. Under 10k rows the difference is invisible; past that, keeping it off the main thread is the difference between a snappy filter and a locked-up tab."
+      },
+      {
+        "title": "Encryption changes what the server may know",
+        "body": "Because deltas are encrypted client-side, the server can't validate, index, or migrate them. That constraint forced a versioned envelope from day one — the payload carries its own schema version so an old device's blob is still readable after the format moves on."
+      }
+    ]
+  }
+}

@@ -1,0 +1,58 @@
+---
+/*
+  Compact project tile. A full-width image band used to eat ~100px of a ~275px
+  tile and forced the copy into a truncated 2-line clamp, so the artwork is a
+  square thumb beside the title instead — tilted and shadowed like the hero
+  portrait, straightening when the tile is hovered or focused.
+*/
+import { projectHref } from '../../lib/projects';
+import type { ProjectSummary } from '../../lib/types';
+
+type Props = ProjectSummary & {
+  /** Grid placement is the parent's job — passed straight through. */
+  class?: string;
+};
+
+const { slug, title, kicker, img, desc, stack, class: extraClass } = Astro.props;
+
+const href = projectHref(slug);
+---
+
+<article class:list={['tile flex flex-col', extraClass]}>
+  <a href={href} class="tile-link absolute inset-0 z-10" aria-label={`${title} — ${kicker}`}></a>
+
+  <div class="relative flex min-h-0 flex-1 flex-col p-4.5 sm:p-5">
+    <div class="mb-3 flex items-start gap-3.5">
+      <div class="tile-thumb border-ink size-12 shrink-0 overflow-hidden rounded-[3px] border">
+        <img
+          src={img}
+          alt=""
+          width="1200"
+          height="800"
+          loading="lazy"
+          decoding="async"
+          class="h-full w-full object-cover"
+        />
+      </div>
+
+      <div class="min-w-0 flex-1">
+        <h3 class="truncate font-mono text-[17px] font-bold tracking-[-0.2px]">{title}</h3>
+        <p class="text-ink-soft truncate font-mono text-[11.5px]">{kicker}</p>
+      </div>
+
+      <span class="tile-arrow text-accent text-[15px] leading-none" aria-hidden="true">→</span>
+    </div>
+
+    <p class="text-ink-soft line-clamp-3 text-[14px] leading-[1.6]">{desc}</p>
+
+    <ul class="mt-auto flex flex-wrap gap-1.5 pt-3.5">
+      {
+        stack.map((tech) => (
+          <li class="chip border-line text-ink-soft rounded-[3px] border px-2 py-0.75 font-mono text-[11px]">
+            {tech}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>

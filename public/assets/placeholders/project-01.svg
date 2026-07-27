@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Placeholder artwork">
+  <defs>
+    <pattern id="dots01" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#c7c3b4" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="#f2f1ea" />
+  <rect width="1200" height="800" fill="url(#dots01)" />
+
+  <!-- window chrome -->
+  <rect x="120" y="120" width="960" height="560" rx="10" fill="#fbfaf6" stroke="#14170f" stroke-width="3" />
+  <rect x="120" y="120" width="960" height="58" rx="10" fill="#e7e4d9" stroke="#14170f" stroke-width="3" />
+  <circle cx="158" cy="149" r="9" fill="#ff5a36" />
+  <circle cx="188" cy="149" r="9" fill="#c7c3b4" />
+  <circle cx="218" cy="149" r="9" fill="#c7c3b4" />
+
+  <!-- sidebar -->
+  <rect x="150" y="212" width="196" height="438" rx="6" fill="#eeece2" />
+  <rect x="174" y="244" width="120" height="14" rx="7" fill="#c7c3b4" />
+  <rect x="174" y="282" width="148" height="14" rx="7" fill="#c7c3b4" />
+  <rect x="174" y="320" width="96" height="14" rx="7" fill="#ff5a36" />
+  <rect x="174" y="358" width="134" height="14" rx="7" fill="#c7c3b4" />
+
+  <!-- cards -->
+  <rect x="382" y="212" width="300" height="180" rx="8" fill="#eeece2" stroke="#c7c3b4" stroke-width="2" />
+  <rect x="714" y="212" width="336" height="180" rx="8" fill="#eeece2" stroke="#c7c3b4" stroke-width="2" />
+  <rect x="410" y="244" width="140" height="16" rx="8" fill="#54584c" />
+  <rect x="742" y="244" width="180" height="16" rx="8" fill="#54584c" />
+
+  <!-- bar chart -->
+  <rect x="382" y="424" width="668" height="226" rx="8" fill="#eeece2" stroke="#c7c3b4" stroke-width="2" />
+  <rect x="424" y="556" width="52" height="62" fill="#c7c3b4" />
+  <rect x="500" y="512" width="52" height="106" fill="#c7c3b4" />
+  <rect x="576" y="538" width="52" height="80" fill="#c7c3b4" />
+  <rect x="652" y="472" width="52" height="146" fill="#ff5a36" />
+  <rect x="728" y="524" width="52" height="94" fill="#c7c3b4" />
+  <rect x="804" y="490" width="52" height="128" fill="#c7c3b4" />
+  <rect x="880" y="548" width="52" height="70" fill="#c7c3b4" />
+
+  <text x="600" y="742" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="24" fill="#54584c">placeholder · 1200×800 · swap me</text>
+</svg>

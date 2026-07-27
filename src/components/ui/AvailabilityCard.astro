@@ -1,0 +1,42 @@
+---
+/* Status + CTA tile: pulsing availability dot, a terminal-styled line, and a
+   stretched link covering the whole card. */
+type Props = {
+  href: string;
+  status: string;
+  headline: string;
+  /** Rendered after a `$` prompt, with a blinking caret. */
+  command: string;
+  cta: string;
+  class?: string;
+};
+
+const { href, status, headline, command, cta, class: extraClass } = Astro.props;
+---
+
+<article class:list={['tile', extraClass]}>
+  <a href={href} class="tile-link absolute inset-0 z-10" aria-label={status}></a>
+
+  <div class="relative flex h-full flex-col justify-between p-4.5 sm:p-5">
+    <div>
+      <span class="text-ink-soft mb-3 flex items-center gap-2 font-mono text-[11.5px]">
+        <span class="pulse-dot" aria-hidden="true"></span>
+        {status}
+      </span>
+      <p class="text-[15px] leading-normal font-semibold">{headline}</p>
+    </div>
+
+    <p class="text-ink-soft border-line mt-4 truncate border-t pt-3 font-mono text-[12px]">
+      {
+        /* Explicit space: the prompt and command sit on separate source lines,
+          and that newline collapses to nothing rather than a gap. */
+      }
+      <span class="text-accent">$</span>{' '}{command}<span class="caret" aria-hidden="true"></span>
+    </p>
+
+    <span class="text-accent mt-auto flex items-baseline gap-1.5 pt-3 font-mono text-[13px]">
+      {cta}
+      <span class="tile-arrow" aria-hidden="true">→</span>
+    </span>
+  </div>
+</article>

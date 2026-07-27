@@ -1,0 +1,49 @@
+---
+/*
+  Native select with the platform arrow replaced by our own glyph
+  (appearance-none), so it matches the mono/hard-edge language of the other
+  controls in both themes. Still a real <select> — keyboard, mobile wheel, and
+  form validation all come for free.
+*/
+import type { SelectOption } from '../../lib/types';
+import { controlClass } from '../../lib/ui';
+import Field from './Field.astro';
+
+type Props = {
+  name: string;
+  label: string;
+  options: SelectOption[];
+  id?: string;
+  required?: boolean;
+  /** Rendered as the empty, unselectable first option. */
+  placeholder?: string;
+  hint?: string;
+  class?: string;
+};
+
+const {
+  name,
+  label,
+  options,
+  id = name,
+  required = false,
+  placeholder = 'Select…',
+  hint,
+  class: extraClass,
+} = Astro.props;
+---
+
+<Field for={id} {label} {required} {hint} class={extraClass}>
+  <div class="relative">
+    <select {id} {name} {required} class:list={[controlClass, 'field-select appearance-none pr-9']}>
+      {/* Empty value keeps a required select :invalid until a real pick. */}
+      <option value="" disabled selected>{placeholder}</option>
+      {options.map((option) => <option value={option.value}>{option.label}</option>)}
+    </select>
+
+    <span
+      class="text-ink-soft pointer-events-none absolute top-1/2 right-3 -translate-y-1/2 font-mono text-[11px]"
+      aria-hidden="true">▼</span
+    >
+  </div>
+</Field>

@@ -1,0 +1,52 @@
+{
+  "heading": "What I've Built",
+  "featured": {
+    "slug": "memberlounge",
+    "title": "Memberlounge",
+    "kicker": "community membership platform",
+    "img": "/assets/placeholders/project-01.svg",
+    "stack": ["TypeScript", "React", "Node", "Stripe"],
+    "desc": "Full-stack SaaS for running paid communities: auth, billing, and a real-time member dashboard. Started as a side project, now runs day to day.",
+    "preview": "https://memberlounge.app"
+  },
+  "projects": [
+    {
+      "slug": "ezaz-dev",
+      "title": "ezaz.dev",
+      "kicker": "this site",
+      "img": "/assets/placeholders/project-02.svg",
+      "stack": ["Astro", "Tailwind", "Cloudflare"],
+      "desc": "Component-driven portfolio and writing log. Static-first, fast, easy to extend one section at a time.",
+      "repo": "ezaz-ahmed/ezaz.dev",
+      "preview": "https://ezaz.dev"
+    },
+    {
+      "slug": "ledgerline",
+      "title": "Ledgerline",
+      "kicker": "local-first budgeting",
+      "img": "/assets/placeholders/project-03.svg",
+      "stack": ["Next.js", "Postgres", "Prisma"],
+      "desc": "No account, no subscription. Your data lives in your browser and a file you can actually open.",
+      "repo": "ezaz-ahmed/finance"
+    }
+  ],
+  "rotation": [
+    "typescript",
+    "react",
+    "astro",
+    "node",
+    "postgres",
+    "prisma",
+    "tailwind",
+    "cloudflare",
+    "docker",
+    "redis"
+  ],
+  "availability": {
+    "href": "/contact",
+    "status": "Available for new projects",
+    "headline": "Got something you want built properly?",
+    "command": "mail ezaz --subject \"hi\"",
+    "cta": "say hi"
+  }
+}

@@ -1,0 +1,66 @@
+---
+/* Hero tile of the work grid: full-bleed artwork over a copy block. */
+import { projectHref } from '../lib/projects';
+import type { ProjectSummary } from '../lib/types';
+
+type Props = ProjectSummary & {
+  badge?: string;
+  class?: string;
+};
+
+const {
+  slug,
+  title,
+  kicker,
+  img,
+  desc,
+  stack,
+  badge = 'featured',
+  class: extraClass,
+} = Astro.props;
+
+const href = projectHref(slug);
+---
+
+<article class:list={['tile flex flex-col', extraClass]}>
+  <a href={href} class="tile-link absolute inset-0 z-10" aria-label={`${title} — ${kicker}`}></a>
+
+  <div class="tile-media relative min-h-0 flex-1 max-lg:aspect-video">
+    <img
+      src={img}
+      alt=""
+      width="1200"
+      height="800"
+      loading="lazy"
+      decoding="async"
+      class="h-full w-full object-cover"
+    />
+    {
+      badge && (
+        <span class="border-ink bg-paper-raised absolute top-3 left-3 rounded-[3px] border-[1.5px] px-2 py-0.75 font-mono text-[11px]">
+          {badge}
+        </span>
+      )
+    }
+  </div>
+
+  <div class="border-line relative shrink-0 border-t p-4.5 sm:p-5">
+    <div class="mb-2 flex items-baseline gap-2">
+      <h3 class="font-mono text-[19px] font-bold tracking-[-0.3px]">{title}</h3>
+      <span class="text-ink-soft truncate font-mono text-[12.5px]">{kicker}</span>
+      <span class="tile-arrow text-accent ml-auto text-[16px]" aria-hidden="true">→</span>
+    </div>
+
+    <p class="text-ink-soft mb-3.5 line-clamp-3 max-w-140 text-[14.5px] leading-[1.6]">{desc}</p>
+
+    <ul class="flex flex-wrap gap-1.5">
+      {
+        stack.map((tech) => (
+          <li class="chip border-line text-ink-soft rounded-[3px] border px-2 py-0.75 font-mono text-[11.5px]">
+            {tech}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</article>

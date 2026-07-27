@@ -1,0 +1,7 @@
+{
+  "links": [
+    { "href": "/#work", "label": "work" },
+    { "href": "/#writing", "label": "writing" },
+    { "href": "/contact", "label": "say hi" }
+  ]
+}

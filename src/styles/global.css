@@ -9,6 +9,7 @@
   --color-line: #c7c3b4;
   --color-tag-teal: #2f6f62;
   --color-tag-teal-bg: #e4eee9;
+  --color-shadow: rgba(20, 23, 15, 0.1);
 
   --font-mono: 'JetBrains Mono', monospace;
   --font-sans: 'Inter', sans-serif;
@@ -40,6 +41,8 @@ html.dark {
   --color-line: #3a382e;
   --color-tag-teal: #7fcbb8;
   --color-tag-teal-bg: #22302b;
+  /* Ink-colored shadows vanish on dark paper — go pure black, much heavier. */
+  --color-shadow: rgba(0, 0, 0, 0.65);
 }
 
 @layer base {
@@ -58,6 +61,70 @@ html.dark {
   ::selection {
     background: var(--color-accent);
     color: var(--color-paper-raised);
+  }
+}
+
+/* Kill the cross-page view transition for readers who asked for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
+/*
+  Button micro-interaction — hover lifts the button up-left and grows a hard
+  offset shadow underneath it; active presses it back down past its resting
+  spot. Shadow uses --color-shadow so it survives the dark-theme flip.
+*/
+.btn {
+  box-shadow: 0 0 0 var(--color-shadow);
+  transition:
+    transform 0.16s ease,
+    box-shadow 0.16s ease,
+    background-color 0.16s ease,
+    border-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--color-shadow);
+}
+
+.btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 0 0 0 var(--color-shadow);
+  transition-duration: 0.06s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn-arrow {
+  transition: transform 0.16s ease;
+}
+
+.btn:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn-arrow {
+    transition-property: background-color, border-color, color;
+  }
+
+  .btn:hover,
+  .btn:active {
+    transform: none;
+  }
+
+  .btn:hover .btn-arrow {
+    transform: none;
   }
 }
 
@@ -125,51 +192,43 @@ html.dark .theme-toggle .icon-moon {
 /* Brand trailing slash — glitches through symbols then settles on "/" */
 @keyframes brand-glyph {
   0% {
-    content: '.{';
-  }
-
-  8% {
     content: '.#';
   }
 
-  16% {
-    content: '.$';
+  10% {
+    content: '.js';
   }
 
-  24% {
-    content: '.>';
+  20% {
+    content: '.ts';
   }
 
-  32% {
-    content: '.%';
+  30% {
+    content: '.go';
   }
 
   40% {
-    content: '.&';
+    content: '.sql';
   }
 
-  48% {
-    content: '.*';
+  50% {
+    content: '.sh';
   }
 
-  56% {
-    content: '.~';
+  60% {
+    content: '.git';
   }
 
-  64% {
-    content: '.|';
-  }
-
-  72% {
-    content: '.<';
+  70% {
+    content: '.api';
   }
 
   80% {
-    content: '.;';
+    content: '.json';
   }
 
-  88% {
-    content: '.\\';
+  90% {
+    content: '.yaml';
   }
 
   100% {
@@ -186,6 +245,361 @@ html.dark .theme-toggle .icon-moon {
 /* Replay on hover (different duration restarts the animation) */
 .brand:hover .brand-slash::after {
   animation: brand-glyph 0.7s steps(1, end) both;
+}
+
+/*
+  Bento tiles — same physical language as .btn: hover lifts the tile up-left
+  and grows a hard offset shadow. Everything below hangs off .tile:hover so a
+  single hover drives the media zoom, chip stagger, and arrow slide together.
+*/
+.tile {
+  position: relative;
+  overflow: hidden;
+  border: 1.5px solid var(--color-line);
+  border-radius: 6px;
+  background-color: var(--color-paper-raised);
+  box-shadow: 0 0 0 var(--color-shadow);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.tile:hover,
+.tile:focus-within {
+  transform: translate(-2px, -2px);
+  border-color: var(--color-ink);
+  box-shadow: 4px 4px 0 var(--color-shadow);
+}
+
+/*
+  Cursor spotlight. --mx/--my are written by the delegated pointermove handler
+  in Work.astro; the 50% fallback keeps it centered before the first move.
+  z-index 0 puts it above the tile background — tile content carries `relative`
+  so it stays above the wash.
+*/
+.tile::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    220px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in oklab, var(--color-accent) 14%, transparent),
+    transparent 70%
+  );
+  transition: opacity 0.25s ease;
+}
+
+.tile:hover::before {
+  opacity: 1;
+}
+
+.tile-link:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: -4px;
+  border-radius: 6px;
+}
+
+/* Media: slow zoom under the tile's clipped corners */
+.tile-media {
+  overflow: hidden;
+}
+
+.tile-media img {
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.tile:hover .tile-media img {
+  transform: scale(1.06);
+}
+
+/* Placeholder art is drawn on light paper — dim it so it sits on dark paper. */
+html.dark .tile-media img,
+html.dark .tile-thumb img {
+  filter: brightness(0.78) contrast(1.06);
+}
+
+/*
+  Square project thumb — same trick as the hero portrait: rests tilted with a
+  hard offset shadow, straightens on hover. Angle and easing match Hero.astro
+  so the two read as one gesture.
+*/
+.tile-thumb {
+  /* The `rotate` property, not transform() — Tailwind v4 compiles the hero's
+     `-rotate-10` to the same standalone property, and keeping them identical
+     means neither fights a transform utility landing on the element later. */
+  rotate: -10deg;
+  box-shadow: 3px 3px 0 var(--color-shadow);
+  transition:
+    rotate 0.3s ease-out,
+    box-shadow 0.3s ease-out;
+}
+
+.tile:hover .tile-thumb,
+.tile:focus-within .tile-thumb {
+  rotate: 0deg;
+  box-shadow: 1px 1px 0 var(--color-shadow);
+}
+
+/* Stack chips lift in sequence on hover */
+.chip {
+  opacity: 0.7;
+  transform: translateY(3px);
+  transition:
+    opacity 0.22s ease,
+    transform 0.22s ease,
+    border-color 0.22s ease,
+    color 0.22s ease;
+}
+
+.tile:hover .chip,
+.tile:focus-within .chip {
+  opacity: 1;
+  transform: none;
+  border-color: var(--color-ink-soft);
+  color: var(--color-ink);
+}
+
+.tile:hover .chip:nth-child(2) {
+  transition-delay: 0.04s;
+}
+
+.tile:hover .chip:nth-child(3) {
+  transition-delay: 0.08s;
+}
+
+.tile:hover .chip:nth-child(4) {
+  transition-delay: 0.12s;
+}
+
+.tile-arrow {
+  display: inline-block;
+  opacity: 0.45;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.tile:hover .tile-arrow,
+.tile:focus-within .tile-arrow {
+  opacity: 1;
+  transform: translateX(4px);
+}
+
+/* Backwards-pointing sibling of .tile-arrow — the pager's "previous" link. */
+.tile-arrow-back {
+  display: inline-block;
+  opacity: 0.45;
+  transition:
+    transform 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.tile:hover .tile-arrow-back,
+.tile:focus-within .tile-arrow-back {
+  opacity: 1;
+  transform: translateX(-4px);
+}
+
+.tile-index {
+  transition: color 0.18s ease;
+}
+
+.tile:hover .tile-index {
+  color: var(--color-accent);
+}
+
+/* Vertical marquee — track holds the list twice, so -50% is a seamless loop */
+@keyframes marquee-up {
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+.marquee-mask {
+  overflow: hidden;
+  /* fade both ends instead of hard-cutting the scrolling text */
+  mask-image: linear-gradient(to bottom, transparent, #000 14%, #000 86%, transparent);
+}
+
+.marquee-track {
+  animation: marquee-up 16s linear infinite;
+  will-change: transform;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+.marquee-item {
+  color: var(--color-ink-soft);
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.marquee-item::before {
+  content: '· ';
+  color: var(--color-accent);
+}
+
+.marquee-item:hover {
+  color: var(--color-ink);
+  transform: translateX(3px);
+}
+
+/*
+  Language bar — one segment per language, width set inline from its share.
+  --tone steps each segment down a single accent ramp (no new hues to keep in
+  sync with the theme flip); --i staggers the hover grow left-to-right.
+*/
+.lang-seg {
+  background: color-mix(in oklab, var(--color-accent) var(--tone, 50%), var(--color-line));
+  transition:
+    transform 0.2s ease,
+    filter 0.2s ease;
+  transition-delay: calc(var(--i) * 30ms);
+  transform-origin: bottom;
+}
+
+.tile:hover .lang-seg {
+  transform: scaleY(1.6);
+}
+
+.lang-dot {
+  height: 6px;
+  width: 6px;
+  flex: none;
+  border-radius: 1px;
+  background: color-mix(in oklab, var(--color-accent) var(--tone, 50%), var(--color-line));
+}
+
+/* Small blinking caret for the terminal-style line (hero .cursor is XL) */
+.caret {
+  display: inline-block;
+  width: 6px;
+  height: 12px;
+  margin-left: 3px;
+  transform: translateY(1px);
+  background: var(--color-accent);
+  animation: blink 1.1s step-start infinite;
+}
+
+/* Availability dot: solid core + expanding ring */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.7);
+    opacity: 0.65;
+  }
+
+  100% {
+    transform: scale(2.6);
+    opacity: 0;
+  }
+}
+
+.pulse-dot {
+  position: relative;
+  display: inline-block;
+  height: 8px;
+  width: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.pulse-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--color-accent);
+  animation: pulse-ring 1.8s ease-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tile,
+  .tile-media img,
+  .chip,
+  .tile-arrow,
+  .tile-arrow-back {
+    transition-property: border-color, color, opacity;
+  }
+
+  .tile:hover,
+  .tile:focus-within,
+  .tile:hover .tile-media img,
+  .tile:hover .tile-arrow,
+  .tile:focus-within .tile-arrow,
+  .tile:hover .tile-arrow-back,
+  .tile:focus-within .tile-arrow-back,
+  .tile:hover .chip,
+  .tile:focus-within .chip,
+  .marquee-item:hover {
+    transform: none;
+  }
+
+  .tile::before {
+    display: none;
+  }
+
+  .tile:hover .lang-seg {
+    transform: none;
+  }
+
+  /* Keep the thumb's resting tilt — it's decoration, not motion — but never
+     animate it. `transform: none` here would straighten it instead. */
+  .tile-thumb {
+    transition: none;
+  }
+
+  .tile:hover .tile-thumb,
+  .tile:focus-within .tile-thumb {
+    rotate: -10deg;
+    box-shadow: 3px 3px 0 var(--color-shadow);
+  }
+
+  .marquee-track,
+  .pulse-dot::after,
+  .caret {
+    animation: none;
+  }
+}
+
+/* Coarse pointers can't hover — show the resting state fully, no spotlight. */
+@media (hover: none) {
+  .tile::before {
+    display: none;
+  }
+
+  .chip {
+    opacity: 1;
+    transform: none;
+  }
+
+  .tile-arrow,
+  .tile-arrow-back {
+    opacity: 1;
+  }
+}
+
+/*
+  Form controls. The placeholder option of a required <select> should read like
+  a placeholder, not a value — :invalid holds until a real option is picked,
+  because the first option carries an empty value.
+*/
+.field-select:invalid {
+  color: color-mix(in oklab, var(--color-ink-soft) 60%, transparent);
+}
+
+/* Option lists are painted by the OS — force our own paper/ink so the open
+   dropdown doesn't flash white on a dark page. */
+.field-select option {
+  background-color: var(--color-paper-raised);
+  color: var(--color-ink);
 }
 
 /* Animated accent underline for nav links */

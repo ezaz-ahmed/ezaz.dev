@@ -1,0 +1,54 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Variant = 'primary' | 'secondary';
+type Size = 'sm' | 'md';
+
+type Props = {
+  variant?: Variant;
+  size?: Size;
+  /** Renders an <a> when set, a <button> otherwise. */
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  /** Appends a → that slides on hover. */
+  arrow?: boolean;
+  class?: string;
+} & (HTMLAttributes<'a'> | HTMLAttributes<'button'>);
+
+const {
+  variant = 'primary',
+  size = 'sm',
+  href,
+  type = 'button',
+  arrow = false,
+  class: extraClass,
+  ...rest
+} = Astro.props;
+
+const base =
+  'btn inline-flex items-center gap-1.5 rounded-[3px] border-[1.5px] font-mono text-[13px] no-underline cursor-pointer';
+
+const variants: Record<Variant, string> = {
+  primary: 'border-accent bg-ink text-paper-raised hover:border-accent hover:bg-accent',
+  secondary: 'border-ink hover:bg-ink hover:text-paper-raised',
+};
+
+const sizes: Record<Size, string> = {
+  sm: 'px-4 py-2.25',
+  md: 'px-5 py-2.5',
+};
+
+const Tag = href ? 'a' : 'button';
+const tagProps = href ? { href } : { type };
+---
+
+<Tag class:list={[base, variants[variant], sizes[size], extraClass]} {...tagProps} {...rest}>
+  <slot />
+  {
+    arrow && (
+      <span class="btn-arrow" aria-hidden="true">
+        →
+      </span>
+    )
+  }
+</Tag>

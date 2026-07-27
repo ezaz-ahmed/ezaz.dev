@@ -1,0 +1,140 @@
+---
+/*
+  GitHub numbers + language split, read from the build-time cache
+  (src/data/github-cache.json, refreshed by `npm run stats`). Self-contained:
+  the caller only positions it in the grid.
+*/
+import { getGithubStats } from '../lib/github';
+import { langTone } from '../lib/ui';
+import GithubIcon from './icons/github.svg';
+
+type Props = { class?: string };
+
+const { class: extraClass } = Astro.props;
+
+const github = getGithubStats();
+
+const stats = [
+  { value: github.repos, suffix: '', label: 'repos', animate: true },
+  { value: github.stars, suffix: '', label: 'stars', animate: true },
+  { value: github.followers, suffix: '', label: 'followers', animate: true },
+  // Contributions need a token; without one fall back to the join year, which
+  // is plain REST data. A year isn't animated — counting up to it reads as junk.
+  github.contributions === null
+    ? { value: github.since, suffix: '', label: 'since', animate: false }
+    : { value: github.contributions, suffix: '', label: 'contributions', animate: true },
+];
+---
+
+<article class:list={['tile', extraClass]}>
+  <a
+    href={github.url}
+    rel="me noopener"
+    class="tile-link absolute inset-0 z-10"
+    aria-label={`GitHub profile: @${github.user}`}></a>
+
+  <div class="relative flex h-full flex-col p-4.5 sm:p-5">
+    <div class="mb-3 flex items-center gap-2">
+      <GithubIcon class="text-ink-soft h-3.5 w-3.5" aria-hidden="true" />
+      <span class="text-ink-soft font-mono text-[11px] tracking-[1.2px] uppercase">github</span>
+      <span class="text-ink-soft ml-auto truncate font-mono text-[11.5px]">@{github.user}</span>
+    </div>
+
+    <dl class="grid flex-1 grid-cols-2 content-center gap-x-4 gap-y-3">
+      {
+        stats.map((stat) => (
+          <div>
+            <dd
+              class="stat font-mono text-[26px] leading-none font-extrabold"
+              data-count={stat.animate ? (stat.value ?? undefined) : undefined}
+              data-suffix={stat.suffix}
+            >
+              {stat.value === null ? '—' : `${stat.animate ? 0 : stat.value}${stat.suffix}`}
+            </dd>
+            <dt class="text-ink-soft mt-1 font-mono text-[11.5px]">{stat.label}</dt>
+          </div>
+        ))
+      }
+    </dl>
+
+    <!-- Language split by repo count. --i staggers the hover lift. -->
+    {
+      github.languages.length > 0 && (
+        <div class="mt-3 shrink-0">
+          <div
+            class="flex h-2 gap-0.5 overflow-hidden rounded-[2px]"
+            role="img"
+            aria-label={github.languages.map((lang) => `${lang.name} ${lang.share}%`).join(', ')}
+          >
+            {github.languages.map((lang, i) => (
+              <span
+                class="lang-seg"
+                style={`--i:${i}; --tone:${langTone(i)}; width:${lang.share}%`}
+              />
+            ))}
+          </div>
+
+          <ul class="text-ink-soft mt-2 flex flex-wrap gap-x-3 gap-y-1 font-mono text-[10.5px]">
+            {github.languages.slice(0, 3).map((lang, i) => (
+              <li class="flex items-center gap-1.5">
+                <span class="lang-dot" style={`--tone:${langTone(i)}`} aria-hidden="true" />
+                {lang.name} {lang.count}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )
+    }
+  </div>
+</article>
+
+<script>
+  let observer: IntersectionObserver | undefined;
+
+  // Count-up on first scroll into view. Re-armed per page load because the
+  // stat nodes are replaced on navigation.
+  function initCounters() {
+    observer?.disconnect();
+
+    const stats = document.querySelectorAll<HTMLElement>('.stat[data-count]');
+    if (!stats.length) return;
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      stats.forEach((el) => (el.textContent = `${el.dataset.count}${el.dataset.suffix ?? ''}`));
+      return;
+    }
+
+    observer = new IntersectionObserver(
+      (entries, obs) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          obs.unobserve(entry.target);
+          countUp(entry.target as HTMLElement);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    stats.forEach((el) => observer!.observe(el));
+  }
+
+  function countUp(el: HTMLElement) {
+    const target = Number(el.dataset.count ?? 0);
+    const suffix = el.dataset.suffix ?? '';
+    const duration = 900;
+    let start: number | undefined;
+
+    function frame(now: number) {
+      start ??= now;
+      const progress = Math.min((now - start) / duration, 1);
+      // easeOutCubic — fast out of the gate, settles on the number.
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = `${Math.round(target * eased)}${suffix}`;
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  document.addEventListener('astro:page-load', initCounters);
+</script>

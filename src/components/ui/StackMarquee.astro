@@ -1,0 +1,37 @@
+---
+/* Vertically scrolling tech list. Pauses on hover; motion is disabled entirely
+   under prefers-reduced-motion (see .marquee-track in global.css). */
+type Props = {
+  items: string[];
+  heading?: string;
+  /** Accessible name for the list itself. */
+  label?: string;
+  class?: string;
+};
+
+const { items, heading = 'in rotation', label = 'Tech stack', class: extraClass } = Astro.props;
+---
+
+<article class:list={['tile marquee', extraClass]}>
+  <div class="relative flex h-full flex-col overflow-hidden p-4.5 sm:p-5">
+    <span class="text-ink-soft mb-2 font-mono text-[11px] tracking-[1.2px] uppercase">
+      {heading}
+    </span>
+
+    <!-- Below lg the tile is auto-height, so the doubled list would render at
+         full length — pin the window and let it scroll instead. -->
+    <div class="marquee-mask relative min-h-0 flex-1 max-lg:h-40 max-lg:flex-none">
+      <ul class="marquee-track font-mono text-[13.5px] leading-[2]" aria-label={label}>
+        {items.map((item) => <li class="marquee-item">{item}</li>)}
+        {/* Second copy makes -50% a seamless loop. */}
+        {
+          items.map((item) => (
+            <li class="marquee-item" aria-hidden="true">
+              {item}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</article>

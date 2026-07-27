@@ -1,0 +1,18 @@
+{
+  "owner": "Ezaz Ahmed",
+  "email": "hi@ezaz.dev",
+  "footerLinks": [
+    {
+      "href": "https://github.com/ezaz-ahmed",
+      "label": "github"
+    },
+    {
+      "href": "/rss.xml",
+      "label": "rss"
+    },
+    {
+      "href": "mailto:hi@ezaz.dev",
+      "label": "hi@ezaz.dev"
+    }
+  ]
+}

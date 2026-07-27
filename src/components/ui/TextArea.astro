@@ -1,0 +1,41 @@
+---
+/* Multi-line control. Only vertical resize — horizontal drag breaks the form
+   grid on narrow screens. */
+import { controlClass } from '../../lib/ui';
+import Field from './Field.astro';
+
+type Props = {
+  name: string;
+  label: string;
+  id?: string;
+  required?: boolean;
+  rows?: number;
+  maxlength?: number;
+  placeholder?: string;
+  hint?: string;
+  class?: string;
+};
+
+const {
+  name,
+  label,
+  id = name,
+  required = false,
+  rows = 6,
+  maxlength,
+  placeholder,
+  hint,
+  class: extraClass,
+} = Astro.props;
+---
+
+<Field for={id} {label} {required} {hint} class={extraClass}>
+  <textarea
+    {id}
+    {name}
+    {required}
+    {rows}
+    {maxlength}
+    {placeholder}
+    class:list={[controlClass, 'resize-y leading-[1.6]']}></textarea>
+</Field>

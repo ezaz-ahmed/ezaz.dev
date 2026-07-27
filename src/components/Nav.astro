@@ -1,12 +1,17 @@
 ---
-const links = [
-  { href: '/#work', label: 'work' },
-  { href: '/#writing', label: 'writing' },
-  { href: '/contact', label: 'say hi' },
-];
+import nav from '../data/nav.json';
+import type { NavLink } from '../lib/types';
+import MoonIcon from './icons/moon.svg';
+import SunIcon from './icons/sun.svg';
+
+const { links } = nav as { links: NavLink[] };
 ---
 
-<nav class="flex items-center justify-between py-7 font-mono text-[13px]">
+<nav
+  transition:persist
+  transition:animate="none"
+  class="flex items-center justify-between py-7 font-mono text-[13px]"
+>
   <a href="/" class="brand text-[20px] font-bold no-underline" aria-label="Home">
     ezaz<span class="brand-slash" aria-hidden="true"></span>
   </a>
@@ -22,46 +27,21 @@ const links = [
     <button
       type="button"
       id="theme-toggle"
-      class="theme-toggle"
+      class="theme-toggle hover:cursor-pointer"
       aria-label="Toggle dark mode"
       title="Toggle dark mode"
     >
-      <!-- moon (shown in light mode) -->
-      <svg
-        class="icon-moon"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-      </svg>
-      <!-- sun (shown in dark mode) -->
-      <svg
-        class="icon-sun"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        aria-hidden="true"
-      >
-        <circle cx="12" cy="12" r="4"></circle>
-        <path
-          d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"
-        ></path>
-      </svg>
+      <MoonIcon class="icon-moon" aria-hidden="true" />
+      <SunIcon class="icon-sun" aria-hidden="true" />
     </button>
   </div>
 </nav>
 
 <script>
-  const btn = document.getElementById('theme-toggle');
-  btn?.addEventListener('click', () => {
+  document.addEventListener('click', (event) => {
+    const target = event.target as HTMLElement | null;
+    if (!target?.closest('#theme-toggle')) return;
+
     const isDark = document.documentElement.classList.toggle('dark');
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   });

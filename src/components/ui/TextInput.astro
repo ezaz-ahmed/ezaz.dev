@@ -1,0 +1,46 @@
+---
+/* Single-line text control. Sibling components cover the typed variants
+   (EmailInput, SelectInput, TextArea) so each one can carry its own
+   keyboard/autofill hints instead of a catch-all `type` prop. */
+import { controlClass } from '../../lib/ui';
+import Field from './Field.astro';
+
+type Props = {
+  name: string;
+  label: string;
+  /** Defaults to `name`, which is what the label points at. */
+  id?: string;
+  required?: boolean;
+  autocomplete?: string;
+  placeholder?: string;
+  maxlength?: number;
+  hint?: string;
+  /** Grid placement is the caller's job. */
+  class?: string;
+};
+
+const {
+  name,
+  label,
+  id = name,
+  required = false,
+  autocomplete = 'off',
+  placeholder,
+  maxlength,
+  hint,
+  class: extraClass,
+} = Astro.props;
+---
+
+<Field for={id} {label} {required} {hint} class={extraClass}>
+  <input
+    {id}
+    {name}
+    type="text"
+    {required}
+    {autocomplete}
+    {placeholder}
+    {maxlength}
+    class={controlClass}
+  />
+</Field>

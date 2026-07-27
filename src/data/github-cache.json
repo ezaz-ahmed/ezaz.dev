@@ -1,0 +1,36 @@
+{
+  "user": "ezaz-ahmed",
+  "repos": 77,
+  "stars": 37,
+  "followers": 23,
+  "since": 2018,
+  "contributions": 90,
+  "languages": [
+    {
+      "name": "JavaScript",
+      "count": 22,
+      "share": 33
+    },
+    {
+      "name": "TypeScript",
+      "count": 21,
+      "share": 31
+    },
+    {
+      "name": "HTML",
+      "count": 7,
+      "share": 10
+    },
+    {
+      "name": "CSS",
+      "count": 5,
+      "share": 7
+    },
+    {
+      "name": "other",
+      "count": 13,
+      "share": 19
+    }
+  ],
+  "fetchedAt": "2026-07-26T12:57:20.089Z"
+}

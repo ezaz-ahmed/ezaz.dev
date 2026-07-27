@@ -1,0 +1,28 @@
+---
+/*
+  Engineering notes: the decisions that cost something. One tile per note so a
+  reader can take them one at a time instead of parsing a wall of prose.
+*/
+import type { ProjectNote } from '../../lib/types';
+
+type Props = { notes: ProjectNote[]; class?: string };
+
+const { notes, class: extraClass } = Astro.props;
+---
+
+<div class:list={['grid gap-3.5 sm:grid-cols-2 lg:grid-cols-3', extraClass]}>
+  {
+    notes.map((note, i) => (
+      <article class="tile">
+        <div class="relative flex h-full flex-col p-5">
+          <span class="tile-index text-ink-soft mb-3 font-mono text-[11px] tracking-[1.2px]">
+            {String(i + 1).padStart(2, '0')}
+          </span>
+
+          <h3 class="mb-2.5 font-mono text-[14.5px] leading-snug font-bold">{note.title}</h3>
+          <p class="text-ink-soft text-[13.5px] leading-[1.65]">{note.body}</p>
+        </div>
+      </article>
+    ))
+  }
+</div>

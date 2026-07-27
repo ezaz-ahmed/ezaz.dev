@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800" role="img" aria-label="Placeholder artwork">
+  <defs>
+    <pattern id="dots03" width="22" height="22" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#c7c3b4" />
+    </pattern>
+  </defs>
+  <rect width="1200" height="800" fill="#f2f1ea" />
+  <rect width="1200" height="800" fill="url(#dots03)" />
+
+  <!-- ledger sheet -->
+  <rect x="160" y="130" width="880" height="540" rx="10" fill="#fbfaf6" stroke="#14170f" stroke-width="3" />
+  <line x1="160" y1="212" x2="1040" y2="212" stroke="#14170f" stroke-width="3" />
+  <rect x="200" y="162" width="150" height="18" rx="9" fill="#54584c" />
+  <rect x="880" y="162" width="120" height="18" rx="9" fill="#ff5a36" />
+
+  <g fill="#c7c3b4">
+    <rect x="200" y="252" width="330" height="14" rx="7" />
+    <rect x="200" y="316" width="286" height="14" rx="7" />
+    <rect x="200" y="380" width="360" height="14" rx="7" />
+    <rect x="200" y="444" width="240" height="14" rx="7" />
+    <rect x="200" y="508" width="312" height="14" rx="7" />
+    <rect x="200" y="572" width="268" height="14" rx="7" />
+  </g>
+  <g fill="#54584c">
+    <rect x="840" y="252" width="160" height="14" rx="7" />
+    <rect x="880" y="316" width="120" height="14" rx="7" />
+    <rect x="820" y="380" width="180" height="14" rx="7" />
+    <rect x="900" y="444" width="100" height="14" rx="7" />
+    <rect x="860" y="508" width="140" height="14" rx="7" />
+  </g>
+  <rect x="820" y="562" width="180" height="34" rx="6" fill="#ff5a36" />
+
+  <g stroke="#c7c3b4" stroke-width="2">
+    <line x1="640" y1="240" x2="640" y2="600" />
+    <line x1="780" y1="240" x2="780" y2="600" />
+  </g>
+
+  <text x="600" y="742" text-anchor="middle" font-family="ui-monospace, 'JetBrains Mono', monospace" font-size="24" fill="#54584c">placeholder · 1200×800 · swap me</text>
+</svg>

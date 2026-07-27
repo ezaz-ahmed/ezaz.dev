@@ -1,25 +1,38 @@
 ---
+import { ClientRouter, fade } from 'astro:transitions';
+
 import '../styles/global.css';
 
-interface Props {
+type Props = {
   title?: string;
-}
+  /** Meta + og description. Omitted pages simply don't emit the tags. */
+  description?: string;
+};
 
-const { title = 'Ezaz Ahmed' } = Astro.props;
+const { title = 'Ezaz Ahmed', description } = Astro.props;
 ---
 
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+    <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <script is:inline>
       // Apply theme before paint to avoid a flash. Saved choice wins; else system preference.
-      const saved = localStorage.getItem('theme');
-      const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
-      document.documentElement.classList.toggle('dark', dark);
+      // Re-run on astro:after-swap: view transitions swap <html>, dropping the class.
+      function applyTheme() {
+        const saved = localStorage.getItem('theme');
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.classList.toggle('dark', dark);
+      }
+
+      applyTheme();
+      document.addEventListener('astro:after-swap', applyTheme);
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -28,10 +41,34 @@ const { title = 'Ezaz Ahmed' } = Astro.props;
       rel="stylesheet"
     />
     <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:type" content="website" />
+    <ClientRouter />
   </head>
   <body>
-    <div class="mx-auto max-w-[760px] px-6 pb-[120px]">
+    <div class="mx-auto max-w-250 px-6 pb-30" transition:animate={fade({ duration: '0.22s' })}>
       <slot />
     </div>
+
+    <script>
+      /*
+        Cursor spotlight for .tile (see global.css). Lives in the layout, not in
+        a card component: the effect belongs to the global .tile style, so any
+        page that renders a tile gets it. Delegated once at module scope, which
+        also means it survives view transitions without re-binding — module
+        scripts don't re-run after a swap.
+      */
+      document.addEventListener('pointermove', (event) => {
+        const target = event.target as HTMLElement | null;
+        const tile = target?.closest<HTMLElement>('.tile');
+        if (!tile) return;
+
+        const rect = tile.getBoundingClientRect();
+        tile.style.setProperty('--mx', `${event.clientX - rect.left}px`);
+        tile.style.setProperty('--my', `${event.clientY - rect.top}px`);
+      });
+    </script>
   </body>
 </html>

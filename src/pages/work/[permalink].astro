@@ -1,0 +1,81 @@
+---
+/*
+  Case-study page for one project, one route per slug in data/work.json. The
+  page owns only the running order; every block is its own component.
+*/
+import Footer from '../../components/Footer.astro';
+import Nav from '../../components/Nav.astro';
+import SectionHeading from '../../components/ui/SectionHeading.astro';
+import MetricStrip from '../../components/work/MetricStrip.astro';
+import NotesPanel from '../../components/work/NotesPanel.astro';
+import ProjectBlock from '../../components/work/ProjectBlock.astro';
+import ProjectHero from '../../components/work/ProjectHero.astro';
+import ProjectPager from '../../components/work/ProjectPager.astro';
+import RepoPanel from '../../components/work/RepoPanel.astro';
+import StackPanel from '../../components/work/StackPanel.astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getNeighbours, getProjects } from '../../lib/projects';
+import type { Project } from '../../lib/types';
+
+export function getStaticPaths() {
+  return getProjects().map((project) => ({
+    params: { permalink: project.slug },
+    props: { project },
+  }));
+}
+
+type Props = { project: Project };
+
+const { project } = Astro.props;
+const { problem, solution, stack, metrics, notes, summary } = project.detail;
+const { prev, next } = getNeighbours(project.slug);
+---
+
+<BaseLayout title={`${project.title} — Ezaz Ahmed`} description={summary}>
+  <Nav />
+
+  <main>
+    <ProjectHero {project} />
+
+    <MetricStrip {metrics} class="mt-9" />
+
+    {
+      /* Problem and answer side by side — each tile carries its own label so the
+        pair reads as one argument. */
+    }
+    <section class="mt-16 pt-2">
+      <SectionHeading title="problem → approach" />
+      <div class="grid items-start gap-3.5 lg:grid-cols-2">
+        <ProjectBlock heading="the problem" {...problem} />
+        <ProjectBlock heading="what I built" {...solution} />
+      </div>
+    </section>
+
+    <section class="mt-16 pt-2">
+      <SectionHeading title="stack" />
+      <StackPanel groups={stack} />
+    </section>
+
+    {
+      project.repo && (
+        <section class="mt-16 pt-2">
+          <SectionHeading title="the repo" />
+          <RepoPanel repo={project.repo} />
+        </section>
+      )
+    }
+
+    {
+      notes.length > 0 && (
+        <section class="mt-16 pt-2">
+          <SectionHeading title="engineering notes" />
+          <NotesPanel {notes} />
+        </section>
+      )
+    }
+
+    <ProjectPager {prev} {next} class="mt-16" />
+  </main>
+
+  <Footer />
+</BaseLayout>

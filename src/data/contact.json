@@ -1,0 +1,50 @@
+{
+  "heading": "Start a Conversation",
+  "intro": "Got a project, a question, or just want to say hi? Drop a note below",
+  "action": "#",
+  "method": "post",
+  "submitLabel": "send message",
+  "fields": {
+    "name": {
+      "name": "name",
+      "label": "Name",
+      "required": true,
+      "autocomplete": "name",
+      "placeholder": "Ada Lovelace"
+    },
+    "email": {
+      "name": "email",
+      "label": "Email",
+      "required": true,
+      "autocomplete": "email",
+      "placeholder": "ada@example.com"
+    },
+    "company": {
+      "name": "company",
+      "label": "Company",
+      "required": false,
+      "autocomplete": "organization",
+      "placeholder": "Analytical Engines Ltd."
+    },
+    "subject": {
+      "name": "subject",
+      "label": "Subject",
+      "required": true,
+      "placeholder": "Pick one",
+      "options": [
+        { "value": "new-project", "label": "New project" },
+        { "value": "collaboration", "label": "Collaboration" },
+        { "value": "question", "label": "Question about a post" },
+        { "value": "hello", "label": "Just saying hi" }
+      ]
+    },
+    "message": {
+      "name": "message",
+      "label": "Message",
+      "required": true,
+      "rows": 6,
+      "maxlength": 2000,
+      "placeholder": "What are you building, and where are you stuck?"
+    }
+  }
+}

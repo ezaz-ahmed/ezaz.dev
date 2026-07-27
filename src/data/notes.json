@@ -1,0 +1,37 @@
+{
+  "heading": "Field notes",
+  "notes": [
+    {
+      "hash": "#a3f19c",
+      "date": "2026-07-22",
+      "tag": "astro",
+      "title": "Rebuilding my site as components without a framework",
+      "href": "#",
+      "desc": "How I split a single HTML concept into Astro components with Tailwind v4 tokens — and why I skipped a JS island entirely."
+    },
+    {
+      "hash": "#7e02b1",
+      "date": "2026-07-09",
+      "tag": "react",
+      "title": "The re-render I chased for two days",
+      "href": "#",
+      "desc": "A new object reference on every render quietly nuked memoization. Notes on the three fixes I tried before the one that stuck."
+    },
+    {
+      "hash": "#519dfa",
+      "date": "2026-06-30",
+      "tag": "systems",
+      "title": "Idempotency keys are a promise, not a checkbox",
+      "href": "#",
+      "desc": "What I got wrong the first few times I implemented exactly-once semantics that weren't."
+    },
+    {
+      "hash": "#c88a20",
+      "date": "2026-06-14",
+      "tag": "career",
+      "title": "On writing docs nobody asked for",
+      "href": "#",
+      "desc": "Why the undocumented internal tool became the thing that actually got me noticed."
+    }
+  ]
+}

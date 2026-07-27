@@ -1,0 +1,179 @@
+---
+/*
+  Repo showcase for one project: counts, language split by bytes, and the last
+  few commits — all read from the build-time cache written by
+  scripts/fetch-github-stats.mjs, so there's no client JS and no visitor-side
+  rate limit.
+
+  No .tile-link overlay here: the commits and the repo name are real links, and
+  a stretched anchor would eat them.
+*/
+import { getRepoStats } from '../../lib/github';
+import { byteLabel, monthYear, shortDate, sizeLabel } from '../../lib/format';
+import { langTone } from '../../lib/ui';
+import GithubIcon from '../icons/github.svg';
+
+type Props = { repo: string; class?: string };
+
+const { repo, class: extraClass } = Astro.props;
+
+const stats = getRepoStats(repo);
+
+const counts = stats
+  ? [
+      { value: stats.stars, label: 'stars' },
+      { value: stats.forks, label: 'forks' },
+      { value: stats.commits, label: 'commits' },
+      { value: stats.contributors, label: 'contributors' },
+    ]
+  : [];
+
+const meta = stats
+  ? [
+      { label: 'branch', value: stats.defaultBranch },
+      { label: 'license', value: stats.license ?? 'none' },
+      { label: 'created', value: monthYear(stats.createdAt) },
+      { label: 'last push', value: monthYear(stats.pushedAt) },
+      { label: 'checkout', value: sizeLabel(stats.size) },
+      { label: 'open issues', value: String(stats.openIssues) },
+    ]
+  : [];
+---
+
+<article class:list={['tile', extraClass]}>
+  <div class="relative p-5 sm:p-6">
+    <div class="mb-4 flex items-center gap-2">
+      <GithubIcon class="text-ink-soft h-3.5 w-3.5" aria-hidden="true" />
+      <a
+        href={stats?.url ?? `https://github.com/${repo}`}
+        rel="noopener"
+        class="hover:text-accent font-mono text-[13px] font-bold no-underline transition-colors"
+      >
+        {repo}
+      </a>
+      {
+        stats?.archived && (
+          <span class="border-line text-ink-soft rounded-[3px] border px-1.5 py-0.5 font-mono text-[10.5px]">
+            archived
+          </span>
+        )
+      }
+      <span class="text-ink-soft ml-auto font-mono text-[11px]" aria-hidden="true">↗</span>
+    </div>
+
+    {
+      !stats && (
+        <p class="text-ink-soft text-[13.5px] leading-[1.65]">
+          Repo details weren't in the build cache — the repo is private, renamed, or the API was
+          unreachable when this was built. The link above still goes to the source.
+        </p>
+      )
+    }
+
+    {
+      stats && (
+        <div class="grid gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-8">
+          <div>
+            {stats.description && (
+              <p class="text-ink-soft mb-5 text-[13.5px] leading-[1.65]">{stats.description}</p>
+            )}
+
+            <dl class="grid grid-cols-4 gap-x-4 gap-y-3">
+              {counts.map((count) => (
+                <div>
+                  <dd class="font-mono text-[22px] leading-none font-extrabold">
+                    {count.value ?? '—'}
+                  </dd>
+                  <dt class="text-ink-soft mt-1.5 font-mono text-[11px]">{count.label}</dt>
+                </div>
+              ))}
+            </dl>
+
+            {/* Language split by bytes of code. --i staggers the hover lift. */}
+            {stats.languages.length > 0 && (
+              <div class="mt-5">
+                <div
+                  class="flex h-2 gap-0.5 overflow-hidden rounded-[2px]"
+                  role="img"
+                  aria-label={stats.languages
+                    .map((lang) => `${lang.name} ${lang.share}%`)
+                    .join(', ')}
+                >
+                  {stats.languages.map((lang, i) => (
+                    <span
+                      class="lang-seg"
+                      style={`--i:${i}; --tone:${langTone(i)}; width:${lang.share}%`}
+                    />
+                  ))}
+                </div>
+
+                <ul class="text-ink-soft mt-2.5 flex flex-wrap gap-x-3.5 gap-y-1.5 font-mono text-[10.5px]">
+                  {stats.languages.map((lang, i) => (
+                    <li class="flex items-center gap-1.5">
+                      <span class="lang-dot" style={`--tone:${langTone(i)}`} aria-hidden="true" />
+                      {lang.name} {lang.share}%
+                      <span class="opacity-60">({byteLabel(lang.count)})</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <dl class="border-line mt-5 grid grid-cols-2 gap-x-4 gap-y-3 border-t pt-4 sm:grid-cols-3">
+              {meta.map((item) => (
+                <div>
+                  <dt class="text-ink-soft font-mono text-[10px] tracking-[1.1px] uppercase">
+                    {item.label}
+                  </dt>
+                  <dd class="mt-1 truncate font-mono text-[12px]">{item.value}</dd>
+                </div>
+              ))}
+            </dl>
+
+            {stats.topics.length > 0 && (
+              <ul class="mt-4 flex flex-wrap gap-1.5">
+                {stats.topics.map((topic) => (
+                  <li class="border-line text-ink-soft rounded-[3px] border px-2 py-0.5 font-mono text-[10.5px]">
+                    {topic}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          {stats.recentCommits.length > 0 && (
+            <div class="border-line max-lg:border-t max-lg:pt-5 lg:border-l lg:pl-8">
+              <p class="text-ink-soft mb-3 font-mono text-[10.5px] tracking-[1.2px] uppercase">
+                latest commits · {stats.defaultBranch}
+              </p>
+
+              <ul class="flex flex-col">
+                {stats.recentCommits.map((commit) => (
+                  <li class="border-line border-b last:border-b-0">
+                    <a
+                      href={commit.url}
+                      rel="noopener"
+                      class="hover:bg-accent/6 group flex items-baseline gap-3 py-2.5 no-underline transition-colors"
+                    >
+                      <code class="text-accent shrink-0 font-mono text-[11.5px]">{commit.sha}</code>
+                      <span class="text-ink-soft group-hover:text-ink min-w-0 flex-1 truncate text-[13px] transition-colors">
+                        {commit.message}
+                      </span>
+                      <span class="text-ink-soft shrink-0 font-mono text-[10.5px] whitespace-nowrap">
+                        {shortDate(commit.date)}
+                      </span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              <p class="text-ink-soft mt-3 font-mono text-[10px]">
+                cached {shortDate(stats.fetchedAt)} · refreshed on every build
+              </p>
+            </div>
+          )}
+        </div>
+      )
+    }
+  </div>
+</article>
